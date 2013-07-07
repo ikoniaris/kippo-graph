@@ -1,0 +1,46 @@
+/*
+Template Name: Realistic
+File: Gallery CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+#gallery{
+	position:relative;
+	margin:0 auto 0;
+	display:block;
+	width:900px;
+	padding-bottom:10px;
+	}
+
+#gallery ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	}
+
+#gallery li{
+	display:block;
+	float:left;
+	width:280px;
+	margin:0 30px 20px 0;
+	padding:0;
+	}
+
+#gallery li a img{
+	display:block;
+	width:260px;
+	height:130px;
+	margin:0;
+	padding:0;
+	border:10px solid #E0E0E0;
+	}
+
+#gallery li a:hover img{
+	border-color:#B4B4B4;
+	}
+
+#gallery li.last{
+	margin-right:0;
+	}

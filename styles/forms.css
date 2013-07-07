@@ -1,0 +1,57 @@
+/*
+Template Name: Realistic
+File: Forms CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+form, fieldset, legend{margin:0; padding:0; border:none;}
+legend{display:none;}
+input, textarea, select{font-size:12px; font-family:Georgia, "Times New Roman", Times, serif;}
+
+/* ----------------------------------------------Search Form-------------------------------------*/
+
+#topbar input{
+	display:block;
+	float:left;
+	width:155px;
+	margin:0 5px 0 0;
+	padding:5px;
+	color:#565656;
+	background-color:#EBEBEB;
+	border:1px solid #C3C3C3;
+	font-size:12px;
+	}
+
+#topbar input#go{
+	width:68px;
+	height:26px;
+	margin:0;
+	padding:4px 0;
+	text-transform:uppercase;
+	color:#FFFFFF;
+	background-color:#565656;
+	border-color:#C3C3C3;
+	cursor:pointer;
+	font-weight:bold;
+	}
+
+/* ----------------------------------------------Forms in Content Area-------------------------------------*/
+
+.container #respond{display: block; width:100%;}
+
+.container #respond input{width:170px; padding:2px; border:1px solid #CCCCCC; margin:5px 5px 0 0;}
+
+.container #respond textarea{width:98%; border:1px solid #CCCCCC; padding:2px; overflow:auto;}
+	
+.container #respond p{margin:5px 0;}
+
+.container #respond #submit, .container #respond #reset{
+	margin:0;
+	padding:5px;
+	color:#666666;
+	background-color:#F7F7F7;
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+	}

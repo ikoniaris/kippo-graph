@@ -1,0 +1,49 @@
+﻿Package: Kippo-Graph
+Version: 0.7.6
+Author: ikoniaris
+Website: bruteforce.gr/kippo-graph
+
+
+TODO for new versions:
++ Seperate HTML and PHP where possible, tidy up code!
++ Graphs (.png) creation should be moved to xxx-generator for each component (or all in one!)
++ Use new version of QGoogleVisualAPI and generate more graphs (eg GeoMap instead of IntensityMap?)
++ Include sample Apache configuration (unless uploaded to /var/www/)
++ Add MySQL dump/backup function (security risk?)
++ 2nd tab on Intensity Map (or new map) with successes per country (temporary SQL table/query)
++ Add option to show results only from a particular sensor (add value in config.php and then change the SQL queries? Perhaps move all SQL query strings in seperate file)
++ Option to use local/offline geolocation service and not geoplugin, see: https://www.maxmind.com/app/support
++ Proxy detection resurrection, here are some lists: https://github.com/lfamorim/barrelroll/tree/master/full_list
++ Table with returning attackers (Kippo-Input). If username/password in auth table exists in userdb.txt then he logged in again (apart from the defaults).
++ Integrate or offer as seperate utility the VirusTotal uploader by @0xAli (contact him again for file)
++ Add www.ip-adress.com/whois/<IP> in Kippo-Geo for IPs (limit of 50 lookups per day is OK) 
++ Use convert/save as ZIP file API from online-convert.com in Kippo-Input for downloaded files
++ Integrate Kippo-Playlog as seen here: http://194.213.0.254/secure/kippo-playlog.php and Kippo-Auth as seen here: http://chaosberlin.de/kippo-graph/kippo-auth.php
++ Kippo-Input: downloaded files with curl (curl -O <file>)
+
+
+DONE:
++ Move project to sf.net/googlecode.com/github.com (next milestone version)
++ Show basic stats like number of attacks, number of IPs, total commands, etc --OK--
++ Fix XSS in Kippo-Input --OK--
++ Human activity per week, Successes per day (line), Probing busiest days (Top 20), naming conventions/changes, update gallery. --OK--
++ URGENT: Fix "Successful logins from same IP", "Probes per day", "Successes per day", when the DB is very big. See: http://t.co/TltEfH89 --OK--
++ Successes per week graph, so gallery will look complete :P --OK--
++ Add timestamp to command tables --OK--
++ New table for passwd and various commands --OK--
++ Generate and post CHECKSUMS for the tar archive online --OK--
++ Include a license file. libchart is GPL, QGoogleVisualAPI is BSD 2-Clause (aka Modified BSD aka FreeBSD), 
+	geoplugin is free asks for recognition - OK,
+	web template has its own license that requires link at the bottom - OK, 
+	honeycomb image in the logo requires attribution - OK, 
+	so Kippo-Graph license => GPL, mentioning all the others seperately, 
+	see: http://programmers.stackexchange.com/a/75464/43511
++ Make version checking more secure with a directive in config.php (UPDATE CHECK YES/NO) --OK--
++ Check IPs for proxies or not --NO FREE/EASY SOLUTION, ABANDON--
++ Visualize IP geolocation data --OK--
++ Temporary SQL table needed for IntensityMap --OK--
++ Create a proper image for index.php --OK--
++ Visualize or display wget commands --OK--
++ Visualize or display apt-get install commands --OK--
++ Better way to visualize input/commands => Simple text/table display --OK--
++ More libchart graphs (Pies, etc) where suited --OK--

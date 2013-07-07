@@ -1,0 +1,45 @@
+/*
+Template Name: Realistic
+File: Portfolio CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+.portfolio{
+	position:relative;
+	display:block;
+	margin:0 auto 1px;
+	padding:10px 0;
+	width:100%;
+	border-top:1px solid #999999;
+	border-bottom:1px solid #999999;
+	}
+
+.portfolio .readmore{
+	display:block;
+	text-align:right;
+	}
+
+.portfolio .fl_left{
+	display:block;
+	float:left;
+	width:250px;/*350px;*/
+	margin:40px 25px 0 0;
+	line-height:1.6em;
+	}
+	
+.portfolio .fl_right{
+	display:block;
+	float:left;/*right*/
+	width:500px;
+	}
+
+.portfolio .fl_right img{
+	display:block;
+	width:600px;/*470px;*/
+	height:auto;
+	margin: 20px 0 0 0;
+	padding:5px;
+	border:10px solid #E0E0E0;
+	}

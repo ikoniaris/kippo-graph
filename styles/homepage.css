@@ -1,0 +1,103 @@
+/*
+Template Name: Realistic
+File: Homepage CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+#hpage_services{
+	}
+
+#hpage_services .block{
+	display:inline;
+	float:left;
+	width:280px;
+	margin:0 30px 0 0;
+	padding:0;
+	}
+
+#hpage_services .last{
+	margin-right:0;
+	}
+
+#hpage_services img{
+	display:inline;
+	float:left;
+	}
+
+#hpage_services strong{
+	float:left;
+	margin:8px 0 0 10px;
+	padding:0;
+	font-size:22px;
+	font-weight:normal;
+	color:#4A4A4A;
+	background-color:#FFF;
+	}
+
+#hpage_services p{
+	display:block;
+	margin:0;
+	padding:10px 0 0 0;
+	clear:both;
+	line-height:1.6em;
+	}
+
+#hpage_services .spacer{
+	clear:both;
+	padding:8px 0;
+	line-height:normal;
+	}
+
+/* ------Latest Homepage Projects-----*/
+
+#hpage_latest{
+	position:relative;
+	margin:0 auto 0;
+	display:block;
+	width:960px;
+	padding:30px 0 0 0;
+	}
+	
+#hpage_latest img{display:inline;}
+
+#hpage_latest .imgholder{
+	display:block;
+	width:260px;
+	margin:0;
+	padding:0 20px 22px 20px;
+	background:url("../images/hpage_latest_shadow.gif") bottom left no-repeat;
+	}
+
+#hpage_latest ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	}
+
+#hpage_latest li{
+	display:block;
+	float:left;
+	width:300px;
+	margin:0 30px 0 0;
+	padding:0;
+	}
+
+#hpage_latest li.last{
+	margin-right:0;
+	}
+	
+#hpage_latest p{
+	margin:0;
+	padding:0 20px;
+	}
+
+#hpage_latest p strong{
+	display:block;
+	margin-bottom:10px;
+	font-size:22px;
+	font-weight:normal;
+	color:#4A4A4A;
+	background-color:#E0E0E0;
+	}
