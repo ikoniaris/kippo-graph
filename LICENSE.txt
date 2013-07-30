@@ -1,7 +1,7 @@
 ﻿============================================================================
 Kippo-Graph is distributed under this license:
 
-Kippo-Graph is Copyright (C) 2011, 2012, 2013 Ioannis Koniaris
+Kippo-Graph is Copyright (C) 2011 - 2013 Ioannis Koniaris
 Contact: ikoniaris@gmail.com
 Website: bruteforce.gr/kippo-graph
 

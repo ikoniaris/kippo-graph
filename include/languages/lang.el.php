@@ -1,6 +1,6 @@
 ﻿<?php
 #Package: Kippo-Graph
-#Version: 0.7.6
+#Version: 0.7.7
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 

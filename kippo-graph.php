@@ -17,7 +17,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.7.6 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.7.7 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -43,7 +43,7 @@
 	  <hr />
 <?php
 #Package: Kippo-Graph
-#Version: 0.7.6
+#Version: 0.7.7
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 
@@ -239,7 +239,7 @@ echo '<br /><br />';
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright">
-    <p class="fl_left">Copyright &copy; 2011, 2012, 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
+    <p class="fl_left">Copyright &copy; 2011 - 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
     <p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
     <br class="clear" />
   </div>

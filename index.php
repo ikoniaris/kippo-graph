@@ -17,7 +17,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.7.6 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.7.7 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -46,7 +46,7 @@
 	  <p align=center>
 	<?php 
 	#Package: Kippo-Graph
-	#Version: 0.7.6
+	#Version: 0.7.7
 	#Author: ikoniaris
 	#Website: bruteforce.gr/kippo-graph
 	require_once('config.php');
@@ -64,6 +64,7 @@
 	?></p>
 	  <p>&nbsp;</p>
 	  <p><strong>CHANGES:</strong></p>
+      <p>Version 0.7.7:<br/>+ Added German language support.</p>
 	  <p>Version 0.7.6:<br/>+ Added Polish & Swedish language support.</p>
 	  <p>Version 0.7.5:<br/>+ Added French language support.</p>
 	  <p>Version 0.7.4:<br/>+ Added config option for non-standard MySQL port.</p>	  
@@ -99,7 +100,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright">
-    <p class="fl_left">Copyright &copy; 2011, 2012, 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
+    <p class="fl_left">Copyright &copy; 2011 - 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
     <p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
     <br class="clear" />
   </div>

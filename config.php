@@ -1,15 +1,15 @@
 ﻿<?php
 #Package: Kippo-Graph
-#Version: 0.7.6
+#Version: 0.7.7
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 
 #Chart language selection. Default: en - English. Change the two-letter 
 #lang.XX.php language code to your preferred choice. 
 #Available options: 
-#en: English | fr: French | it: Italian | nl: Dutch
+#en: English | fr: French | de: German | it: Italian | nl: Dutch
 #el: Greek  | et: Estonian | pl: Polish | sv: Swedish
-#ar: Arabic (does not work)
+#ar: Arabic (currently not working)
 require_once('include/languages/lang.en.php');
 
 #You will have to change the following four definitions 
