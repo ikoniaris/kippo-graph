@@ -43,7 +43,7 @@ class geoPlugin {
 	var $countryCode = null;
 	var $countryName = null;
 	var $continentCode = null;
-	var $latitute = null;
+	var $latitude = null;
 	var $longitude = null;
 	var $currencyCode = null;
 	var $currencySymbol = null;
