@@ -52,6 +52,7 @@ require_once('class/KippoGraph.class.php');
 
 $kippoGraph = new KippoGraph();
 
+//Let's create all the charts! (generated-graphs folder)
 $kippoGraph->createTop10Passwords();
 $kippoGraph->createTop10Usernames();
 $kippoGraph->createTop10Combinations();
