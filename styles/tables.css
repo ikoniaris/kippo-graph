@@ -33,8 +33,14 @@ table tbody td{
 	border-right:1px solid #CCCCCC;
 	}
 
+table tbody td.icon{
+    border-style: none;
+}
+
 table td img.icon {
-float:left;
+    float: left;
+    height: 16px;
+    width: 16px;
 }
 
 table thead th, table tbody td{
@@ -46,6 +52,10 @@ table tbody tr.light{
 	color:#666666;
 	background-color:#F7F7F7;
 	}
+
+table tbody tr.word-break{
+    word-break: break-all;
+}
 
 table tbody tr.dark{
 	color:#666666;
