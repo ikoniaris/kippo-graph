@@ -101,7 +101,7 @@ class KippoGeo
             echo 	'<th>Latitude</th>';
             echo 	'<th>Longitude</th>';
             echo	'<th>Hostname</th>';
-            echo	'<th colspan="3">Lookup</th>';
+            echo	'<th colspan="5">Lookup</th>';
             echo '</tr></thead><tbody>';
 
             //We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -157,7 +157,9 @@ class KippoGeo
                 echo	'<td>'.get_host($row['ip']).'</td>';
                 echo	'<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
                 echo    '<td class="icon"><a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.png"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class=icon" src="images/robtex.ico"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class="icon" src="images/robtex.ico"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data='.$row['ip'].'&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.png"/></a></td>';
+                echo    '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/alienvault.png"/></a></td>';
                 echo '</tr>';
 
                 //Lastly, we increase the index used by maps to indicate the next row,

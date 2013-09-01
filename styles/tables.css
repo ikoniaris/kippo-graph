@@ -35,6 +35,7 @@ table tbody td{
 
 table tbody td.icon{
     border-style: none;
+    padding: 1px;
 }
 
 table td img.icon {
