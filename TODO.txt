@@ -6,7 +6,6 @@ Website: bruteforce.gr/kippo-graph
 
 TODO for new versions:
 + Seperate HTML and PHP where possible, tidy up code!
-+ Graphs (.png) creation should be moved to xxx-generator for each component (or all in one!)
 + Use new version of QGoogleVisualAPI and generate more graphs (eg GeoMap instead of IntensityMap?)
 + Include sample Apache configuration (unless uploaded to /var/www/)
 + Add MySQL dump/backup function (security risk?)
@@ -23,6 +22,7 @@ TODO for new versions:
 
 
 DONE:
++ Graphs (.png) creation should be moved to xxx-generator for each component (or all in one!)
 + Move project to sf.net/googlecode.com/github.com (next milestone version)
 + Show basic stats like number of attacks, number of IPs, total commands, etc --OK--
 + Fix XSS in Kippo-Input --OK--
