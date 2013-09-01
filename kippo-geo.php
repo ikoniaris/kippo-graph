@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://gmpg.org/xfn/11">
 <title>Kippo-Graph | Fast Visualization for your Kippo SSH Honeypot Stats</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -139,7 +139,7 @@ if($result->num_rows > 0)
 	echo 	'<th>Latitude</th>';
 	echo 	'<th>Longitude</th>';
 	echo	'<th>Hostname</th>';
-	echo	'<th>Lookup</th>';
+	echo	'<th colspan="3">Lookup</th>';
 	echo '</tr></thead><tbody>';
 	
 	//We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -193,9 +193,9 @@ if($result->num_rows > 0)
 		echo	'<td>'.$geoplugin->latitude.'</td>';
 		echo	'<td>'.$geoplugin->longitude.'</td>';
 		echo	'<td>'.get_host($row['ip']).'</td>';		
-		echo	'<td><a href="http://www.dshield.org/ipinfo.html?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/dshield.ico"/></a>'
-				.'<a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.png"/></a>'
-				.'<a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class=icon" src="images/robtex.ico"/></a></td>';
+		echo	'<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
+		echo    '<td class="icon"><a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.png"/></a></td>';
+		echo    '<td class="icon"><a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class=icon" src="images/robtex.ico"/></a></td>';
 		echo '</tr>';
 		
 		//Lastly, we increase the index used by maps to indicate the next row,

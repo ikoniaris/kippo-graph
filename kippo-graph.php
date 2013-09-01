@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://gmpg.org/xfn/11">
 <title>Kippo-Graph | Fast Visualization for your Kippo SSH Honeypot Stats</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -48,80 +48,28 @@
 #Website: bruteforce.gr/kippo-graph
 
 require_once('config.php');
+require_once('class/KippoGraph.class.php');
 
-//Let's connect to the database
-$db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
+$kippoGraph = new KippoGraph();
 
-if(mysqli_connect_errno()) {
-	echo 'Error connecting to the database: '.mysqli_connect_error();
-	exit();
-}
+$kippoGraph->createTop10Passwords();
+$kippoGraph->createTop10Usernames();
+$kippoGraph->createTop10Combinations();
+$kippoGraph->createSuccessRation();
+$kippoGraph->createMostSuccessfulLoginsPerDay();
+$kippoGraph->createSuccessesPerDay();
+$kippoGraph->createSuccessesPerWeek();
+$kippoGraph->createNumberOfConnectionsPerIP();
+$kippoGraph->createSuccessfulLoginsFromSameIP();
+$kippoGraph->createMostProbesPerDay();
+$kippoGraph->createProbesPerDay();
+$kippoGraph->createProbesPerWeek();
+$kippoGraph->createTop10SSHClients();
 
 //-----------------------------------------------------------------------------------------------------------------
 //OVERALL HONEYPOT ACTIVITY
 //-----------------------------------------------------------------------------------------------------------------
-
-//TOTAL LOGIN ATTEMPTS
-$db_query = 'SELECT COUNT(*) AS logins '
-			."FROM auth";
-$result = $db_conn->query($db_query);
-//echo 'Found '.$result->num_rows.' records';
-
-$row = $result->fetch_array(MYSQLI_BOTH);
-//echo '<strong>Total login attempts: </strong><h3>'.$row['logins'].'</h3>';
-echo '<table><thead>';
-echo '<tr>';
-echo 	'<th>Total login attempts</th>';
-echo	'<th>'.$row['logins'].'</th>';
-echo '</tr></thead><tbody>';
-echo '</tbody></table>';
-
-//TOTAL DISTINCT IPs
-$db_query = 'SELECT COUNT(DISTINCT ip) AS IPs '
-			."FROM sessions";
-$result = $db_conn->query($db_query);
-//echo 'Found '.$result->num_rows.' records';
-
-$row = $result->fetch_array(MYSQLI_BOTH);
-//echo '<strong>Distinct source IPs: </strong><h3>'.$row['IPs'].'</h3>';
-echo '<table><thead>';
-echo '<tr>';
-echo 	'<th>Distinct source IP addresses</th>';
-echo	'<th>'.$row['IPs'].'</th>';
-echo '</tr></thead><tbody>';
-echo '</tbody></table>';
-
-//OPERATIONAL TIME PERIOD
-$db_query = 'SELECT MIN(timestamp) AS start, MAX(timestamp) AS end '
-			."FROM auth";
-
-$result = $db_conn->query($db_query);
-//echo 'Found '.$result->num_rows.' records';
-
-if($result->num_rows > 0) {
-	//We create a skeleton for the table
-	echo '<table><thead>';
-	echo '<tr class="dark">';
-	echo 	'<th colspan="2">Active time period</th>';
-	echo '</tr>';
-	echo '<tr class="dark">';
-	echo	'<th>Start date (first attack)</th>';
-	echo 	'<th>End date (last attack)</th>';
-	echo '</tr></thead><tbody>';
-
-	//For every row returned from the database we add a new point to the dataset,
-	//and create a new table row with the data as columns
-	while($row = $result->fetch_array(MYSQLI_BOTH))
-	{
-		echo '<tr class="light">';
-		echo 	'<td>'.date('l, d-M-Y, H:i A',strtotime($row['start'])).'</td>';
-		echo 	'<td>'.date('l, d-M-Y, H:i A',strtotime($row['end'])).'</td>';
-		echo '</tr>';
-	}
-
-	//Close tbody and table element, it's ready.
-	echo '</tbody></table>';
-}
+$kippoGraph->printOverallHoneypotActivity();
 
 echo '<br /><br />';
 ?>

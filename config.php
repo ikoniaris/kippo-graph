@@ -1,8 +1,13 @@
-﻿<?php
+﻿﻿<?php
 #Package: Kippo-Graph
 #Version: 0.7.7
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
+
+#DIR_ROOT -- defines where your Kippo-Graph install currently resides in.
+#This should be an absolute directory/path, e.g. /var/www/kippo-graph for Linux
+#or something like C:\BitNami\wampstack-XXX\apache2\htdocs\kippo-graph for Windows
+define('DIR_ROOT', '/var/www/kippo-graph');
 
 #Chart language selection. Default: en - English. Change the two-letter 
 #lang.XX.php language code to your preferred choice. 
@@ -38,4 +43,5 @@ define('DB_PORT', '3306');
 #feature enabled is your choice and not forced.
 #Change NO to YES if you want to enable it.
 define('UPDATE_CHECK', 'NO');
+
 ?>
