@@ -101,7 +101,7 @@ class KippoGeo
             echo 	'<th>Latitude</th>';
             echo 	'<th>Longitude</th>';
             echo	'<th>Hostname</th>';
-            echo	'<th colspan="5">Lookup</th>';
+            echo	'<th colspan="7">Lookup</th>';
             echo '</tr></thead><tbody>';
 
             //We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -156,10 +156,12 @@ class KippoGeo
                 echo	'<td>'.$this->geoplugin->longitude.'</td>';
                 echo	'<td>'.get_host($row['ip']).'</td>';
                 echo	'<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.png"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.ico"/></a></td>';
                 echo    '<td class="icon"><a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class="icon" src="images/robtex.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data='.$row['ip'].'&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.png"/></a></td>';
-                echo    '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/alienvault.png"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data='.$row['ip'].'&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.ico"/></a></td>';
+                echo    '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/alienvault.ico"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
+                echo    '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
                 echo '</tr>';
 
                 //Lastly, we increase the index used by maps to indicate the next row,
