@@ -47,7 +47,7 @@ class KippoInput
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $row['total'] . '</td>';
                 echo    '<td>' . $row['uniq'] . '</td>';
                 echo '</tr>';
@@ -79,7 +79,7 @@ class KippoInput
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $row['files'] . '</td>';
                 echo    '<td>' . $row['uniq_files'] . '</td>';
                 echo '</tr>';
@@ -249,7 +249,7 @@ class KippoInput
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
                 echo    '<td>' . $row['COUNT(input)'] . '</td>';
@@ -305,7 +305,7 @@ class KippoInput
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
                 echo    '<td>' . $row['COUNT(input)'] . '</td>';
@@ -361,7 +361,7 @@ class KippoInput
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
                 echo    '<td>' . $row['COUNT(input)'] . '</td>';
@@ -409,7 +409,7 @@ class KippoInput
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
@@ -493,7 +493,7 @@ class KippoInput
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
@@ -535,7 +535,7 @@ class KippoInput
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
@@ -575,7 +575,7 @@ class KippoInput
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-                echo '<tr class="light">';
+                echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
