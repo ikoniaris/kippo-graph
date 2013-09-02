@@ -63,7 +63,7 @@
 	?></p>
 	  <p>&nbsp;</p>
 	  <p><strong>CHANGES:</strong></p>
-      <p>Version 0.8:<br/>+ Chnaged code to OOP style.<br/>+ Added FortiGuard, AlientVault, WatchGuard and McAfee IP scanning services (Kippo-Geo).<br/>+ CSS-related fixes for cross-browser compatibility.</p>
+      <p>Version 0.8:<br/>+ Changed code to OOP style.<br/>+ Added FortiGuard, AlientVault, WatchGuard and McAfee IP scanning services (Kippo-Geo).<br/>+ CSS-related fixes for cross-browser compatibility.</p>
       <p>Version 0.7.7:<br/>+ Added German language support.</p>
 	  <p>Version 0.7.6:<br/>+ Added Polish & Swedish language support.</p>
 	  <p>Version 0.7.5:<br/>+ Added French language support.</p>
