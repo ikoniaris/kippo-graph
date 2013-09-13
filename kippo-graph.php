@@ -79,6 +79,7 @@ echo '<br /><br />';
         <div class="fl_left">
           <h2>Top 10 passwords</h2>
           <p>This vertical bar chart diplays the top 10 passwords that attackers try when attacking the system.</p>
+		  <p><a href="export.php?type=pass">CSV Of All Distinct Passwords</a><p>
         </div>
         <div class="fl_right"><img src="generated-graphs/top10_passwords.png" alt="" /></div>
         <div class="clear"></div>
@@ -88,6 +89,7 @@ echo '<br /><br />';
         <div class="fl_left">
           <h2>Top 10 usernames</h2>
           <p>This vertical bar chart diplays the top 10 usernames that attackers try when attacking the system.</p>
+		  <p><a href="export.php?type=user">CSV Of All Distinct UserNames</a><p>
         </div>
         <div class="fl_right"><img src="generated-graphs/top10_usernames.png" alt="" /></div>
         <div class="clear"></div>
@@ -97,10 +99,12 @@ echo '<br /><br />';
         <div class="fl_left">
           <h2>Top 10 user-pass combos</h2>
           <p>This vertical bar chart diplays the top 10 username and password combinations that attackers try when attacking the system.</p>
+		  <p><a href="export.php?type=combo">CSV Of All Distinct Combinations</a><p>
         </div>
         <div class="fl_right"><img src="generated-graphs/top10_combinations.png" alt="" /></div>
 		<div class="fl_left">
           <p>This pie chart diplays the top 10 username and password combinations that attackers try when attacking the system.</p>
+
         </div>
 		<div class="fl_right"><img src="generated-graphs/top10_combinations_pie.png" alt="" /></div>
         <div class="clear"></div>
