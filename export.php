@@ -4,9 +4,8 @@
 #Website: techanarchy.net
 
 require_once "config.php";
+include "sql.php"; // this has all the SQL Statements named as per Query String below
 
-//Get Query Strings to create dynamic queries
-parse_str($_SERVER['QUERY_STRING']);
 
 //Valid queries should be usernames, passwords, IP's optional query should be Limit.
 
@@ -19,50 +18,35 @@ if(mysqli_connect_errno()) {
 	exit();
 }
 
-if($_GET['type'] == 'ip') { // Get All Distinct IP's
-$db_query = 'SELECT ip '
-			."FROM session "
-			."GROUP BY ip ";
-} elseif($_GET['type'] == 'pass') { // Get all Distcint Passwords
-$db_query = 'SELECT password '
-			."FROM auth "
-			."WHERE password <> '' "
-			."GROUP BY password ";
-} elseif($_GET['type'] == 'user') { // Get All Distinct / UserNames
-$db_query = 'SELECT username '
-			."FROM auth "
-			."WHERE username <> '' "
-			."GROUP BY username ";
-} elseif($_GET['type'] == 'combo') { // get all Distinct User / Pass Combos
-$db_query = 'SELECT username, password '
-			."FROM auth "
-			."WHERE username <> '' AND password <> '' "
-			."GROUP BY username, password ";
-} else {
-	echo 'Invalid Query String: '.$type;
-	exit();
-}
+
+// create the varaiable name from the URL Query string which should match SQL.php, than pass it as db_query
+$db_query = ${"db_" . $_GET['type']};
+
 
 $result = $db_conn->query($db_query);
 
-$first = true;
+$first = true; // flag for column titeles
 
+//Set Headers to create download instead of a page
+$fileName = "Export_" . $_GET['type'] . ".csv"; 
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment;filename="export.csv"');
+header('Content-Disposition: attachment;filename="'.$fileName.'"');
 header('Cache-Control: max-age=0');
 
-$out = fopen('php://output', 'w');
+// open file without writing to disk
+$out = fopen('php://output', 'w'); 
 
 while ($row = $result->fetch_array(MYSQLI_NUM)) {
     if($first){
         $titles = array();
         foreach($row as $key=>$val){
-            $titles[] = $key;
+            $titles[] = $key; 
         }
-        fputcsv($out, $titles);
-        $first = false;
+        fputcsv($out, $titles); // write the titles
+        $first = false; // no longer on the column titles
     }
-    fputcsv($out, $row);
+    fputcsv($out, $row); // write all other rows
 }
 fclose($out);
+
 ?>
