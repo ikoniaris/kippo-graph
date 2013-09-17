@@ -237,12 +237,14 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 input (overall)</h3>';
             echo '<p>The following table diplays the top 10 commands (overall) entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=Input">CSV Of All Input Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
             echo    '<th>Input</th>';
             echo    '<th>Count</th>';
             echo '</tr></thead><tbody>';
+			
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
@@ -259,6 +261,7 @@ class KippoInput
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
+			
 
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
@@ -293,6 +296,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 successful input</h3>';
             echo '<p>The following table diplays the top 10 successful commands entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=Successinput">CSV Of All Succesful Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -349,6 +353,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 failed input</h3>';
             echo '<p>The following table diplays the top 10 failed commands entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=FailedInput">CSV Of All Failed Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -400,6 +405,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>passwd commands</h3>';
             echo '<p>The following table diplays the latest "passwd" commands entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=passwd">CSV Of All "passwd" Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -438,6 +444,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>wget commands</h3>';
             echo '<p>The following table diplays the latest "wget" commands entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=wget">CSV Of All "wget" Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -484,6 +491,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Executed scripts</h3>';
             echo '<p>The following table diplays the latest executed scripts by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=Scripts">CSV Of All Scripts Executed</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -526,6 +534,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Interesting commands</h3>';
             echo '<p>The following table diplays other interesting commands executed by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=Interesting">CSV Of All Interesting Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -566,6 +575,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>apt-get commands</h3>';
             echo '<p>The following table diplays the latest "apt-get"/"aptitude" commands entered by attackers in the honeypot system.</p>';
+			echo '<p><a href="export.php?type=aptget">CSV Of All "apt-get"/"aptitiude" Commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
