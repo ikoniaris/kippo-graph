@@ -1,5 +1,5 @@
 ﻿Package: Kippo-Graph
-Version: 0.8
+Version: 0.9
 Author: ikoniaris
 Website: bruteforce.gr/kippo-graph
 

@@ -17,7 +17,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.8 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.9 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -43,9 +43,9 @@
 	  <p><hr></p>
 	  <p align=center><img src="images/kippo-graph-img.png" height=215 width=320></p>
 	  <p align=center>
-	<?php 
+	<?php
 	#Package: Kippo-Graph
-	#Version: 0.8
+	#Version: 0.9
 	#Author: ikoniaris
 	#Website: bruteforce.gr/kippo-graph
 	require_once('config.php');
@@ -63,11 +63,12 @@
 	?></p>
 	  <p>&nbsp;</p>
 	  <p><strong>CHANGES:</strong></p>
+      <p>Version 0.9:<br/>+ Added CSV export capabilities.<br/>+ Added Spanish language support.</p>
       <p>Version 0.8:<br/>+ Changed code to OOP style.<br/>+ Added FortiGuard, AlientVault, WatchGuard and McAfee IP scanning services (Kippo-Geo).<br/>+ Various CSS-related fixes for tables and cross-browser compatibility.</p>
       <p>Version 0.7.7:<br/>+ Added German language support.</p>
 	  <p>Version 0.7.6:<br/>+ Added Polish & Swedish language support.</p>
 	  <p>Version 0.7.5:<br/>+ Added French language support.</p>
-	  <p>Version 0.7.4:<br/>+ Added config option for non-standard MySQL port.</p>	  
+	  <p>Version 0.7.4:<br/>+ Added config option for non-standard MySQL port.</p>
 	  <p>Version 0.7.3:<br/>+ Fixed XSS issues in Kippo-Input.<br/>+ Added tables with overall/basic stats in Kippo-Graph and Kippo-Input.</p>
 	  <p>Version 0.7.2:<br/>+ Minor fixes and various changes.</p>
 	  <p>Version 0.7.1:<br/>+ Added chart localization - need volunteers.<br/>+ Languages: Greek, Italian, Dutch, Estonian.<br/>+ New chart fonts added - default: OpenSans.<br/>+ Added API key to QGoogleVisualizationAPI.</p>
@@ -82,7 +83,7 @@
 	  <p>Version 0.6.2:<br/>+ Added hostname resolution for IPs (include/misc/ip2host.php).<br/>+ Added robtex IP lookup feature.</p>
 	  <p>Version 0.6.1:<br/>+ Changed all links and information about the project.</p>
 	  <p>Version 0.6:<br/>+ Added human activity per day graph (Kippo-Input) - updated gallery.<br/>+ Added probes per week graph - updated gallery.<br/>+ Added break-ins from same IP graph - updated gallery.
-		<br/>+ Added IP Void lookup feature (Kippo-Geo).<br/>+ Added NoVirusThanks scan feature (Kippo-Input).<br/>+ Fixed SSH clients graph: shows top 10, ordered by volume.<br/>- Removed favicon.</p> 
+		<br/>+ Added IP Void lookup feature (Kippo-Geo).<br/>+ Added NoVirusThanks scan feature (Kippo-Input).<br/>+ Fixed SSH clients graph: shows top 10, ordered by volume.<br/>- Removed favicon.</p>
 	  <p>Version 0.5.1:<br/>+ Made version checking more secure with a directive in config.php (UPDATE CHECK YES/NO).<br/>+ Posted CHECKSUMS for the .tar archive online (and noted for future releases).<br/>+ Added LICENSE.txt</p>
 	  <p>Version 0.5:<br/>+ Added Kippo-Input: display and visualization of input data, wget (with file links) and apt-get commands.<br/>+ Added online version checking function (include/misc/versionCheck.php).
 		<br/>+ Added new pie charts, Kippo-Graph now shows 15 - updated gallery.<br/>+ Added IP table on Kippo-Geo with whois/lookup feature.<br/>+ Changed all files to .php.<br/></p>

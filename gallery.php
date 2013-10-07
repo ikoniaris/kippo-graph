@@ -23,7 +23,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.8 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.9 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -51,31 +51,31 @@
         <li><a rel="gallery_group" href="generated-graphs/top10_passwords.png" title="Top 10 passwords attempted"><img src="generated-graphs/top10_passwords.png" alt="" /></a></li>
         <li><a rel="gallery_group" href="generated-graphs/top10_usernames.png" title="Top 10 usernames attempted"><img src="generated-graphs/top10_usernames.png" alt="" /></a></li>
         <li class="last"><a rel="gallery_group" href="generated-graphs/top10_combinations.png" title="Top 10 username-password combinations"><img src="generated-graphs/top10_combinations.png" alt="" /></a></li>
-        
+
 		<li><a rel="gallery_group" href="generated-graphs/top10_combinations_pie.png" title="Top 10 username-password combinations"><img src="generated-graphs/top10_combinations_pie.png" alt="" /></a></li>
         <li><a rel="gallery_group" href="generated-graphs/success_ratio.png" title="Overall success ratio"><img src="generated-graphs/success_ratio.png" alt="" /></a></li>
         <li class="last"><a rel="gallery_group" href="generated-graphs/most_successful_logins_per_day.png" title="Most successful logins per day (Top 20)"><img src="generated-graphs/most_successful_logins_per_day.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/successes_per_day.png" title="Successes per day"><img src="generated-graphs/successes_per_day.png" alt="" /></a></li>
 		<li><a rel="gallery_group" href="generated-graphs/successes_per_week.png" title="Successes per week"><img src="generated-graphs/successes_per_week.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/connections_per_ip.png" title="Number of connections per unique IP (Top 10)"><img src="generated-graphs/connections_per_ip.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/connections_per_ip_pie.png" title="Number of connections per unique IP (Top 10)"><img src="generated-graphs/connections_per_ip_pie.png" alt="" /></a></li>
         <li><a rel="gallery_group" href="generated-graphs/logins_from_same_ip.png" title="Successful logins from same IP (Top 20)"><img src="generated-graphs/logins_from_same_ip.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/most_probes_per_day.png" title="Most probes per day (Top 20)"><img src="generated-graphs/most_probes_per_day.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/probes_per_day.png" title="Probes per day"><img src="generated-graphs/probes_per_day.png" alt="" /></a></li>
-		<li><a rel="gallery_group" href="generated-graphs/probes_per_week.png" title="Probes per week"><img src="generated-graphs/probes_per_week.png" alt="" /></a></li>        
+		<li><a rel="gallery_group" href="generated-graphs/probes_per_week.png" title="Probes per week"><img src="generated-graphs/probes_per_week.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/top10_ssh_clients.png" title="Top 10 SSH clients"><img src="generated-graphs/top10_ssh_clients.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/connections_per_country_pie.png" title="Number of connections per country"><img src="generated-graphs/connections_per_country_pie.png" alt="" /></a></li>
 		<li><a rel="gallery_group" href="generated-graphs/connections_per_ip_geo.png" title="Number of connections per unique IP (Top 10) + Country Codes"><img src="generated-graphs/connections_per_ip_geo.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/connections_per_ip_geo_pie.png" title="Number of connections per unique IP (Top 10) + Country Codes"><img src="generated-graphs/connections_per_ip_geo_pie.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/human_activity_busiest_days.png" title="Human activity busiest days (Top 20)"><img src="generated-graphs/human_activity_busiest_days.png" alt="" /></a></li>
 		<li><a rel="gallery_group" href="generated-graphs/human_activity_per_day.png" title="Human activity per day"><img src="generated-graphs/human_activity_per_day.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/human_activity_per_week.png" title="Human activity per week"><img src="generated-graphs/human_activity_per_week.png" alt="" /></a></li>
-		
+
 		<li><a rel="gallery_group" href="generated-graphs/top10_overall_input.png" title="Top 10 input (overall)"><img src="generated-graphs/top10_overall_input.png" alt="" /></a></li>
 		<li><a rel="gallery_group" href="generated-graphs/top10_successful_input.png" title="Top 10 successful input"><img src="generated-graphs/top10_successful_input.png" alt="" /></a></li>
 		<li class="last"><a rel="gallery_group" href="generated-graphs/top10_failed_input.png" title="Top 10 failed input"><img src="generated-graphs/top10_failed_input.png" alt="" /></a></li>
