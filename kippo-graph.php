@@ -146,7 +146,7 @@ echo '<br /><br />';
         <div class="fl_left">
           <h2>Connections per IP</h2>
           <p>This vertical bar chart displays the top 10 unique IPs ordered by the number of overall connections to the system.</p>
-		  <p><a href="export.php?type=SuccessIP">CSV of all successes per IP</a><p>
+		  <p><a href="export.php?type=IP">CSV of all connections per IP</a><p>
         </div>
         <div class="fl_right"><img src="generated-graphs/connections_per_ip.png" alt="" /></div>
         <div class="fl_left">
