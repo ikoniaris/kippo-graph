@@ -431,7 +431,8 @@ class KippoInput
 
     public function printWgetCommands()
     {
-        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file "
+        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file, "
+            . "timestamp "
             . "FROM input "
             . "WHERE input LIKE '%wget%' AND input NOT LIKE 'wget' "
             . "ORDER BY timestamp DESC";
@@ -448,6 +449,7 @@ class KippoInput
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
+            echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
             echo    '<th>File link</th>';
             echo    '<th>NoVirusThanks</th>';
@@ -457,6 +459,7 @@ class KippoInput
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
+                echo    '<td>' . $row['timestamp'] . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
                 $file_link = trim($row['file']);
                 // If the link has no "http://" in front, then add it
