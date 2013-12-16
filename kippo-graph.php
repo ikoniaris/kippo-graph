@@ -28,6 +28,7 @@
       <li><a href="index.php">Homepage</a></li>
       <li class="active"><a href="kippo-graph.php">Kippo-Graph</a></li>
 	  <li><a href="kippo-input.php">Kippo-Input</a></li>
+    <li><a href="kippo-playlog.php">Kippo-PlayLog</a></li>
 	  <li><a href="kippo-geo.php">Kippo-Geo</a></li>
       <li class="last"><a href="gallery.php">Graph Gallery</a></li>
     </ul>
