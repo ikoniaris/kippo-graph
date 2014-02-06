@@ -41,11 +41,11 @@
       <!-- ####################################################################################################### -->
       <h3>Thank you for using Kippo-Graph!</h3>
 	  <p><hr></p>
-	  <p align=center><img src="images/kippo-graph-img.png" height=215 width=320></p>
+	  <p align=center><img src="images/kippo-graph-img.png" alt="Kippo-Graph" height=215 width=320></p>
 	  <p align=center>
 	<?php
 	#Package: Kippo-Graph
-	#Version: 0.9
+	#Version: 0.9.1
 	#Author: ikoniaris
 	#Website: bruteforce.gr/kippo-graph
 	require_once('config.php');
@@ -63,6 +63,7 @@
 	?></p>
 	  <p>&nbsp;</p>
 	  <p><strong>CHANGES:</strong></p>
+      <p>Version 0.9.1:<br/>+ Fixed Google Map rendering issue.</p>
       <p>Version 0.9:<br/>+ Added CSV export capabilities.<br/>+ Added Spanish language support.</p>
       <p>Version 0.8:<br/>+ Changed code to OOP style.<br/>+ Added FortiGuard, AlientVault, WatchGuard and McAfee IP scanning services (Kippo-Geo).<br/>+ Various CSS-related fixes for tables and cross-browser compatibility.</p>
       <p>Version 0.7.7:<br/>+ Added German language support.</p>
