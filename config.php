@@ -1,4 +1,4 @@
-﻿<?php
+﻿﻿<?php
 #Package: Kippo-Graph
 #Version: 0.9.1
 #Author: ikoniaris
@@ -42,6 +42,6 @@ define('DB_PORT', '3306');
 #the following value ensures that having the update checking
 #feature enabled is your choice and not forced.
 #Change NO to YES if you want to enable it.
-define('UPDATE_CHECK', 'YES');
+define('UPDATE_CHECK', 'NO');
 
 ?>
