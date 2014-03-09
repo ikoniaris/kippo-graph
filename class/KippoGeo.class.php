@@ -1,5 +1,4 @@
 <?php
-
 require_once(DIR_ROOT . '/include/libchart/classes/libchart.php');
 require_once(DIR_ROOT . '/include/qgooglevisualapi/config.inc.php');
 require_once(DIR_ROOT . '/include/geoplugin/geoplugin.class.php');

@@ -3,7 +3,7 @@
 /**
  * Wrapper for Google Visualisation API
  * Visualisation type: Map
- * @author Thomas Schäfer
+ * @author Thomas Schï¿½fer
  * @since 2008-06-29
  *
  */
@@ -46,7 +46,7 @@ class QMapGoogleGraph extends QVizualisationGoogleGraph {
 	protected $packageSetup = array(
 		"script" => array(
 			 "type" => "text/javascript",
-			 "src" => QApikeyGoogleGraph::KEY,
+			 "src" => "http://maps.google.com/maps/api/js?sensor=false" //QApikeyGoogleGraph::KEY,
 		) 
 	);
 	
