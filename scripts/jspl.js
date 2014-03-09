@@ -2,8 +2,6 @@
  * Terminal
  */
 
-console.log(log);
-
 var Terminal = function(name) {
     this.name = name;
     this.buffer = new Array();

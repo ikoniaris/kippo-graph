@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="styles/layout.css" type="text/css" />
 <link rel="stylesheet" href="styles/playlog.css" type="text/css">
 <script type="text/javascript" src="scripts/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="scripts/BinFileReader.js"></script>
+<script type="text/javascript" src="scripts/jquery.getUrlParam.js"></script>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -41,7 +43,7 @@
   <div class="container">
     <div class="whitebox">
       <!-- ####################################################################################################### -->
-          <h2>Play logs of attackers in the kippo honeypot</h2>
+          <h2>Kippo TTY Log</h2>
           <hr />
 <?php
 #Package: Kippo-Graph
@@ -62,28 +64,24 @@ if (mysqli_connect_errno())
 $session = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['f']);
 
 $db_query = "SELECT ttylog, session FROM ttylog "
-    . "WHERE session=" . "\"" . $session . "\" "
-    . "LIMTT 1";
+    . "WHERE session=" . "\"" . $session . "\"";
 
 $result = $db_conn->query($db_query);
 
-
 while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-	$log = $row[ttylog];
+	$log = base64_encode($row['ttylog']);
 }
+
 $db_conn->close();
 ?>
 
-<!-- Pass PHP variables to javascript -->
+<!-- Pass PHP variables to javascript - Please ignore the below section -->
 <script type="text/javascript">
   var log = "<?php echo $log; ?>";
 </script>
 <script type="text/javascript" src="scripts/jspl.js"></script>
-      
-      <h1>
-      Kippo TTY Log
-      </h1>
-      <div id="description">No input file specified!</div>
+
+      <div id="description">Error loading specified log.</div>
       <br>
       <div id="playlog"></div>
 
