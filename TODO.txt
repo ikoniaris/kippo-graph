@@ -1,13 +1,5 @@
-﻿Package: Kippo-Graph
-Version: 0.9.1
-Author: ikoniaris
-Website: bruteforce.gr/kippo-graph
-
-
-TODO for new versions:
-+ Seperate HTML and PHP where possible, tidy up code!
+﻿TODO for new versions:
 + Use new version of QGoogleVisualAPI and generate more graphs (eg GeoMap instead of IntensityMap?)
-+ Include sample Apache configuration (unless uploaded to /var/www/)
 + 2nd tab on Intensity Map (or new map) with successes per country (temporary SQL table/query)
 + Add option to show results only from a particular sensor (add value in config.php and then change the SQL queries? Perhaps move all SQL query strings in seperate file)
 + Option to use local/offline geolocation service and not geoplugin, see: https://www.maxmind.com/app/support
@@ -16,11 +8,12 @@ TODO for new versions:
 + Integrate or offer as seperate utility the VirusTotal uploader by @0xAli (contact him again for file)
 + Add www.ip-adress.com/whois/<IP> in Kippo-Geo for IPs (limit of 50 lookups per day is OK) 
 + Use convert/save as ZIP file API from online-convert.com in Kippo-Input for downloaded files
-+ Integrate Kippo-Playlog as seen here: http://194.213.0.254/secure/kippo-playlog.php and Kippo-Auth as seen here: http://chaosberlin.de/kippo-graph/kippo-auth.php
 + Kippo-Input: downloaded files with curl (curl -O <file>)
 
 
 DONE:
++ Integrate Kippo-Playlog
++ Seperate HTML and PHP where possible, tidy up code!
 + Add CSV dump/backup function
 + Graphs (.png) creation should be moved to xxx-generator for each component (or all in one!)
 + Move project to sf.net/googlecode.com/github.com (next milestone version)
