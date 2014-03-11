@@ -391,7 +391,7 @@ class KippoInput
 
     public function printPasswdCommands()
     {
-        $db_query = 'SELECT timestamp, input '
+        $db_query = 'SELECT timestamp, input, session '
             . "FROM input "
             . "WHERE realm like 'passwd' "
             . "GROUP BY input "
@@ -411,6 +411,7 @@ class KippoInput
             echo    '<th>ID</th>';
             echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
+            echo    '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
@@ -419,6 +420,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
+                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -431,7 +433,8 @@ class KippoInput
 
     public function printWgetCommands()
     {
-        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file "
+        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file, "
+            . "timestamp, session "
             . "FROM input "
             . "WHERE input LIKE '%wget%' AND input NOT LIKE 'wget' "
             . "ORDER BY timestamp DESC";
@@ -448,8 +451,10 @@ class KippoInput
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
+            echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
             echo    '<th>File link</th>';
+            echo    '<th>Play Log</th>';
             echo    '<th>NoVirusThanks</th>';
             echo '</tr></thead><tbody>';
 
@@ -457,6 +462,7 @@ class KippoInput
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
                 echo    '<td>' . $counter . '</td>';
+                echo    '<td>' . $row['timestamp'] . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
                 $file_link = trim($row['file']);
                 // If the link has no "http://" in front, then add it
@@ -464,6 +470,7 @@ class KippoInput
                     $file_link = 'http://' . $file_link;
                 }
                 echo    '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
+                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo    '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -477,7 +484,7 @@ class KippoInput
 
     public function printExecutedScripts()
     {
-        $db_query = 'SELECT timestamp, input '
+        $db_query = 'SELECT timestamp, input, session '
             . "FROM input "
             . "WHERE input like './%' "
             . "GROUP BY input "
@@ -497,6 +504,7 @@ class KippoInput
             echo    '<th>ID</th>';
             echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
+            echo    '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
@@ -505,6 +513,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
+                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -517,7 +526,7 @@ class KippoInput
 
     public function printInterestingCommands()
     {
-        $db_query = 'SELECT timestamp, input '
+        $db_query = 'SELECT timestamp, input, session '
             . "FROM input "
             . "WHERE (input like '%cat%' OR input like '%dev%' OR input like '%man%' OR input like '%gpg%' OR input like '%ping%' "
             . "OR input like '%ssh%' OR input like '%scp%' OR input like '%whois%' OR input like '%unset%' OR input like '%kill%' "
@@ -540,6 +549,7 @@ class KippoInput
             echo    '<th>ID</th>';
             echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
+            echo    '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
@@ -548,6 +558,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
+                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -560,7 +571,7 @@ class KippoInput
 
     public function printAptGetCommands()
     {
-        $db_query = 'SELECT timestamp, input '
+        $db_query = 'SELECT timestamp, input, session '
             . "FROM input "
             . "WHERE (input like '%apt-get install%' OR input like '%apt-get remove%' OR input like '%aptitude install%' OR input like '%aptitude remove%') "
             . "AND input NOT LIKE 'apt-get' AND input NOT LIKE 'aptitude'"
@@ -581,6 +592,7 @@ class KippoInput
             echo    '<th>ID</th>';
             echo    '<th>Timestamp</th>';
             echo    '<th>Input</th>';
+            echo    '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
@@ -589,6 +601,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
+                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
