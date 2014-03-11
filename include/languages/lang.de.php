@@ -1,9 +1,5 @@
 ﻿<?php
-#Package: Kippo-Graph
-#Version: 0.9.1
-#Author: ikoniaris
-#Website: bruteforce.gr/kippo-graph
-#Translation: Dario Rugani
+//Translation: Dario Rugani
 
 //INDEX.PHP STRINGS
 //MORE TODO
