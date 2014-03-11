@@ -38,7 +38,7 @@ class KippoPlayLog
         if ($result->num_rows > 0) {
             //We create a skeleton for the table
             $counter = 1;
-            echo '<h3>Log Files</h3>';
+            echo '<h3>Log files</h3>';
             echo '<p>The following table displays a list of all the logs recorded by kippo</p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
