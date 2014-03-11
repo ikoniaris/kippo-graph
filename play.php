@@ -43,7 +43,7 @@
   <div class="container">
     <div class="whitebox">
       <!-- ####################################################################################################### -->
-          <h2>Kippo TTY Log</h2>
+          <h2>Kippo TTY log</h2>
           <hr />
 <?php
 #Package: Kippo-Graph
@@ -93,7 +93,7 @@ $db_conn->close();
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright">
-    <p class="fl_left">Copyright &copy; 2011 - 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
+    <p class="fl_left">Copyright &copy; 2011 - 2014 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
     <p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
     <br class="clear" />
   </div>
