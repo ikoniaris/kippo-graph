@@ -92,6 +92,59 @@ class KippoInput
         echo '<hr /><br />';
     }
 
+    public function printIpActivity()
+    {
+        echo '<h3>List of IP activity</h3>';
+
+        //TOTAL ACTIVITY from IP
+        // Last activity|IP|n.Sessiones|Success
+        $db_query = "select timestamp,ip "
+           . "FROM auth,sessions "
+           . "WHERE sessions.id = session "
+	   . "GROUP BY ip "
+	   . "ORDER BY timestamp DESC";
+
+	//$db_query = "select ip,count(ip) from (select * from (select distinct ip,id from sessions) A order by ip) B group by ip";
+	$db_query = "SELECT * from (SELECT ip, COUNT(DISTINCT sessions.id) from sessions group by ip order by ip) A LEFT JOIN (select timestamp,sessions.ip,max(success) from sessions,auth where sessions.id = auth.session group by ip order by timestamp DESC )B on A.ip = B.ip order by A.ip";
+	$result = $this->db_conn->query($db_query);
+	//echo 'Found '.$result->num_rows.' records';
+
+	if ($result->num_rows > 0) {
+	   //We create a skeleton for the table
+	    echo '<table><thead>';
+	    echo '<tr class="dark">';
+	    echo '<th colspan="4">IP Activity</th>';
+	    echo '</tr>';
+	    echo '<tr class="dark">';
+	    echo '<th>IP Address</th>';
+	    echo '<th>Sessions Count</th>';
+	    echo '<th>Success</th>';
+	    echo '<th>Last Attempt</th>';
+	    echo '</tr></thead><tbody>';
+
+	    //For every row returned from the database we add a new point to the dataset,
+	    //and create a new table row with the data as columns
+	    while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+
+	        $success = is_null($row['max(success)']) ? 'N/A' : $row['max(success)'];
+		$timestamp = is_null($row['timestamp']) ? 'N/A' : $row['timestamp'];
+
+		echo '<tr class="light word-break">';
+		echo '<td>' . $row['0'] .'</td>';
+		echo '<td>' . $row['COUNT(DISTINCT sessions.id)'] . '</td>';
+		echo '<td>' . $success . '</td>';
+		echo '<td>' . $timestamp . '</td>';
+		echo '</tr>';
+	    }
+
+	    //Close tbody and table element, it's ready.
+	    echo '</tbody></table>';
+	}
+
+	echo '<hr /><br />';
+
+    }
+
     public function printHumanActivityBusiestDays()
     {
         $db_query = "SELECT COUNT(input), timestamp "
