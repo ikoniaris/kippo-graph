@@ -17,7 +17,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.9.2 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.9.1 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -28,9 +28,9 @@
       <li><a href="index.php">Homepage</a></li>
       <li><a href="kippo-graph.php">Kippo-Graph</a></li>
       <li><a href="kippo-input.php">Kippo-Input</a></li>
-      <li><a href="kippo-playlog.php">Kippo-PlayLog</a></li>
-      <li><a href="kippo-ip.php">Kippo-Ip</a></li>	
-	  <li class="active"><a href="kippo-geo.php">Kippo-Geo</a></li>
+      <li><a href="kippo-playlog.php">Kippo-Playlog</a></li>
+	  <li class="active"><a href="kippo-ip.php">Kippo-Ip</a></li>
+      <li><a href="kippo-geo.php">Kippo-Geo</a></li>
       <li class="last"><a href="gallery.php">Graph Gallery</a></li>
     </ul>
     <div class="clear"></div>
@@ -41,25 +41,28 @@
   <div class="container">
     <div class="whitebox">
       <!-- ####################################################################################################### -->
-	  <h2>Geolocation information gathered from the top 10 IP addresses probing the system</h2>
+	  <h2>IP activity gathered from the honeypot system</h2>
 	  <hr />
-
 <?php
+#Package: Kippo-Graph
+#Version: 0.9.1
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 
 require_once('config.php');
-require_once('class/KippoGeo.class.php');
+require_once('class/KippoInput.class.php');
 
-$kippoGeo = new KippoGeo();
+$kippoInput = new KippoInput();
 
 //-----------------------------------------------------------------------------------------------------------------
-//KIPPO-GEO DATA
+//APT-GET COMMANDS
 //-----------------------------------------------------------------------------------------------------------------
-$kippoGeo->printKippoGeoData();
+$kippoInput->printIpActivity();
 //-----------------------------------------------------------------------------------------------------------------
 //END
 //-----------------------------------------------------------------------------------------------------------------
+
+
 
 ?>
       <!-- ####################################################################################################### -->
@@ -70,7 +73,7 @@ $kippoGeo->printKippoGeoData();
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright">
-    <p class="fl_left">Copyright &copy; 2011 - 2014 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
+    <p class="fl_left">Copyright &copy; 2011 - 2013 - All Rights Reserved - <a href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
     <p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
     <br class="clear" />
   </div>
