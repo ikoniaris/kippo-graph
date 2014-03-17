@@ -119,7 +119,7 @@ class KippoInput
 	    echo '<th>IP Address</th>';
 	    echo '<th>Sessions Count</th>';
 	    echo '<th>Success</th>';
-	    echo '<th>Last Attempt</th>';
+	    echo '<th>Last Seen</th>';
 	    echo '</tr></thead><tbody>';
 
 	    //For every row returned from the database we add a new point to the dataset,
