@@ -5,7 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
 <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+<link rel="stylesheet" href="styles/tablesorter.css" type="text/css" />
 <script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="scripts/jquery.tablesorter.pager.js"></script>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -17,7 +20,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="topbar">
-    <div class="fl_left">Version: 0.9.1 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
+    <div class="fl_left">Version: 0.9.2 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a></div>
     <br class="clear" />
   </div>
 </div>
@@ -45,7 +48,7 @@
 	  <hr />
 <?php
 #Package: Kippo-Graph
-#Version: 0.9.1
+#Version: 0.9.2
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 
@@ -64,11 +67,9 @@ $kippoInput->printIpInputRegistered("89.107.180.43");
 //END
 //-----------------------------------------------------------------------------------------------------------------
 
-
-
 ?>
-      <!-- ####################################################################################################### -->
-      <div class="clear"></div>
+<!-- ####################################################################################################### -->
+<div class="clear"></div>
     </div>
   </div>
 </div>
@@ -85,6 +86,21 @@ $kippoInput->printIpInputRegistered("89.107.180.43");
 jQuery(function () {
     jQuery('ul.nav').superfish();
 });
+</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+        $("#Overall-IP-Activity")
+        .tablesorter({widthFixed: true, widgets: ['zebra']})
+        .tablesorterPager({container: $("#pager1")});
+
+	 $("#IP-Attemps")
+        .tablesorter({widthFixed: true, widgets: ['zebra']})
+        .tablesorterPager({container: $("#pager2")});
+
+	 $("#IP-Registered")
+        .tablesorter({widthFixed: true, widgets: ['zebra']})
+        .tablesorterPager({container: $("#pager3")});
+   });
 </script>
 </body>
 </html>

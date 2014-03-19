@@ -100,9 +100,9 @@ class KippoInput
 
 	if ($result->num_rows > 0) {
 	   //We create a skeleton for the table
-	    echo '<table><thead>';
+	    echo '<table id="Overall-IP-Activity" class="tablesorter"><thead>';
 	    echo '<tr class="dark">';
-	    echo '<th colspan="4">Total IP Addresses number: '.$result->num_rows.'</th>';
+	    echo '<th colspan="4">Total identified IP Addresses: '.$result->num_rows.'</th>';
 	    echo '</tr>';
 	    echo '<tr class="dark">';
 	    echo '<th>IP Address</th>';
@@ -129,8 +129,24 @@ class KippoInput
 	    //Close tbody and table element, it's ready.
 	    echo '</tbody></table>';
 	}
+      
+	echo '<div id="pager1" class="pager">';
+	echo '  <form>';
+	echo '     <img src="images/first.png" class="first"/>';
+	echo '     <img src="images/prev.png" class="prev"/>';
+	echo '     <span class="pagedisplay"></span>';
+	echo '     <img src="images/next.png" class="next"/>';
+	echo '     <img src="images/last.png" class="last"/>';
+	echo '     <select class="pagesize">';
+	echo '        <option selected="selected" value="10">10</option>';
+	echo '        <option value="20">20</option>';
+	echo '        <option value="30">30</option>';
+	echo '        <option value="40">40</option>';
+	echo '     </select>';
+	echo '  </form>';
+	echo '</div>';
 
-	echo '<hr /><br />';
+        echo '<hr /><br />';
 
     }
 
@@ -147,7 +163,7 @@ class KippoInput
 
         if ($result->num_rows > 0) {
            //We create a skeleton for the table
-            echo '<table><thead>';
+            echo '<table id="IP-Attemps" class="tablesorter"><thead>';
             echo '<tr class="dark">';
             echo '<th colspan="6">Connection attempts from '.$ip.'</th>';
             echo '</tr>';
@@ -178,7 +194,24 @@ class KippoInput
             echo '</tbody></table>';
         }
 
+        echo '<div id="pager2" class="pager">';
+        echo '  <form>';
+        echo '     <img src="images/first.png" class="first"/>';
+        echo '     <img src="images/prev.png" class="prev"/>';
+        echo '     <span class="pagedisplay"></span>';
+        echo '     <img src="images/next.png" class="next"/>';
+        echo '     <img src="images/last.png" class="last"/>';
+        echo '     <select class="pagesize">';
+        echo '        <option selected="selected" value="10">10</option>';
+        echo '        <option value="20">20</option>';
+        echo '        <option value="30">30</option>';
+        echo '        <option value="40">40</option>';
+        echo '     </select>';
+        echo '  </form>';
+        echo '</div>';
+
         echo '<hr /><br />';
+
     }
 
     public function printIpInputRegistered($ip)
@@ -189,8 +222,8 @@ class KippoInput
 
 	if ($result->num_rows > 0) {
            //We create a skeleton for the table
-            echo '<table><thead>';
-            echo '<tr class="dark">';
+            echo '<table id="IP-Registered" class="tablesorter"><thead>';
+	    echo '<tr class="dark">';
             echo '<th colspan="4">Input Activity from '.$ip.'</th>';
             echo '</tr>';
             echo '<tr class="dark">';
@@ -215,7 +248,24 @@ class KippoInput
             echo '</tbody></table>';
         }
 
+        echo '<div id="pager3" class="pager">';
+        echo '  <form>';
+        echo '     <img src="images/first.png" class="first"/>';
+        echo '     <img src="images/prev.png" class="prev"/>';
+        echo '     <span class="pagedisplay"></span>';
+        echo '     <img src="images/next.png" class="next"/>';
+        echo '     <img src="images/last.png" class="last"/>';
+        echo '     <select class="pagesize">';
+        echo '        <option selected="selected" value="10">10</option>';
+        echo '        <option value="20">20</option>';
+        echo '        <option value="30">30</option>';
+        echo '        <option value="40">40</option>';
+        echo '     </select>';
+        echo '  </form>';
+        echo '</div>';
+
         echo '<hr /><br />';
+
     }
     public function printHumanActivityBusiestDays()
     {
