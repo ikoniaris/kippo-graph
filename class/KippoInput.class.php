@@ -118,7 +118,7 @@ class KippoInput
 	        $success = is_null($row['max(success)']) ? 'N/A' : $row['max(success)'];
 		$timestamp = is_null($row['max(starttime)']) ? 'N/A' : $row['max(starttime)'];
 
-		echo '<tr class="light word-break">';
+		echo '<tr class="light word-break" onclick=\'getIPinfo("'. $row['0'] .'")\'>';
 		echo '<td>' . $row['0'] .'</td>';
 		echo '<td>' . $row['COUNT(DISTINCT sessions.id)'] . '</td>';
 		echo '<td>' . $success . '</td>';
@@ -150,123 +150,6 @@ class KippoInput
 
     }
 
-    public function printIpConnectionAttempts($ip)
-    {
-
-	$db_query = "SELECT timestamp,ip,session,username,password,success "
-		    ."FROM sessions,auth "
-                    ."WHERE sessions.id=auth.session and sessions.ip=\"".$ip." \"" 
-		    ."ORDER BY auth.timestamp";
-
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
-
-        if ($result->num_rows > 0) {
-           //We create a skeleton for the table
-            echo '<table id="IP-Attemps" class="tablesorter"><thead>';
-            echo '<tr class="dark">';
-            echo '<th colspan="6">Connection attempts from '.$ip.'</th>';
-            echo '</tr>';
-            echo '<tr class="dark">';
-            echo '<th>Timestamp</th>';
-            echo '<th>IP</th>';
-            echo '<th>Session</th>';
-            echo '<th>Username</th>';
-	    echo '<th>Password</th>';
-	    echo '<th>Success</th>';
-            echo '</tr></thead><tbody>';
-
-            //For every row returned from the database we add a new point to the dataset,
-            //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-
-                echo '<tr class="light word-break">';
-                echo '<td>' . $row['timestamp'] .'</td>';
-                echo '<td>' . $row['ip'] . '</td>';
-                echo '<td>' . $row['session'] . '</td>';
-                echo '<td>' . $row['username'] . '</td>';
-	        echo '<td>' . $row['password'] . '</td>';
-		echo '<td>' . $row['success'] . '</td>';
-                echo '</tr>';
-            }
-
-            //Close tbody and table element, it's ready.
-            echo '</tbody></table>';
-        }
-
-        echo '<div id="pager2" class="pager">';
-        echo '  <form>';
-        echo '     <img src="images/first.png" class="first"/>';
-        echo '     <img src="images/prev.png" class="prev"/>';
-        echo '     <span class="pagedisplay"></span>';
-        echo '     <img src="images/next.png" class="next"/>';
-        echo '     <img src="images/last.png" class="last"/>';
-        echo '     <select class="pagesize">';
-        echo '        <option selected="selected" value="10">10</option>';
-        echo '        <option value="20">20</option>';
-        echo '        <option value="30">30</option>';
-        echo '        <option value="40">40</option>';
-        echo '     </select>';
-        echo '  </form>';
-        echo '</div>';
-
-        echo '<hr /><br />';
-
-    }
-
-    public function printIpInputRegistered($ip)
-    {
-
-        $db_query = "select * from (select distinct sessions.id from sessions where sessions.ip=\"".$ip."\") A JOIN (select * from input) B on A.id=B.session order by timestamp";
-        $result = $this->db_conn->query($db_query);
-
-	if ($result->num_rows > 0) {
-           //We create a skeleton for the table
-            echo '<table id="IP-Registered" class="tablesorter"><thead>';
-	    echo '<tr class="dark">';
-            echo '<th colspan="4">Input Activity from '.$ip.'</th>';
-            echo '</tr>';
-            echo '<tr class="dark">';
-            echo '<th>Timestamp</th>';
-            echo '<th>Session</th>';
-            echo '<th>Success</th>';
-            echo '<th>Input</th>';
-            echo '</tr></thead><tbody>';
-
-            //For every row returned from the database we add a new point to the dataset,
-            //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-
-                echo '<tr class="light word-break">';
-                echo '<td>' . $row['timestamp'] .'</td>';
-                echo '<td>' . $row['session'] . '</td>';
-                echo '<td>' . $row['success'] . '</td>';
-                echo '<td>' . $row['input'] . '</td>';
-                echo '</tr>';
-            }
-            //Close tbody and table element, it's ready.
-            echo '</tbody></table>';
-        }
-
-        echo '<div id="pager3" class="pager">';
-        echo '  <form>';
-        echo '     <img src="images/first.png" class="first"/>';
-        echo '     <img src="images/prev.png" class="prev"/>';
-        echo '     <span class="pagedisplay"></span>';
-        echo '     <img src="images/next.png" class="next"/>';
-        echo '     <img src="images/last.png" class="last"/>';
-        echo '     <select class="pagesize">';
-        echo '        <option selected="selected" value="10">10</option>';
-        echo '        <option value="20">20</option>';
-        echo '        <option value="30">30</option>';
-        echo '        <option value="40">40</option>';
-        echo '     </select>';
-        echo '  </form>';
-        echo '</div>';
-
-        echo '<hr /><br />';
-
-    }
     public function printHumanActivityBusiestDays()
     {
         $db_query = "SELECT COUNT(input), timestamp "

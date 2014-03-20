@@ -61,14 +61,13 @@ $kippoInput = new KippoInput();
 //APT-GET COMMANDS
 //-----------------------------------------------------------------------------------------------------------------
 $kippoInput->printOverallIpActivity();
-$kippoInput->printIpConnectionAttempts("89.107.180.43");
-$kippoInput->printIpInputRegistered("89.107.180.43");
 //-----------------------------------------------------------------------------------------------------------------
 //END
 //-----------------------------------------------------------------------------------------------------------------
 
 ?>
 <!-- ####################################################################################################### -->
+<div id="extended-ip-info"></div>
 <div class="clear"></div>
     </div>
   </div>
@@ -92,15 +91,32 @@ jQuery(function () {
         $("#Overall-IP-Activity")
         .tablesorter({widthFixed: true, widgets: ['zebra']})
         .tablesorterPager({container: $("#pager1")});
+   });
+</script>
+<script type="text/javascript">
+function getIPinfo(ip) {
+   $.ajax({
+      type: "POST",
+      url:'class/KippoIPextended.class.php',
+      data: 'ip='+ip,
+      complete: function (response) {
+         $('#extended-ip-info').html(response.responseText);
 
-	 $("#IP-Attemps")
+         $("#IP-attemps")
         .tablesorter({widthFixed: true, widgets: ['zebra']})
         .tablesorterPager({container: $("#pager2")});
 
-	 $("#IP-Registered")
+         $("#IP-commands")
         .tablesorter({widthFixed: true, widgets: ['zebra']})
         .tablesorterPager({container: $("#pager3")});
-   });
+
+      },
+      error: function () {
+          $('#output').html('Bummer: there was an error!');
+      },
+  });
+  return false;
+}
 </script>
 </body>
 </html>
