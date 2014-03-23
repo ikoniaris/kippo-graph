@@ -237,7 +237,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 input (overall)</h3>';
             echo '<p>The following table displays the top 10 commands (overall) entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=Input">CSV of all input commands</a><p>';
+			echo '<p><a href="include/export.php?type=Input">CSV of all input commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -296,7 +296,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 successful input</h3>';
             echo '<p>The following table displays the top 10 successful commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=Successinput">CSV of all successful commands</a><p>';
+			echo '<p><a href="include/export.php?type=Successinput">CSV of all successful commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -353,7 +353,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 failed input</h3>';
             echo '<p>The following table displays the top 10 failed commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=FailedInput">CSV of all failed commands</a><p>';
+			echo '<p><a href="include/export.php?type=FailedInput">CSV of all failed commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -405,7 +405,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>passwd commands</h3>';
             echo '<p>The following table displays the latest "passwd" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=passwd">CSV of all "passwd" commands</a><p>';
+			echo '<p><a href="include/export.php?type=passwd">CSV of all "passwd" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -420,7 +420,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -447,7 +447,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>wget commands</h3>';
             echo '<p>The following table displays the latest "wget" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=wget">CSV of all "wget" commands</a><p>';
+			echo '<p><a href="include/export.php?type=wget">CSV of all "wget" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -470,7 +470,7 @@ class KippoInput
                     $file_link = 'http://' . $file_link;
                 }
                 echo    '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo    '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -498,7 +498,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Executed scripts</h3>';
             echo '<p>The following table displays the latest executed scripts by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=Scripts">CSV of all scripts executed</a><p>';
+			echo '<p><a href="include/export.php?type=Scripts">CSV of all scripts executed</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -513,7 +513,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -543,7 +543,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>Interesting commands</h3>';
             echo '<p>The following table displays other interesting commands executed by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=Interesting">CSV of all interesting commands</a><p>';
+			echo '<p><a href="include/export.php?type=Interesting">CSV of all interesting commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -558,7 +558,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -586,7 +586,7 @@ class KippoInput
             $counter = 1;
             echo '<h3>apt-get commands</h3>';
             echo '<p>The following table displays the latest "apt-get"/"aptitude" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="export.php?type=aptget">CSV of all "apt-get"/"aptitude" commands</a><p>';
+			echo '<p><a href="include/export.php?type=aptget">CSV of all "apt-get"/"aptitude" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
             echo    '<th>ID</th>';
@@ -601,7 +601,7 @@ class KippoInput
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }

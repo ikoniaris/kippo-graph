@@ -54,7 +54,7 @@ class KippoPlayLog
                 echo    '<td>' . $counter . '</td>';
                 echo    '<td>' . $row['timestamp'] . '</td>';
                 echo    '<td>' . $row['size'] . 'kb' . '</td>';
-                echo    '<td><a href="play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
