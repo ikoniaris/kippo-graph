@@ -3,9 +3,9 @@
 #Author: Kevin Breen
 #Website: techanarchy.net
 
-require_once('config.php');
-require_once('include/sql.php'); // this has all the SQL Statements named as per Query String below
-require_once('include/misc/xss_clean.php');
+require_once('../config.php');
+require_once('../include/sql.php'); // this has all the SQL Statements named as per Query String below
+require_once('../include/misc/xss_clean.php');
 
 //Valid queries should be usernames, passwords, IP's optional query should be Limit.
 
