@@ -30,8 +30,13 @@ td.tablesorter-pager {
 
 .pager form {
   display:inline-flex;
+  margin-right: 20px;
 }
 
+#allActivityLink {
+  position:relative;
+  top:-5px;
+}
 /*** css used when "updateArrows" option is true ***/
 /* the pager itself gets a disabled class when the number of rows is less than the size */
 .tablesorter-pager.disabled {

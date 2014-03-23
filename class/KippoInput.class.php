@@ -144,6 +144,7 @@ class KippoInput
 	echo '        <option value="40">40</option>';
 	echo '     </select>';
 	echo '  </form>';
+	echo '  <a id="allActivityLink" href="export.php?type=allActivity">CSV of all recent IP activity</a>';
 	echo '</div>';
 
         echo '<hr /><br />';
