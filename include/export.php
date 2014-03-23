@@ -13,9 +13,9 @@ require_once('../include/misc/xss_clean.php');
 //Let's connect to the database
 $db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
 
-if(mysqli_connect_errno()) {
-	echo 'Error connecting to the database: '.mysqli_connect_error();
-	exit();
+if (mysqli_connect_errno()) {
+    echo 'Error connecting to the database: ' . mysqli_connect_error();
+    exit();
 }
 
 
@@ -30,16 +30,16 @@ $first = true; // flag for column titeles
 //Set Headers to create download instead of a page
 $fileName = "Export_" . $_GET['type'] . ".csv";
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment;filename="'.$fileName.'"');
+header('Content-Disposition: attachment;filename="' . $fileName . '"');
 header('Cache-Control: max-age=0');
 
 // open file without writing to disk
 $out = fopen('php://output', 'w');
 
 while ($row = $result->fetch_array(MYSQLI_NUM)) {
-    if($first){
+    if ($first) {
         $titles = array();
-        foreach($row as $key=>$val){
+        foreach ($row as $key => $val) {
             $titles[] = $key;
         }
         fputcsv($out, $titles); // write the titles
