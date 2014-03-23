@@ -56,3 +56,7 @@ table.tablesorter thead tr .header {
     background-position: right center;
     cursor: pointer;
 }
+
+table tbody tr:hover { 
+    background: #e8e8e8; 
+}

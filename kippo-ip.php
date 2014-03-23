@@ -89,7 +89,7 @@ jQuery(function () {
 <script type="text/javascript">
    $(document).ready(function() {
         $("#Overall-IP-Activity")
-        .tablesorter({widthFixed: true, widgets: ['zebra']})
+        .tablesorter({sortList: [[3,1]], widthFixed: true, widgets: ['zebra']})
         .tablesorterPager({container: $("#pager1")});
    });
 </script>
@@ -101,7 +101,7 @@ function getIPinfo(ip) {
       data: 'ip='+ip,
       complete: function (response) {
          $('#extended-ip-info').html(response.responseText);
-
+	
          $("#IP-attemps")
         .tablesorter({widthFixed: true, widgets: ['zebra']})
         .tablesorterPager({container: $("#pager2")});
