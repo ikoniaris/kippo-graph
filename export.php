@@ -9,7 +9,6 @@ require_once('include/misc/xss_clean.php');
 
 //Valid queries should be usernames, passwords, IP's optional query should be Limit.
 
-
 //Let's connect to the database
 $db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
 

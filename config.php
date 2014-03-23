@@ -1,4 +1,4 @@
-﻿﻿<?php
+<?php
 #Package: Kippo-Graph
 #Version: 0.9.1
 #Author: ikoniaris
@@ -14,6 +14,7 @@
 #Linux:
 define('DIR_ROOT', '/var/www/kippo-graph');
 
+
 #Chart language selection -- Default: en (English). Change the two-letter
 #lang.XX.php language code to your preferred choice.
 #Available options:
@@ -21,6 +22,7 @@ define('DIR_ROOT', '/var/www/kippo-graph');
 #nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
 #ar: Arabic (currently not working)
 require_once('include/languages/lang.en.php');
+
 
 #You will have to change the following four definitions
 #from the default values to the correct ones, according
@@ -32,6 +34,7 @@ define('DB_USER', 'username');
 define('DB_PASS', 'password');
 define('DB_NAME', 'database');
 define('DB_PORT', '3306');
+
 
 #The following value determines whether Kippo-Graph would
 #automatically check if a newer version is available for download.

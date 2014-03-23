@@ -35,6 +35,7 @@
       <li><a href="kippo-graph.php">Kippo-Graph</a></li>
 	  <li><a href="kippo-input.php">Kippo-Input</a></li>
     <li><a href="kippo-playlog.php">Kippo-PlayLog</a></li>
+      <li><a href="kippo-ip.php">Kippo-Ip</a></li>
 	  <li><a href="kippo-geo.php">Kippo-Geo</a></li>
       <li class="active last"><a href="gallery.php">Graph Gallery</a></li>
     </ul>
