@@ -37,19 +37,19 @@ class KippoInput
             //We create a skeleton for the table
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th colspan="2">Post-compromise human activity</th>';
+            echo '<th colspan="2">Post-compromise human activity</th>';
             echo '</tr>';
             echo '<tr class="dark">';
-            echo    '<th>Total number of commands</th>';
-            echo    '<th>Distinct number of commands</th>';
+            echo '<th>Total number of commands</th>';
+            echo '<th>Distinct number of commands</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $row['total'] . '</td>';
-                echo    '<td>' . $row['uniq'] . '</td>';
+                echo '<td>' . $row['total'] . '</td>';
+                echo '<td>' . $row['uniq'] . '</td>';
                 echo '</tr>';
             }
 
@@ -69,19 +69,19 @@ class KippoInput
             //We create a skeleton for the table
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th colspan="2">Downloaded files</th>';
+            echo '<th colspan="2">Downloaded files</th>';
             echo '</tr>';
             echo '<tr class="dark">';
-            echo    '<th>Total number of downloads</th>';
-            echo    '<th>Distinct number of downloads</th>';
+            echo '<th>Total number of downloads</th>';
+            echo '<th>Distinct number of downloads</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $row['files'] . '</td>';
-                echo    '<td>' . $row['uniq_files'] . '</td>';
+                echo '<td>' . $row['files'] . '</td>';
+                echo '<td>' . $row['uniq_files'] . '</td>';
                 echo '</tr>';
             }
 
@@ -237,14 +237,14 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 input (overall)</h3>';
             echo '<p>The following table displays the top 10 commands (overall) entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=Input">CSV of all input commands</a><p>';
+            echo '<p><a href="include/export.php?type=Input">CSV of all input commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>Count</th>';
+            echo '<th>ID</th>';
+            echo '<th>Input</th>';
+            echo '<th>Count</th>';
             echo '</tr></thead><tbody>';
-			
+
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
@@ -252,16 +252,16 @@ class KippoInput
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td>' . $row['COUNT(input)'] . '</td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
             }
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-			
+
 
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
@@ -296,12 +296,12 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 successful input</h3>';
             echo '<p>The following table displays the top 10 successful commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=Successinput">CSV of all successful commands</a><p>';
+            echo '<p><a href="include/export.php?type=Successinput">CSV of all successful commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Input (success)</th>';
-            echo    '<th>Count</th>';
+            echo '<th>ID</th>';
+            echo '<th>Input (success)</th>';
+            echo '<th>Count</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
@@ -310,9 +310,9 @@ class KippoInput
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td>' . $row['COUNT(input)'] . '</td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -353,12 +353,12 @@ class KippoInput
             $counter = 1;
             echo '<h3>Top 10 failed input</h3>';
             echo '<p>The following table displays the top 10 failed commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=FailedInput">CSV of all failed commands</a><p>';
+            echo '<p><a href="include/export.php?type=FailedInput">CSV of all failed commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Input (fail)</th>';
-            echo    '<th>Count</th>';
+            echo '<th>ID</th>';
+            echo '<th>Input (fail)</th>';
+            echo '<th>Count</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
@@ -367,9 +367,9 @@ class KippoInput
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td>' . $row['COUNT(input)'] . '</td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -405,22 +405,22 @@ class KippoInput
             $counter = 1;
             echo '<h3>passwd commands</h3>';
             echo '<p>The following table displays the latest "passwd" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=passwd">CSV of all "passwd" commands</a><p>';
+            echo '<p><a href="include/export.php?type=passwd">CSV of all "passwd" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timestamp</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>Play Log</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -447,31 +447,31 @@ class KippoInput
             $counter = 1;
             echo '<h3>wget commands</h3>';
             echo '<p>The following table displays the latest "wget" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=wget">CSV of all "wget" commands</a><p>';
+            echo '<p><a href="include/export.php?type=wget">CSV of all "wget" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timestamp</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>File link</th>';
-            echo    '<th>Play Log</th>';
-            echo    '<th>NoVirusThanks</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>File link</th>';
+            echo '<th>Play Log</th>';
+            echo '<th>NoVirusThanks</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . $row['timestamp'] . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . $row['timestamp'] . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
                 $file_link = trim($row['file']);
                 // If the link has no "http://" in front, then add it
                 if (substr(strtolower($file_link), 0, 4) !== 'http') {
                     $file_link = 'http://' . $file_link;
                 }
-                echo    '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
-                echo    '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
+                echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -498,22 +498,22 @@ class KippoInput
             $counter = 1;
             echo '<h3>Executed scripts</h3>';
             echo '<p>The following table displays the latest executed scripts by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=Scripts">CSV of all scripts executed</a><p>';
+            echo '<p><a href="include/export.php?type=Scripts">CSV of all scripts executed</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timestamp</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>Play Log</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -543,22 +543,22 @@ class KippoInput
             $counter = 1;
             echo '<h3>Interesting commands</h3>';
             echo '<p>The following table displays other interesting commands executed by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=Interesting">CSV of all interesting commands</a><p>';
+            echo '<p><a href="include/export.php?type=Interesting">CSV of all interesting commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timestamp</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>Play Log</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
@@ -586,22 +586,22 @@ class KippoInput
             $counter = 1;
             echo '<h3>apt-get commands</h3>';
             echo '<p>The following table displays the latest "apt-get"/"aptitude" commands entered by attackers in the honeypot system.</p>';
-			echo '<p><a href="include/export.php?type=aptget">CSV of all "apt-get"/"aptitude" commands</a><p>';
+            echo '<p><a href="include/export.php?type=aptget">CSV of all "apt-get"/"aptitude" commands</a><p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timestamp</th>';
-            echo    '<th>Input</th>';
-            echo    '<th>Play Log</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timestamp</th>';
+            echo '<th>Input</th>';
+            echo '<th>Play Log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo    '<td>' . xss_clean($row['input']) . '</td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
+                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }

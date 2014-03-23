@@ -42,19 +42,19 @@ class KippoPlayLog
             echo '<p>The following table displays a list of all the logs recorded by kippo</p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th>ID</th>';
-            echo    '<th>Timstamp</th>';
-            echo    '<th>Size</th>';
-            echo    '<th>Play the log</th>';
+            echo '<th>ID</th>';
+            echo '<th>Timstamp</th>';
+            echo '<th>Size</th>';
+            echo '<th>Play the log</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light word-break">';
-                echo    '<td>' . $counter . '</td>';
-                echo    '<td>' . $row['timestamp'] . '</td>';
-                echo    '<td>' . $row['size'] . 'kb' . '</td>';
-                echo    '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . $row['timestamp'] . '</td>';
+                echo '<td>' . $row['size'] . 'kb' . '</td>';
+                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }

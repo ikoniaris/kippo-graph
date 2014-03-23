@@ -33,8 +33,8 @@ class KippoGraph
         //echo '<strong>Total login attempts: </strong><h3>'.$row['logins'].'</h3>';
         echo '<table><thead>';
         echo '<tr>';
-        echo    '<th>Total login attempts</th>';
-        echo    '<th>' . $row['logins'] . '</th>';
+        echo '<th>Total login attempts</th>';
+        echo '<th>' . $row['logins'] . '</th>';
         echo '</tr></thead><tbody>';
         echo '</tbody></table>';
 
@@ -48,8 +48,8 @@ class KippoGraph
         //echo '<strong>Distinct source IPs: </strong><h3>'.$row['IPs'].'</h3>';
         echo '<table><thead>';
         echo '<tr>';
-        echo    '<th>Distinct source IP addresses</th>';
-        echo    '<th>' . $row['IPs'] . '</th>';
+        echo '<th>Distinct source IP addresses</th>';
+        echo '<th>' . $row['IPs'] . '</th>';
         echo '</tr></thead><tbody>';
         echo '</tbody></table>';
 
@@ -64,19 +64,19 @@ class KippoGraph
             //We create a skeleton for the table
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo    '<th colspan="2">Active time period</th>';
+            echo '<th colspan="2">Active time period</th>';
             echo '</tr>';
             echo '<tr class="dark">';
-            echo    '<th>Start date (first attack)</th>';
-            echo    '<th>End date (last attack)</th>';
+            echo '<th>Start date (first attack)</th>';
+            echo '<th>End date (last attack)</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 echo '<tr class="light">';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['start'])) . '</td>';
-                echo    '<td>' . date('l, d-M-Y, H:i A', strtotime($row['end'])) . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['start'])) . '</td>';
+                echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['end'])) . '</td>';
                 echo '</tr>';
             }
 

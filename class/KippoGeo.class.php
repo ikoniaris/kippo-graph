@@ -30,23 +30,22 @@ class KippoGeo
     public function printKippoGeoData()
     {
         $db_query = 'SELECT ip, COUNT(ip) '
-            ."FROM sessions "
-            ."GROUP BY ip "
-            ."ORDER BY COUNT(ip) DESC "
-            ."LIMIT 10 ";
+            . "FROM sessions "
+            . "GROUP BY ip "
+            . "ORDER BY COUNT(ip) DESC "
+            . "LIMIT 10 ";
 
         $result = $this->db_conn->query($db_query);
         //echo 'Found '.$result->num_rows.' records';
 
-        if($result->num_rows > 0)
-        {
+        if ($result->num_rows > 0) {
             //We create a new vertical bar chart, a new pie chart and initialize the dataset
             $verticalChart = new VerticalBarChart(600, 300);
             $pieChart = new PieChart(600, 300);
             $dataSet = new XYDataSet();
 
             //We create a "intensity" pie chart as well along with a dataset
-            $intensityPieChart = new PieChart(600,300);
+            $intensityPieChart = new PieChart(600, 300);
             $intensityDataSet = new XYDataSet();
 
             //We create a new Google Map and initialize its columns,
@@ -67,7 +66,7 @@ class KippoGeo
             $intensityMap = new QIntensitymapGoogleGraph;
             $intensityMap->addDrawProperties(
                 array(
-                    "title"=>'IntensityMap',
+                    "title" => 'IntensityMap',
                 )
             );
             $intensityMap->addColumns(
@@ -90,17 +89,17 @@ class KippoGeo
             echo '<p>The following table displays the top 10 IP addresses connected to the system (ordered by volume of connections).</p>';
             echo '<table><thead>';
             echo '<tr class="dark">';
-            echo 	'<th>ID</th>';
-            echo 	'<th>IP Address</th>';
-            echo 	'<th>Probes</th>';
-            echo 	'<th>City</th>';
-            echo 	'<th>Region</th>';
-            echo 	'<th>Country Name</th>';
-            echo 	'<th>Code</th>';
-            echo 	'<th>Latitude</th>';
-            echo 	'<th>Longitude</th>';
-            echo	'<th>Hostname</th>';
-            echo	'<th colspan="7">Lookup</th>';
+            echo '<th>ID</th>';
+            echo '<th>IP Address</th>';
+            echo '<th>Probes</th>';
+            echo '<th>City</th>';
+            echo '<th>Region</th>';
+            echo '<th>Country Name</th>';
+            echo '<th>Code</th>';
+            echo '<th>Latitude</th>';
+            echo '<th>Longitude</th>';
+            echo '<th>Hostname</th>';
+            echo '<th colspan="7">Lookup</th>';
             echo '</tr></thead><tbody>';
 
             //We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -109,24 +108,23 @@ class KippoGeo
             $col = 0;
 
             //For every row returned from the database...
-            while($row = $result->fetch_array(MYSQLI_BOTH))
-            {
+            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
                 //We call the geoplugin service to get the geolocation data for the ip
                 $this->geoplugin->locate($row['ip']);
 
                 //We prepare the label for our vertical bar chart and add the point
-                $geoip = $row['ip']." - ".$this->geoplugin->countryCode;
+                $geoip = $row['ip'] . " - " . $this->geoplugin->countryCode;
                 $dataSet->addPoint(new Point($geoip, $row['COUNT(ip)']));
 
                 //We next prepare the marker's tooltip inside Google Map
-                $geostats = "<strong>TOP $counter/10:</strong> ".$row['ip']."<br />"
-                    ."<strong>Probes:</strong> ".$row['COUNT(ip)']."<br />"
-                    ."<strong>City:</strong> ".$this->geoplugin->city."<br />"
-                    ."<strong>Region:</strong> ".$this->geoplugin->region."<br />"
-                    ."<strong>Country:</strong> ".$this->geoplugin->countryName."<br />"
+                $geostats = "<strong>TOP $counter/10:</strong> " . $row['ip'] . "<br />"
+                    . "<strong>Probes:</strong> " . $row['COUNT(ip)'] . "<br />"
+                    . "<strong>City:</strong> " . $this->geoplugin->city . "<br />"
+                    . "<strong>Region:</strong> " . $this->geoplugin->region . "<br />"
+                    . "<strong>Country:</strong> " . $this->geoplugin->countryName . "<br />"
                     //."<strong>Country Code:</strong> ".$geoplugin->countryCode."<br />"
-                    ."<strong>Latitude:</strong> ".$this->geoplugin->latitude."<br />"
-                    ."<strong>Longitude:</strong> ".$this->geoplugin->longitude."<br />";
+                    . "<strong>Latitude:</strong> " . $this->geoplugin->latitude . "<br />"
+                    . "<strong>Longitude:</strong> " . $this->geoplugin->longitude . "<br />";
 
                 //And add the marker to the map
                 $gMapTop10->setValues(
@@ -138,29 +136,31 @@ class KippoGeo
                 );
 
                 //We prepare the data that will be inserted in our temporary table
-                $ip = $row['ip']; $ip_count = $row['COUNT(ip)']; $CC = $this->geoplugin->countryCode;
+                $ip = $row['ip'];
+                $ip_count = $row['COUNT(ip)'];
+                $CC = $this->geoplugin->countryCode;
                 $country_query = "INSERT INTO temp_ip VALUES('$ip', '$ip_count', '$CC')";
                 $country_query_execute = $this->db_conn->query($country_query);
 
                 //For every row returned from the database we create a new table row with the data as columns
                 echo '<tr class="light">';
-                echo 	'<td>'.$counter.'</td>';
-                echo 	'<td>'.$row['ip'].'<!--<a href="http://www.ip-adress.com/ip_tracer/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ip_tracer.png"/></a>-->'.'</td>';
-                echo	'<td>'.$row['COUNT(ip)'].'</td>';
-                echo	'<td>'.$this->geoplugin->city.'</td>';
-                echo	'<td>'.$this->geoplugin->region.'</td>';
-                echo	'<td>'.$this->geoplugin->countryName.'</td>';
-                echo	'<td>'.$this->geoplugin->countryCode.'</td>';
-                echo	'<td>'.$this->geoplugin->latitude.'</td>';
-                echo	'<td>'.$this->geoplugin->longitude.'</td>';
-                echo	'<td>'.get_host($row['ip']).'</td>';
-                echo	'<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.ipvoid.com/scan/'.$row['ip'].'" target="_blank"><img class="icon" src="images/ipvoid.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.robtex.com/ip/'.$row['ip'].'.html" target="_blank"><img class="icon" src="images/robtex.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data='.$row['ip'].'&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/alienvault.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
-                echo    '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip='.$row['ip'].'" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
+                echo '<td>' . $counter . '</td>';
+                echo '<td>' . $row['ip'] . '<!--<a href="http://www.ip-adress.com/ip_tracer/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ip_tracer.png"/></a>-->' . '</td>';
+                echo '<td>' . $row['COUNT(ip)'] . '</td>';
+                echo '<td>' . $this->geoplugin->city . '</td>';
+                echo '<td>' . $this->geoplugin->region . '</td>';
+                echo '<td>' . $this->geoplugin->countryName . '</td>';
+                echo '<td>' . $this->geoplugin->countryCode . '</td>';
+                echo '<td>' . $this->geoplugin->latitude . '</td>';
+                echo '<td>' . $this->geoplugin->longitude . '</td>';
+                echo '<td>' . get_host($row['ip']) . '</td>';
+                echo '<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://www.ipvoid.com/scan/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ipvoid.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://www.robtex.com/ip/' . $row['ip'] . '.html" target="_blank"><img class="icon" src="images/robtex.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data=' . $row['ip'] . '&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/alienvault.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
+                echo '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
                 echo '</tr>';
 
                 //Lastly, we increase the index used by maps to indicate the next row,
@@ -181,7 +181,7 @@ class KippoGeo
             $verticalChart->getPlot()->setGraphPadding(new Padding(5, 50, 100, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $verticalChart->render("generated-graphs/connections_per_ip_geo.png");
             echo '<p>The following vertical bar chart visualizes the top 10 IPs ordered by the number of connections to the system.'
-                .'<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
+                . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo.png">';
 
             //We set the pie chart's dataset, render the graph and display it (we're inside html code!)
@@ -189,13 +189,13 @@ class KippoGeo
             $pieChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
             $pieChart->render("generated-graphs/connections_per_ip_geo_pie.png");
             echo '<p>The following pie chart visualizes the top 10 IPs ordered by the number of connections to the system.'
-                .'<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
+                . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo_pie.png">';
             echo '<hr /><br />';
 
             //Charts are ready, so is Google Map, let's render it below
             echo '<p>The following zoomable world map marks the geographic locations of the top 10 IPs according to their latitude and longitude values. '
-                .'Click on them to get the full information available from the database.<p>';
+                . 'Click on them to get the full information available from the database.<p>';
             //echo '<div align=center>';
             echo $gMapTop10->render();
             //echo '</div>';
@@ -203,20 +203,19 @@ class KippoGeo
 
             //Lastly, we prepare the data for the Intesity Map
             $db_query_map = 'SELECT country, SUM(counter) '
-                ."FROM temp_ip "
-                ."GROUP BY country "
-                ."ORDER BY SUM(counter) DESC ";
+                . "FROM temp_ip "
+                . "GROUP BY country "
+                . "ORDER BY SUM(counter) DESC ";
             //."LIMIT 10 ";
 
             $result = $this->db_conn->query($db_query_map);
             //echo 'Found '.$result->num_rows.' records';
 
-            if($result->num_rows > 0) {
+            if ($result->num_rows > 0) {
                 $col = 0; //Dummy row index
                 //For every row returned from the database add the values to Intensity Map's table and intensityPieChart
-                while($row = $result->fetch_array(MYSQLI_BOTH))
-                {
-                    $countryProbes = $row['country']." - ".$row['SUM(counter)'];
+                while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+                    $countryProbes = $row['country'] . " - " . $row['SUM(counter)'];
                     $intensityDataSet->addPoint(new Point($countryProbes, $row['SUM(counter)']));
                     $intensityMap->setValues(
                         array(
