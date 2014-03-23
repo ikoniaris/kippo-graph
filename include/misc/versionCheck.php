@@ -10,7 +10,8 @@ define('VERSION', '0.9.2');
 
 function isUpToDate()
 {
-    $remoteVersion=trim(@file_get_contents(REMOTE_VERSION));
+    $remoteVersion = trim(@file_get_contents(REMOTE_VERSION));
     return version_compare(VERSION, $remoteVersion, 'ge');
 }
+
 ?>
