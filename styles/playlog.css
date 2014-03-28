@@ -1,32 +1,32 @@
 body {
-  color: #787878;
-  font-family: Georgia, serif;
+    color: #787878;
+    font-family: Georgia, serif;
 }
 
 a {
-  color: #c77;
-  text-decoration: none;
+    color: #c77;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 a:active {
-  color: white
+    color: white
 }
 
 /* http://stackoverflow.com/questions/1255281/how-to-set-width-of-div-to-fit-constant-number-of-letters-in-monospace-font */
 #playlog {
-  border: 3px solid #541;
-  font: 15px/1.2 Courier, monospace;
-  width: 48em;  /* 80 x 0.6 (the width/height ratio of Courier) */
-  height: 30em; /* 25 x 1.2 (line-height is 1.2) */
-  overflow: hidden;
-  /*background-color: #021; */
-  background-color: black;
-  color: #bbb;
-  display: none;
+    border: 3px solid #541;
+    font: 15px/1.2 Courier, monospace;
+    width: 48em; /* 80 x 0.6 (the width/height ratio of Courier) */
+    height: 30em; /* 25 x 1.2 (line-height is 1.2) */
+    overflow: hidden;
+    /*background-color: #021; */
+    background-color: black;
+    color: #bbb;
+    display: none;
 }
 
 .cursorChar {

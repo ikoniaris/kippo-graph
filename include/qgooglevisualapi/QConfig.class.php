@@ -1,4 +1,5 @@
 <?php
+
 /**
  * QConfig stores all configuration information for a Qube application.
  *
@@ -7,76 +8,76 @@
  */
 class QConfig
 {
-  protected static
-    $config = array();
+    protected static
+        $config = array();
 
-  /**
-   * Retrieves a config parameter.
-   *
-   * @param string A config parameter name
-   * @param mixed  A default config parameter value
-   *
-   * @return mixed A config parameter value, if the config parameter exists, otherwise null
-   */
-  public static function get($name, $default = null)
-  {
-    return self::$config[$name];
-  }
+    /**
+     * Retrieves a config parameter.
+     *
+     * @param string A config parameter name
+     * @param mixed  A default config parameter value
+     *
+     * @return mixed A config parameter value, if the config parameter exists, otherwise null
+     */
+    public static function get($name, $default = null)
+    {
+        return self::$config[$name];
+    }
 
-  /**
-   * Indicates whether or not a config parameter exists.
-   *
-   * @param string A config parameter name
-   *
-   * @return bool true, if the config parameter exists, otherwise false
-   */
-  public static function has($name)
-  {
-    return array_key_exists($name, self::$config);
-  }
+    /**
+     * Indicates whether or not a config parameter exists.
+     *
+     * @param string A config parameter name
+     *
+     * @return bool true, if the config parameter exists, otherwise false
+     */
+    public static function has($name)
+    {
+        return array_key_exists($name, self::$config);
+    }
 
-  /**
-   * Sets a config parameter.
-   *
-   * If a config parameter with the name already exists the value will be overridden.
-   *
-   * @param string A config parameter name
-   * @param mixed  A config parameter value
-   */
-  public static function set($name, $value)
-  {
-    self::$config[$name] = $value;
-  }
+    /**
+     * Sets a config parameter.
+     *
+     * If a config parameter with the name already exists the value will be overridden.
+     *
+     * @param string A config parameter name
+     * @param mixed  A config parameter value
+     */
+    public static function set($name, $value)
+    {
+        self::$config[$name] = $value;
+    }
 
-  /**
-   * Sets an array of config parameters.
-   *
-   * If an existing config parameter name matches any of the keys in the supplied
-   * array, the associated value will be overridden.
-   *
-   * @param array An associative array of config parameters and their associated values
-   */
-  public static function add($parameters = array())
-  {
-    self::$config = array_merge(self::$config, $parameters);
-  }
+    /**
+     * Sets an array of config parameters.
+     *
+     * If an existing config parameter name matches any of the keys in the supplied
+     * array, the associated value will be overridden.
+     *
+     * @param array An associative array of config parameters and their associated values
+     */
+    public static function add($parameters = array())
+    {
+        self::$config = array_merge(self::$config, $parameters);
+    }
 
-  /**
-   * Retrieves all configuration parameters.
-   *
-   * @return array An associative array of configuration parameters.
-   */
-  public static function getAll()
-  {
-    return self::$config;
-  }
+    /**
+     * Retrieves all configuration parameters.
+     *
+     * @return array An associative array of configuration parameters.
+     */
+    public static function getAll()
+    {
+        return self::$config;
+    }
 
-  /**
-   * Clears all current config parameters.
-   */
-  public static function clear()
-  {
-    self::$config = null;
-    self::$config = array();
-  }
+    /**
+     * Clears all current config parameters.
+     */
+    public static function clear()
+    {
+        self::$config = null;
+        self::$config = array();
+    }
 }

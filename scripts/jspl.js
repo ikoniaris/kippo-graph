@@ -2,7 +2,7 @@
  * Terminal
  */
 
-var Terminal = function(name) {
+var Terminal = function (name) {
     this.name = name;
     this.buffer = new Array();
     this.buffer[0] = "";
@@ -11,11 +11,11 @@ var Terminal = function(name) {
     this.width = 80;
 }
 
-Terminal.prototype.redraw = function() {
+Terminal.prototype.redraw = function () {
     $("#" + this.name).text("");
     var topLine = (this.buffer.length >= this.height) ?
         (this.buffer.length - this.height) : 0;
-    for (var i = topLine; i < this.buffer.length; i ++) {
+    for (var i = topLine; i < this.buffer.length; i++) {
         l = this.buffer[i];
         if (i == this.buffer.length - 1) {
             var start = l.substr(0, this.cursor);
@@ -32,19 +32,19 @@ Terminal.prototype.redraw = function() {
     }
 
     if (this.buffer.length < this.height) {
-        for (var i = 0; i < this.height - this.buffer.length; i ++) {
+        for (var i = 0; i < this.height - this.buffer.length; i++) {
             $("#" + this.name).append("<br />");
         }
     }
 }
 
-Terminal.prototype.write = function(s) {
-    for (var i = 0; i < s.length; i ++) {
+Terminal.prototype.write = function (s) {
+    for (var i = 0; i < s.length; i++) {
         this.writeChar(s[i]);
     }
 }
 
-Terminal.prototype.writeChar = function(c) {
+Terminal.prototype.writeChar = function (c) {
     l = this.buffer.length - 1;
     if (c == '\n') {
         this.buffer[l + 1] = "";
@@ -60,7 +60,7 @@ Terminal.prototype.writeChar = function(c) {
     if (this.buffer[l].length >= this.width) {
         this.buffer[l + 1] = "";
         this.cursor = 0;
-        l ++;
+        l++;
     }
     //this.buffer[l] += c;
     // split string at cursor, add new char and put the line back together
@@ -72,10 +72,10 @@ Terminal.prototype.writeChar = function(c) {
     //console.log("end: [" + end + "]");
     //console.log("c: [" + c + "]");
     this.buffer[l] = start + c + end;
-    this.cursor ++;
+    this.cursor++;
 }
 
-Terminal.prototype.deleteChar = function() {
+Terminal.prototype.deleteChar = function () {
     l = this.buffer.length - 1;
     var start = this.buffer[l].substr(0, this.cursor);
     var end = this.buffer[l].substr(this.cursor + 1);
@@ -86,7 +86,7 @@ Terminal.prototype.deleteChar = function() {
  * TTYLog
  */
 
-var TTYLog = function(logfile) {
+var TTYLog = function (logfile) {
     this.data = new BinFileReader(logfile);
 
     // we'll use these to avoid going EOF
@@ -94,7 +94,7 @@ var TTYLog = function(logfile) {
     this.filesize = this.data.getFileSize();
 }
 
-TTYLog.prototype.read = function() {
+TTYLog.prototype.read = function () {
     var op = this.data.readNumber(4);
     var tty = this.data.readNumber(4);
     var length = this.data.readNumber(4);
@@ -114,32 +114,32 @@ TTYLog.prototype.read = function() {
     };
 }
 
-TTYLog.prototype.readString = function(length) {
+TTYLog.prototype.readString = function (length) {
     this.readcount += length;
     return this.data.readString(length);
 }
 
-TTYLog.OP_OPEN          = 1
-TTYLog.OP_CLOSE         = 2
-TTYLog.OP_WRITE         = 3
-TTYLog.OP_EXEC          = 4
-TTYLog.TYPE_INPUT       = 1
-TTYLog.TYPE_OUTPUT      = 2
-TTYLog.TYPE_INTERACT    = 3
+TTYLog.OP_OPEN = 1
+TTYLog.OP_CLOSE = 2
+TTYLog.OP_WRITE = 3
+TTYLog.OP_EXEC = 4
+TTYLog.TYPE_INPUT = 1
+TTYLog.TYPE_OUTPUT = 2
+TTYLog.TYPE_INTERACT = 3
 
 /*
  * stuff
  */
 
 function tick() {
-    tick.counter ++;
+    tick.counter++;
     if (ttylog.readcount >= ttylog.filesize) return -1; // EOF
     packet = ttylog.read();
     if (packet.length == 0) {
         return packet.stamp;
     }
 
-    var write = function(s) {
+    var write = function (s) {
         if (packet.dir != TTYLog.TYPE_OUTPUT) return;
         //terminal.write(htmlEncode(s));
         terminal.write(s);
@@ -147,13 +147,13 @@ function tick() {
 
     var i = 0;
     while (i < packet.length) {
-        i ++;
+        i++;
         c = ttylog.readString(1);
         var num = c.charCodeAt(0);
         if (num == 27) {
             var escdata = '';
             escdata = ttylog.readString(1);
-            i ++;
+            i++;
             if (escdata == 'c') {
                 write("^C\n");
                 break;
@@ -161,13 +161,13 @@ function tick() {
             if (escdata != "[") break;
             while (1) {
                 tmp = ttylog.readString(1);
-                i ++;
+                i++;
                 escdata += tmp;
                 if (tmp.charCodeAt(0) >= 64 &&
-                        tmp.charCodeAt(0) <= 126) {
+                    tmp.charCodeAt(0) <= 126) {
                     //console.log("escdata:" + escdata);
                     if (escdata == "[1D") {
-                        terminal.cursor --;
+                        terminal.cursor--;
                     } else if (escdata == "[1P") {
                         terminal.deleteChar();
                     } else {
@@ -187,8 +187,7 @@ function tick() {
 }
 tick.counter = 0;
 
-function autoTick()
-{
+function autoTick() {
     var stamp = tick();
 
     if (stamp == -1) {
@@ -230,7 +229,7 @@ function blinkCursor() {
     setTimeout(blinkCursor, 500);
 }
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     terminal = new Terminal("playlog");
 
     var fileName = $(document).getUrlParam("f");
