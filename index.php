@@ -70,6 +70,8 @@
 
             <p><strong>CHANGES:</strong></p>
 
+            <p>Version 0.9.3:<br/>+ Added Kippo-IP: attack details by IP address.</p>
+
             <p>Version 0.9.2:<br/>+ Added experimental playlog display.</p>
 
             <p>Version 0.9.1:<br/>+ Fixed Google Map rendering issue.</p>
