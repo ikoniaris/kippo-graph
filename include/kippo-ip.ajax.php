@@ -1,7 +1,14 @@
 <?php
 require_once('../config.php');
+require_once('../include/misc/xss_clean.php');
 
-$ip = $_POST['ip'];
+$ip = xss_clean($_POST['ip']);
+
+if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+    echo "Error parsing IP address";
+    exit();
+}
+
 $db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 if (mysqli_connect_errno()) {
