@@ -16,9 +16,9 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$db_query = "SELECT timestamp,ip,session,username,password,success "
-    . "FROM sessions,auth "
-    . "WHERE sessions.id=auth.session and sessions.ip=\"" . $ip . " \" "
+$db_query = 'SELECT timestamp, ip, session, username, password, success '
+    . "FROM sessions, auth "
+    . "WHERE sessions.id = auth.session AND sessions.ip=\"" . $ip . " \" "
     . "ORDER BY auth.timestamp";
 
 $result = $db_conn->query($db_query);

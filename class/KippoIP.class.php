@@ -22,7 +22,13 @@ class KippoIP
 
     public function printOverallIpActivity()
     {
-        $db_query = "SELECT * from (SELECT ip, max(starttime), COUNT(DISTINCT sessions.id) from sessions group by ip) A LEFT JOIN (select sessions.ip,max(success) from sessions,auth where sessions.id = auth.session group by ip)B on A.ip = B.ip order by A.ip";
+        $db_query = 'SELECT * FROM (SELECT ip, MAX(starttime), COUNT(DISTINCT sessions.id) '
+            . "FROM sessions GROUP BY ip) A "
+            . "LEFT JOIN (SELECT sessions.ip, MAX(success) "
+            . "FROM sessions, auth "
+            . "WHERE sessions.id = auth.session "
+            . "GROUP BY ip) B on A.ip = B.ip "
+            . "ORDER BY A.ip";
         $result = $this->db_conn->query($db_query);
         //echo 'Found '.$result->num_rows.' records';
 
@@ -46,8 +52,8 @@ class KippoIP
             //and create a new table row with the data as columns
             while ($row = $result->fetch_array(MYSQLI_BOTH)) {
 
-                $success = is_null($row['max(success)']) ? 'N/A' : $row['max(success)'];
-                $timestamp = is_null($row['max(starttime)']) ? 'N/A' : $row['max(starttime)'];
+                $success = is_null($row['MAX(success)']) ? 'N/A' : $row['MAX(success)'];
+                $timestamp = is_null($row['MAX(starttime)']) ? 'N/A' : $row['MAX(starttime)'];
 
                 echo '<tr class="light word-break" onclick=\'getIPinfo("' . $row['0'] . '")\'>';
                 echo '<td>' . $row['0'] . '</td>';
