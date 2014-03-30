@@ -44,7 +44,7 @@
     <div class="container">
         <div class="whitebox">
             <!-- ####################################################################################################### -->
-            <h2>Play logs of attackers in the kippo honeypot</h2>
+            <h2>Replay input by attackers captured by the honeypot system</h2>
             <hr/>
             <?php
             #Author: ikoniaris, CCoffie

@@ -34,7 +34,7 @@ class KippoIP
 
         if ($result->num_rows > 0) {
 
-            echo '<h4>Click column heads to sort data, rows to display attack details</h4>';
+            echo '<p>Click column heads to sort data, rows to display attack details.</p>';
 
             //We create a skeleton for the table
             echo '<table id="Overall-IP-Activity" class="tablesorter"><thead>';
