@@ -77,7 +77,7 @@ if ($result->num_rows > 0) {
     //We create a skeleton for the table
     echo '<table id="IP-commands" class="tablesorter"><thead>';
     echo '<tr class="dark">';
-    echo '<th colspan="4">Total Input Activity from ' . $ip . ' : ' . $result->num_rows . ' </th>';
+    echo '<th colspan="4">Total input activity from ' . $ip . ': ' . $result->num_rows . ' </th>';
     echo '</tr>';
     echo '<tr class="dark">';
     echo '<th>Timestamp</th>';

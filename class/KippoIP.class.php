@@ -27,16 +27,19 @@ class KippoIP
         //echo 'Found '.$result->num_rows.' records';
 
         if ($result->num_rows > 0) {
+
+            echo '<h4>Click column heads to sort data, rows to display attack details</h4>';
+
             //We create a skeleton for the table
             echo '<table id="Overall-IP-Activity" class="tablesorter"><thead>';
             echo '<tr class="dark">';
-            echo '<th colspan="4">Total identified IP Addresses: ' . $result->num_rows . '</th>';
+            echo '<th colspan="4">Total identified IP addresses: ' . $result->num_rows . '</th>';
             echo '</tr>';
             echo '<tr class="dark">';
-            echo '<th>IP Address</th>';
-            echo '<th>Sessions Count</th>';
+            echo '<th>IP address</th>';
+            echo '<th>Sessions count</th>';
             echo '<th>Success</th>';
-            echo '<th>Last Seen</th>';
+            echo '<th>Last seen</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we add a new point to the dataset,
