@@ -200,4 +200,8 @@ $db_aptget = 'SELECT timestamp, input '
     . "ORDER BY timestamp DESC";
 
 
+// All IP activity
+$db_allActivity = 'select A.timestamp as "Timestamp",A.session,ip,username,password,A.success,input from (select * from auth) A LEFT JOIN (select * from sessions) B on A.session=B.id LEFT JOIN (select * from input) C on B.id=C.session order by A.timestamp DESC limit 65535;'
+
+
 ?>
