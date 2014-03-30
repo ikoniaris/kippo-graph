@@ -1,6 +1,6 @@
 <?php
 
-class KippoPlayLog
+class KippoIP
 {
     private $db_conn;
 
