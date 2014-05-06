@@ -82,8 +82,9 @@
             </script>
             <script type="text/javascript" src="../scripts/jspl.js"></script>
 
+            <noscript>Please enable Javascript for log playback.<br /><br /></noscript>
             <div id="description">Error loading specified log.</div>
-            <br>
+            <br />
 
             <div id="playlog"></div>
 
