@@ -24,13 +24,17 @@ class KippoPlayLog
     {
         //TODO: ikoniaris
         //This seems to be a very expensive query when run on very big databases (local MySQL hanged and CPU went up to 100%)
-        //SELECT ttylog.session, timestamp, ROUND(LENGTH(ttylog)/1024, 2) AS size FROM ttylog JOIN auth ON ttylog.session=auth.session ORDER BY timestamp DESC;
-        $db_query = "SELECT ttylog.session, timestamp, "
-            . "ROUND(LENGTH(ttylog)/1024, 2) AS size "
-            . "FROM ttylog JOIN auth "
+        //SELECT * FROM ( SELECT ttylog.session, timestamp, ROUND(LENGTH(ttylog)/1024, 2) AS size FROM ttylog JOIN auth ON ttylog.session=auth.session ORDER BY timestamp DESC ) s WHERE size > x;
+        $db_query = "SELECT * "
+            . "FROM ( "
+            . "SELECT ttylog.session, timestamp,  "
+            . "ROUND(LENGTH(ttylog)/1024, 2) AS size  "
+            . "FROM ttylog "
+            . "JOIN auth "
             . "ON ttylog.session=auth.session "
-            . "WHERE LENGTH(ttylog)>85 " //Gets rid of all of the connect then immediate disconnects
-            . "ORDER BY timestamp DESC";
+            . "ORDER BY timestamp DESC "
+            . ") s "
+            . "WHERE size > " . PLAYBACKSIZE_IGNORE;
 
         $result = $this->db_conn->query($db_query);
         //echo 'Found '.$result->num_rows.' records';
