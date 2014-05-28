@@ -1,4 +1,4 @@
-﻿﻿<?php
+﻿<?php
 #Author: ikoniaris
 #Website: bruteforce.gr/kippo-graph
 
@@ -46,5 +46,11 @@ define('DB_PORT', '3306');
 #feature enabled is your choice and not forced.
 #Change NO to YES if you want to enable it.
 define('UPDATE_CHECK', 'NO');
+
+#The following value determines the minimum size (in kb) of the Kippo log needed to be
+#shown in Kippo-Playlog. Any value below it will be ignored.
+#This is useful to remove any sessions that just join and quit immediately afterwards.
+#The value may need updating based on the length of the MOTD (which is displayed after a successful login).
+define('PLAYBACKSIZE_IGNORE', '0.4');
 
 ?>
