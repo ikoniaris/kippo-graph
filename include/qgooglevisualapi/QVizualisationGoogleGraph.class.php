@@ -30,7 +30,7 @@ class QVizualisationGoogleGraph extends QGoogleGraph
      *
      * @var string
      */
-    private $vizReference = "http://code.google.com/apis/visualization/documentation/gallery/";
+    private $vizReference = "//code.google.com/apis/visualization/documentation/gallery/";
 
     /**
      * holder of context node => name of visualisation type
@@ -124,7 +124,7 @@ class QVizualisationGoogleGraph extends QGoogleGraph
         $api = $this->object["api"];
         $apiscript = $api->addChild('script');
         $apiscript->addAttribute("type", "text/javascript");
-        $apiscript->addAttribute("src", "http://www.google.com/jsapi");
+        $apiscript->addAttribute("src", "//www.google.com/jsapi");
 
         // set base section
         $this->object["base"] = new SimpleXMLElement($xml);

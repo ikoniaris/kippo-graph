@@ -269,7 +269,7 @@ class QMixupGoogleGraph
         if (empty($bCustomPackages)) {
             $apiscript = $scriptlet->addChild('script');
             $apiscript->addAttribute("type", "text/javascript");
-            $apiscript->addAttribute("src", "http://www.google.com/jsapi");
+            $apiscript->addAttribute("src", "//www.google.com/jsapi");
         }
 
         $apisource = $scriptlet->addChild('script', $source);
