@@ -75,12 +75,12 @@ class QMagictableGoogleGraph extends QVisualizationGoogleGraph
             array(
                 "rel" => "stylesheet",
                 "type" => "text/css",
-                "href" => "http://magic-table.googlecode.com/svn/trunk/magic-table/google_visualisation/example.css"
+                "href" => "//magic-table.googlecode.com/svn/trunk/magic-table/google_visualisation/example.css"
             ),
         "script" => array(
             array(
                 "type" => "text/javascript",
-                "src" => "http://www.google.com/jsapi"
+                "src" => "//www.google.com/jsapi"
             ),
             array(
                 "type" => "text/javascript",
@@ -90,7 +90,7 @@ class QMagictableGoogleGraph extends QVisualizationGoogleGraph
             ),
             array(
                 "type" => "text/javascript",
-                "src" => "http://magic-table.googlecode.com/svn/trunk/magic-table/javascript/magic_table.js"
+                "src" => "//magic-table.googlecode.com/svn/trunk/magic-table/javascript/magic_table.js"
             )
         )
     );
@@ -145,7 +145,7 @@ class QMagictableGoogleGraph extends QVisualizationGoogleGraph
 
     public function getReferenceLink()
     {
-        $link = '<a href="http://magic-table.googlecode.com/svn/trunk/magic-table/google_visualisation/example_1.html" target="_blank">Goto MagicTable Project Home</a>';
+        $link = '<a href="//magic-table.googlecode.com/svn/trunk/magic-table/google_visualisation/example_1.html" target="_blank">Goto MagicTable Project Home</a>';
         return $link;
     }
 

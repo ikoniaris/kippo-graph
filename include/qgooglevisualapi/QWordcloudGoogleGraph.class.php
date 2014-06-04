@@ -52,11 +52,11 @@ class QWordcloudGoogleGraph extends QVizualisationGoogleGraph
             array(
                 "rel" => "stylesheet",
                 "type" => "text/css",
-                "href" => "http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"
+                "href" => "//visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.css"
             ),
         "script" => array(
             "type" => "text/javascript",
-            "src" => "http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"
+            "src" => "//visapi-gadgets.googlecode.com/svn/trunk/wordcloud/wc.js"
         )
     );
 
@@ -105,7 +105,7 @@ class QWordcloudGoogleGraph extends QVizualisationGoogleGraph
 
     public function getReferenceLink()
     {
-        $link = '<a href="http://visapi-gadgets.googlecode.com/svn/trunk/wordcloud/doc.html" target="_blank">Goto Google Visualization Web API Gallery</a>';
+        $link = '<a href="//visapi-gadgets.googlecode.com/svn/trunk/wordcloud/doc.html" target="_blank">Goto Google Visualization Web API Gallery</a>';
         return $link;
     }
 
