@@ -70,6 +70,8 @@
             <p>&nbsp;</p>
 
             <p><strong>CHANGES:</strong></p>
+            
+            <p>Version 1.0:<br/>+ Various fixes and updates.</p>
 
             <p>Version 0.9.3:<br/>+ Added Kippo-IP: attack details by IP address.</p>
 
