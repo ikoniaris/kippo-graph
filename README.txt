@@ -1,5 +1,5 @@
 ﻿Package: Kippo-Graph
-Version: 0.9.3
+Version: 1.0
 Author: ikoniaris
 Website: bruteforce.gr/kippo-graph
 
@@ -10,7 +10,9 @@ It uses "Libchart" PHP chart drawing library by Jean-Marc Trémeaux,
 and geoPlugin geolocation technology (geoplugin.com)
 
 REQUIREMENTS:
-You need to have “libapache2-mod-php5″, “php5-gd” and “php5-mysql” packages installed. On Ubuntu/Debian:
+You need to have “libapache2-mod-php5″, “php5-gd” and “php5-mysql” packages installed.
+
+On Ubuntu/Debian:
 apt-get update && apt-get install -y libapache2-mod-php5 php5-gd php5-mysql
 /etc/init.d/apache2 restart
 

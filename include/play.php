@@ -22,7 +22,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
     <div id="topbar">
-        <div class="fl_left">Version: 0.9.3 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
+        <div class="fl_left">Version: 1.0 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
         </div>
         <br class="clear"/>
     </div>
@@ -35,6 +35,7 @@
             <li><a href="../kippo-graph.php">Kippo-Graph</a></li>
             <li><a href="../kippo-input.php">Kippo-Input</a></li>
             <li class="active"><a href="../kippo-playlog.php">Kippo-PlayLog</a></li>
+            <li><a href="../kippo-ip.php">Kippo-Ip</a></li>
             <li><a href="../kippo-geo.php">Kippo-Geo</a></li>
             <li class="last"><a href="../gallery.php">Graph Gallery</a></li>
         </ul>
