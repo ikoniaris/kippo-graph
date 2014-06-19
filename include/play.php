@@ -144,8 +144,8 @@
 						if (substr(strtolower($file_link), 0, 4) !== 'http') {
 							$file_link = 'http://' . $file_link;
 						}
-						echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-						echo '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
+						echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="../images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
+						echo '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="../images/novirusthanks.ico"/>Scan File</a></td>';
 						echo '</tr>';
 						$counter++;
 					}
