@@ -178,7 +178,7 @@
 						if(!empty($host) || !empty($dig))
 						{
 							
-							echo "<h3>Additional informations about IP:</h3>";
+							echo "<h3>Additional information about IP:</h3>";
 								
 							if(!empty($dig))
 							{
