@@ -32,3 +32,15 @@ a:active {
 .cursorChar {
     text-decoration: underline;
 }
+
+pre {
+	background:#ccc;
+	padding:3px;
+	margin-top:6px;
+	margin-bottom:6px;
+	max-height:400px;
+	font:15px/1.2 Courier, monospace;
+	color:#000;
+	line-height:16px;
+	overflow:auto;
+}
