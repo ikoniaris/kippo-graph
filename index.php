@@ -19,7 +19,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
     <div id="topbar">
-        <div class="fl_left">Version: 1.0 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
+        <div class="fl_left">Version: 1.1 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
         </div>
         <br class="clear"/>
     </div>
@@ -70,7 +70,9 @@
             <p>&nbsp;</p>
 
             <p><strong>CHANGES:</strong></p>
-            
+
+            <p>Version 1.1:<br/>+ Added downloads, dig output and geolocation of current session in Kippo-Playlog.</p>
+
             <p>Version 1.0:<br/>+ Various fixes and updates.</p>
 
             <p>Version 0.9.3:<br/>+ Added Kippo-IP: attack details by IP address.</p>
