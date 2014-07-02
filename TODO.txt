@@ -9,7 +9,7 @@
 + Add www.ip-adress.com/whois/<IP> in Kippo-Geo for IPs (limit of 50 lookups per day is OK) 
 + Use convert/save as ZIP file API from online-convert.com in Kippo-Input for downloaded files
 + Kippo-Input: downloaded files with curl (curl -O <file>)
-
++ Consider replacing NoVirusThanks with Wepawet
 
 DONE:
 + Integrate Kippo-Playlog
