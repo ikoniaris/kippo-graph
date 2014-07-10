@@ -17,7 +17,7 @@ define('DIR_ROOT', '/var/www/kippo-graph');
 #Available options:
 #en: English | fr: French | de: German | it: Italian | es: Spanish
 #nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
-#ar: Arabic (currently not working)
+#cs: Czech | ar: Arabic (currently not working)
 require_once('include/languages/lang.en.php');
 
 #You will have to change the following four definitions
