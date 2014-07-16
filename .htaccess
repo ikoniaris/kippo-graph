@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^results\.php$ http://www.garyshood.com/virus/results.php$1 [R=301,L]
+</IfModule>
