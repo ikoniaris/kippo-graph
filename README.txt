@@ -23,6 +23,7 @@ cd /var/www
 tar xvf kippo-graph-VERSION.tar --no-same-permissions
 cd kippo-graph
 chmod 777 generated-graphs
+cp config.php.dist config.php
 vi config.php #enter the appropriate values
 
 Browse to http://your-server/kippo-graph to generate the statistics.
