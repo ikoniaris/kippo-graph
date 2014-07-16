@@ -71,6 +71,12 @@
 
             <p><strong>CHANGES:</strong></p>
 
+            <p>Version 1.2:<br/>+ Substituted the defunct NoVirusThanks with Gary's Hood Online Virus Scanner.
+                <br/>+ Added Kippo-Scanner module to handle AV and anti-malware submissions.
+                <br/>+ Added IP-address.com tracer to Kippo-Geo IPs.
+                <br/>+ Added Czech language support.
+                <br/>+ Added .gitgnore to exclude config.php file from VCS.</p>
+
             <p>Version 1.1:<br/>+ Added downloads, dig output and geolocation of current session in Kippo-Playlog.</p>
 
             <p>Version 1.0:<br/>+ Various fixes and updates.</p>
