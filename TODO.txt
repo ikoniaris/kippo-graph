@@ -6,13 +6,13 @@
 + Proxy detection resurrection, here are some lists: https://github.com/lfamorim/barrelroll/tree/master/full_list
 + Table with returning attackers (Kippo-Input). If username/password in auth table exists in userdb.txt then he logged in again (apart from the defaults).
 + Integrate or offer as seperate utility the VirusTotal uploader by @0xAli (contact him again for file)
-+ Add www.ip-adress.com/whois/<IP> in Kippo-Geo for IPs (limit of 50 lookups per day is OK) 
 + Use convert/save as ZIP file API from online-convert.com in Kippo-Input for downloaded files
 + Kippo-Input: downloaded files with curl (curl -O <file>)
-+ Consider replacing NoVirusThanks with Wepawet
 + Add the dig/host/geoip information from Kippo-Playlog to Kippo-IP as well
 
 DONE:
++ Add www.ip-adress.com/whois/<IP> in Kippo-Geo for IPs (limit of 50 lookups per day is OK)
++ Consider replacing NoVirusThanks with http://www.garyshood.com/virus/ and http://scanthis.net/
 + Integrate Kippo-Playlog
 + Seperate HTML and PHP where possible, tidy up code!
 + Add CSV dump/backup function
