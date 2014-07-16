@@ -455,7 +455,7 @@ class KippoInput
             echo '<th>Input</th>';
             echo '<th>File link</th>';
             echo '<th>Play Log</th>';
-            echo '<th>NoVirusThanks</th>';
+            echo '<th>Kippo-Scanner</th>';
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
@@ -471,7 +471,7 @@ class KippoInput
                 }
                 echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
                 echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
-                echo '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="images/novirusthanks.ico"/>Scan File</a></td>';
+                echo '<td><a href="kippo-scanner.php?file_url=' . $file_link . '" target="_blank">Scan File</a></td>';
                 echo '</tr>';
                 $counter++;
             }
