@@ -104,7 +104,7 @@
 			<br /><br />
 			<h3>Downloaded files:</h3>
 			<?php
-			
+
 				$db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
 
 				if (mysqli_connect_errno()) {
@@ -130,7 +130,7 @@
 					echo '<th>Timestamp</th>';
 					echo '<th>Input</th>';
 					echo '<th>File link</th>';
-					echo '<th>NoVirusThanks</th>';
+					echo '<th>Kippo-Scanner</th>';
 					echo '</tr></thead><tbody>';
 
 					//For every row returned from the database we create a new table row with the data as columns
@@ -145,7 +145,7 @@
 							$file_link = 'http://' . $file_link;
 						}
 						echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="../images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-						echo '<td><a href="http://vscan.novirusthanks.org/?url=' . $file_link . '&submiturl=' . $file_link . '" target="_blank"><img class="icon" src="../images/novirusthanks.ico"/>Scan File</a></td>';
+                        echo '<td><a href="kippo-scanner.php?file_url=' . $file_link . '" target="_blank">Scan File</a></td>';
 						echo '</tr>';
 						$counter++;
 					}
@@ -202,7 +202,7 @@
 							}
 						}
 					}
-									
+
 			?>
 			
 			<br />
