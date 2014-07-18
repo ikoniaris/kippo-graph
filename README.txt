@@ -17,10 +17,11 @@ apt-get update && apt-get install -y libapache2-mod-php5 php5-gd php5-mysql
 /etc/init.d/apache2 restart
 
 QUICK INSTALLATION:
-wget http://bruteforce.gr/wp-content/uploads/kippo-graph-VERSION.tar
-mv kippo-graph-VERSION.tar /var/www
+wget http://bruteforce.gr/wp-content/uploads/kippo-graph-VERSION.tar.gz
+mv kippo-graph-VERSION.tar.gz /var/www
 cd /var/www
-tar xvf kippo-graph-VERSION.tar --no-same-permissions
+tar zxvf kippo-graph-VERSION.tar.gz
+mv kippo-graph-VERSION kippo-graph
 cd kippo-graph
 chmod 777 generated-graphs
 cp config.php.dist config.php
