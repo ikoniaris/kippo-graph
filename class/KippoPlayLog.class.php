@@ -22,16 +22,14 @@ class KippoPlayLog
 
     public function printLogs()
     {
-        //TODO: ikoniaris
-        //This seems to be a very expensive query when run on very big databases (local MySQL hanged and CPU went up to 100%)
-        //SELECT * FROM ( SELECT ttylog.session, timestamp, ROUND(LENGTH(ttylog)/1024, 2) AS size FROM ttylog JOIN auth ON ttylog.session=auth.session ORDER BY timestamp DESC ) s WHERE size > x;
         $db_query = "SELECT * "
             . "FROM ( "
             . "SELECT ttylog.session, timestamp,  "
             . "ROUND(LENGTH(ttylog)/1024, 2) AS size  "
             . "FROM ttylog "
             . "JOIN auth "
-            . "ON ttylog.session=auth.session "
+            . "ON ttylog.session = auth.session "
+            . "WHERE auth.success = 1 "
             . "ORDER BY timestamp DESC "
             . ") s "
             . "WHERE size > " . PLAYBACKSIZE_IGNORE;
