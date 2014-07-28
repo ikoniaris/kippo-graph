@@ -1,43 +1,34 @@
 <?php
+require_once(DIR_ROOT . '/include/rb.php');
 
 class KippoPlayLog
 {
-    private $db_conn;
 
     function __construct()
     {
         //Let's connect to the database
-        $this->db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
-
-        if (mysqli_connect_errno()) {
-            echo 'Error connecting to the database: ' . mysqli_connect_error();
-            exit();
-        }
+        R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
 
     function __destruct()
     {
-        $this->db_conn->close();
+        R::close();
     }
 
     public function printLogs()
     {
-        $db_query = "SELECT * "
-            . "FROM ( "
-            . "SELECT ttylog.session, timestamp,  "
-            . "ROUND(LENGTH(ttylog)/1024, 2) AS size  "
-            . "FROM ttylog "
-            . "JOIN auth "
-            . "ON ttylog.session = auth.session "
-            . "WHERE auth.success = 1 "
-            . "ORDER BY timestamp DESC "
-            . ") s "
-            . "WHERE size > " . PLAYBACKSIZE_IGNORE;
+        $db_query = "SELECT * FROM (
+            SELECT ttylog.session, timestamp, ROUND(LENGTH(ttylog)/1024, 2) AS size
+            FROM ttylog
+            JOIN auth ON ttylog.session = auth.session
+            WHERE auth.success = 1
+            ORDER BY timestamp DESC
+            ) s
+            WHERE size > " . PLAYBACKSIZE_IGNORE;
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<p>The following table displays a list of all the logs recorded by Kippo.</p>';
@@ -50,7 +41,7 @@ class KippoPlayLog
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
