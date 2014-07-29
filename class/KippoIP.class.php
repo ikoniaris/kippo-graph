@@ -18,14 +18,14 @@ class KippoIP
     public function printOverallIpActivity()
     {
         $db_query = "SELECT A.*, B.success FROM (
-            SELECT ip, MAX(starttime) as starttime, COUNT(DISTINCT sessions.id) as sessions
-            FROM sessions GROUP BY ip) A
-            LEFT JOIN (
-              SELECT sessions.ip, MAX(success) as success
-              FROM sessions, auth
-              WHERE sessions.id = auth.session
-              GROUP BY ip) B on A.ip = B.ip
-            ORDER BY A.ip";
+          SELECT ip, MAX(starttime) as starttime, COUNT(DISTINCT sessions.id) as sessions
+          FROM sessions GROUP BY ip) A
+          LEFT JOIN (
+            SELECT sessions.ip, MAX(success) as success
+            FROM sessions, auth
+            WHERE sessions.id = auth.session
+            GROUP BY ip) B on A.ip = B.ip
+          ORDER BY A.ip";
 
         $rows = R::getAll($db_query);
 
