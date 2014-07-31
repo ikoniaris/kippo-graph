@@ -1,4 +1,5 @@
 <?php
+require_once(DIR_ROOT . '/include/rb.php');
 require_once(DIR_ROOT . '/include/libchart/classes/libchart.php');
 require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 
@@ -9,17 +10,12 @@ class KippoInput
     function __construct()
     {
         //Let's connect to the database
-        $this->db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
-
-        if (mysqli_connect_errno()) {
-            echo 'Error connecting to the database: ' . mysqli_connect_error();
-            exit();
-        }
+        R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
 
     function __destruct()
     {
-        $this->db_conn->close();
+        R::close();
     }
 
     public function printOverallHoneypotActivity()
@@ -27,13 +23,11 @@ class KippoInput
         echo '<h3>Overall post-compromise activity</h3>';
 
         //TOTAL NUMBER OF COMMANDS
-        $db_query = "SELECT COUNT(*) as total, COUNT(DISTINCT input) as uniq "
-            . "FROM input";
+        $db_query = "SELECT COUNT(*) as total, COUNT(DISTINCT input) as uniq FROM input";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             echo '<table><thead>';
             echo '<tr class="dark">';
@@ -46,7 +40,7 @@ class KippoInput
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $row['total'] . '</td>';
                 echo '<td>' . $row['uniq'] . '</td>';
@@ -58,14 +52,12 @@ class KippoInput
         }
 
         //TOTAL DOWNLOADED FILES
-        $db_query = "SELECT COUNT(*) as files, COUNT(DISTINCT input) as uniq_files "
-            . "FROM input "
-            . "WHERE input LIKE '%wget%' AND input NOT LIKE 'wget'";
+        $db_query = "SELECT COUNT(*) as files, COUNT(DISTINCT input) as uniq_files
+          FROM input WHERE input LIKE '%wget%' AND input NOT LIKE 'wget'";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             echo '<table><thead>';
             echo '<tr class="dark">';
@@ -78,7 +70,7 @@ class KippoInput
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $row['files'] . '</td>';
                 echo '<td>' . $row['uniq_files'] . '</td>';
@@ -94,23 +86,21 @@ class KippoInput
 
     public function printHumanActivityBusiestDays()
     {
-        $db_query = "SELECT COUNT(input), timestamp "
-            . "FROM input "
-            . "GROUP BY DAYOFYEAR(timestamp) "
-            //."ORDER BY timestamp ASC ";
-            . "ORDER BY COUNT(input) DESC "
-            . "LIMIT 20 ";
+        $db_query = "SELECT COUNT(input), timestamp
+          FROM input
+          GROUP BY DAYOFYEAR(timestamp)
+          ORDER BY COUNT(input) DESC
+          LIMIT 20 ";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new vertical bar chart and initialize the dataset
             $chart_vertical = new VerticalBarChart(600, 300);
             $dataSet = new XYDataSet();
 
             //For every row returned from the database we add a new point to the dataset
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 $dataSet->addPoint(new Point(date('d-m-Y', strtotime($row['timestamp'])), $row['COUNT(input)']));
             }
 
@@ -127,15 +117,14 @@ class KippoInput
 
     public function printHumanActivityPerDay()
     {
-        $db_query = 'SELECT COUNT(input), timestamp '
-            . "FROM input "
-            . "GROUP BY DAYOFYEAR(timestamp) "
-            . "ORDER BY timestamp ASC ";
+        $db_query = "SELECT COUNT(input), timestamp
+          FROM input
+          GROUP BY DAYOFYEAR(timestamp)
+          ORDER BY timestamp ASC ";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new line chart and initialize the dataset
             $chart = new LineChart(600, 300);
             $dataSet = new XYDataSet();
@@ -143,10 +132,10 @@ class KippoInput
             //This graph gets messed up for large DBs, so here is a simple way to limit some of the input
             $counter = 1;
             //Display date legend only every $mod rows, 25 distinct values being the optimal for a graph
-            $mod = round($result->num_rows / 25);
+            $mod = round(count($rows) / 25);
             if ($mod == 0) $mod = 1; //otherwise a division by zero might happen below
             //For every row returned from the database we add a new point to the dataset
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 if ($counter % $mod == 0) {
                     $dataSet->addPoint(new Point(date('d-m-Y', strtotime($row['timestamp'])), $row['COUNT(input)']));
                 } else {
@@ -168,21 +157,19 @@ class KippoInput
 
     public function printHumanActivityPerWeek()
     {
-        $db_query = 'SELECT COUNT(input), MAKEDATE( '
-            . "CASE "
-            . "WHEN WEEKOFYEAR(timestamp) = 52 "
-            . "THEN YEAR(timestamp)-1 "
-            . "ELSE YEAR(timestamp) "
-            . "END, (WEEKOFYEAR(timestamp) * 7)-4) AS DateOfWeek_Value "
-            . "FROM input "
-            . "GROUP BY WEEKOFYEAR(timestamp) "
-            . "ORDER BY timestamp ASC";
+        $db_query = "SELECT COUNT(input), MAKEDATE(
+          CASE
+          WHEN WEEKOFYEAR(timestamp) = 52
+          THEN YEAR(timestamp)-1
+          ELSE YEAR(timestamp)
+          END, (WEEKOFYEAR(timestamp) * 7)-4) AS DateOfWeek_Value
+          FROM input
+          GROUP BY WEEKOFYEAR(timestamp)
+          ORDER BY timestamp ASC";
 
+        $rows = R::getAll($db_query);
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
-
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new line chart and initialize the dataset
             $chart = new LineChart(600, 300);
             $dataSet = new XYDataSet();
@@ -190,10 +177,10 @@ class KippoInput
             //This graph gets messed up for large DBs, so here is a simple way to limit some of the input
             $counter = 1;
             //Display date legend only every $mod rows, 25 distinct values being the optimal for a graph
-            $mod = round($result->num_rows / 25);
+            $mod = round(count($rows) / 25);
             if ($mod == 0) $mod = 1; //otherwise a division by zero might happen below
             //For every row returned from the database we add a new point to the dataset
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 if ($counter % $mod == 0) {
                     $dataSet->addPoint(new Point(date('d-m-Y', strtotime($row['DateOfWeek_Value'])), $row['COUNT(input)']));
                 } else {
@@ -219,16 +206,15 @@ class KippoInput
 
     public function printTop10OverallInput()
     {
-        $db_query = 'SELECT input, COUNT(input) '
-            . "FROM input "
-            . "GROUP BY input "
-            . "ORDER BY COUNT(input) DESC "
-            . "LIMIT 10";
+        $db_query = "SELECT input, COUNT(input)
+          FROM input
+          GROUP BY input
+          ORDER BY COUNT(input) DESC
+          LIMIT 10";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new vertical bar chart and initialize the dataset
             $chart = new VerticalBarChart(600, 300);
             $dataSet = new XYDataSet();
@@ -248,7 +234,7 @@ class KippoInput
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
@@ -277,17 +263,16 @@ class KippoInput
 
     public function printTop10SuccessfulInput()
     {
-        $db_query = 'SELECT input, COUNT(input) '
-            . "FROM input "
-            . "WHERE success = 1 "
-            . "GROUP BY input "
-            . "ORDER BY COUNT(input) DESC "
-            . "LIMIT 10";
+        $db_query = "SELECT input, COUNT(input)
+          FROM input
+          WHERE success = 1
+          GROUP BY input
+          ORDER BY COUNT(input) DESC
+          LIMIT 10";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new vertical bar chart and initialize the dataset
             $chart = new VerticalBarChart(600, 300);
             $dataSet = new XYDataSet();
@@ -306,7 +291,7 @@ class KippoInput
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
@@ -334,17 +319,16 @@ class KippoInput
 
     public function printTop10FailedInput()
     {
-        $db_query = 'SELECT input, COUNT(input) '
-            . "FROM input "
-            . "WHERE success = 0 "
-            . "GROUP BY input "
-            . "ORDER BY COUNT(input) DESC "
-            . "LIMIT 10";
+        $db_query = "SELECT input, COUNT(input)
+          FROM input
+          WHERE success = 0
+          GROUP BY input
+          ORDER BY COUNT(input) DESC
+          LIMIT 10";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new vertical bar chart and initialize the dataset
             $chart = new VerticalBarChart(600, 300);
             $dataSet = new XYDataSet();
@@ -363,7 +347,7 @@ class KippoInput
 
             //For every row returned from the database we add a new point to the dataset,
             //and create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 $dataSet->addPoint(new Point($row['input'], $row['COUNT(input)']));
 
                 echo '<tr class="light word-break">';
@@ -391,16 +375,15 @@ class KippoInput
 
     public function printPasswdCommands()
     {
-        $db_query = 'SELECT timestamp, input, session '
-            . "FROM input "
-            . "WHERE realm like 'passwd' "
-            . "GROUP BY input "
-            . "ORDER BY timestamp DESC";
+        $db_query = "SELECT timestamp, input, session
+          FROM input
+          WHERE realm like 'passwd'
+          GROUP BY input
+          ORDER BY timestamp DESC";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<h3>passwd commands</h3>';
@@ -415,7 +398,7 @@ class KippoInput
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
@@ -433,16 +416,14 @@ class KippoInput
 
     public function printWgetCommands()
     {
-        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file, "
-            . "timestamp, session "
-            . "FROM input "
-            . "WHERE input LIKE '%wget%' AND input NOT LIKE 'wget' "
-            . "ORDER BY timestamp DESC";
+        $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file, timestamp, session
+          FROM input
+          WHERE input LIKE '%wget%' AND input NOT LIKE 'wget'
+          ORDER BY timestamp DESC";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<h3>wget commands</h3>';
@@ -459,7 +440,7 @@ class KippoInput
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
@@ -484,16 +465,15 @@ class KippoInput
 
     public function printExecutedScripts()
     {
-        $db_query = 'SELECT timestamp, input, session '
-            . "FROM input "
-            . "WHERE input like './%' "
-            . "GROUP BY input "
-            . "ORDER BY timestamp DESC";
+        $db_query = "SELECT timestamp, input, session
+          FROM input
+          WHERE input like './%'
+          GROUP BY input
+          ORDER BY timestamp DESC";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<h3>Executed scripts</h3>';
@@ -508,7 +488,7 @@ class KippoInput
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
@@ -526,19 +506,19 @@ class KippoInput
 
     public function printInterestingCommands()
     {
-        $db_query = 'SELECT timestamp, input, session '
-            . "FROM input "
-            . "WHERE (input like '%cat%' OR input like '%dev%' OR input like '%man%' OR input like '%gpg%' OR input like '%ping%' "
-            . "OR input like '%ssh%' OR input like '%scp%' OR input like '%whois%' OR input like '%unset%' OR input like '%kill%' "
-            . "OR input like '%ifconfig%' OR input like '%iwconfig%' OR input like '%traceroute%' OR input like '%screen%' OR input like '%user%') "
-            . "AND input NOT like '%wget%' AND input NOT like '%apt-get%' "
-            . "GROUP BY input "
-            . "ORDER BY timestamp DESC";
+        $db_query = "SELECT timestamp, input, session
+          FROM input
+          WHERE (input like '%cat%' OR input like '%dev%' OR input like '%man%' OR input like '%gpg%'
+          OR input like '%ping%' OR input like '%ssh%' OR input like '%scp%' OR input like '%whois%'
+          OR input like '%unset%' OR input like '%kill%' OR input like '%ifconfig%' OR input like '%iwconfig%'
+          OR input like '%traceroute%' OR input like '%screen%' OR input like '%user%')
+          AND input NOT like '%wget%' AND input NOT like '%apt-get%'
+          GROUP BY input
+          ORDER BY timestamp DESC";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<h3>Interesting commands</h3>';
@@ -553,7 +533,7 @@ class KippoInput
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
@@ -571,17 +551,17 @@ class KippoInput
 
     public function printAptGetCommands()
     {
-        $db_query = 'SELECT timestamp, input, session '
-            . "FROM input "
-            . "WHERE (input like '%apt-get install%' OR input like '%apt-get remove%' OR input like '%aptitude install%' OR input like '%aptitude remove%') "
-            . "AND input NOT LIKE 'apt-get' AND input NOT LIKE 'aptitude'"
-            . "GROUP BY input "
-            . "ORDER BY timestamp DESC";
+        $db_query = "SELECT timestamp, input, session
+          FROM input
+          WHERE (input like '%apt-get install%' OR input like '%apt-get remove%'
+          OR input like '%aptitude install%' OR input like '%aptitude remove%')
+          AND input NOT LIKE 'apt-get' AND input NOT LIKE 'aptitude'
+          GROUP BY input
+          ORDER BY timestamp DESC";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
             echo '<h3>apt-get commands</h3>';
@@ -596,7 +576,7 @@ class KippoInput
             echo '</tr></thead><tbody>';
 
             //For every row returned from the database we create a new table row with the data as columns
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
