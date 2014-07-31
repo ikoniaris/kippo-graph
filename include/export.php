@@ -42,4 +42,7 @@ foreach ($rows as $row) {
 }
 fclose($out);
 
+//Close DB connection
+R::close();
+
 ?>
