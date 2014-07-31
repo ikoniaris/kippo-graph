@@ -94,7 +94,7 @@ class KippoGeo
             echo '<th>Latitude</th>';
             echo '<th>Longitude</th>';
             echo '<th>Hostname</th>';
-            echo '<th colspan="8">Lookup</th>';
+            echo '<th colspan="9">IP Lookup</th>';
             echo '</tr></thead><tbody>';
 
             //We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -157,6 +157,7 @@ class KippoGeo
                 echo '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.ip-adress.com/ip_tracer/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ip_tracer.png"/></a></td>';
+                echo '<td class="icon"><a href="https://www.virustotal.com/en/ip-address/' . $row['ip'] . '/information/" target="_blank"><img class="icon" src="images/virustotal.ico"/></a></td>';
                 echo '</tr>';
 
                 //Lastly, we increase the index used by maps to indicate the next row,
