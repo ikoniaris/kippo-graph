@@ -15,7 +15,7 @@ R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB
 $db_query = "SELECT timestamp, ip, session, username, password, success
 FROM sessions, auth
 WHERE sessions.id = auth.session AND sessions.ip='$ip'
-ORDER BY auth.timestamp";
+ORDER BY auth.timestamp ASC";
 
 $rows = R::getAll($db_query);
 
