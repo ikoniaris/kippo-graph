@@ -169,7 +169,7 @@ class KippoGeo
             echo '</tbody></table>';
             echo '<hr /><br />';
 
-            //While still inside the if($result->num_rows > 0) clause (otherwise the dataSet will be empty),
+            //While still inside the if(count($rows)) clause (otherwise the dataSet will be empty),
             //we set the bar chart's dataset, render the graph and display it (we're inside html code!)
             $verticalChart->setDataSet($dataSet);
             $verticalChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
