@@ -36,7 +36,7 @@ if (count($rows)) {
 
     //For every row returned from the database we add a new point to the dataset,
     //and create a new table row with the data as columns
-    foreach($rows as $row) {
+    foreach ($rows as $row) {
         echo '<tr class="light word-break">';
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['ip'] . '</td>';
@@ -93,7 +93,7 @@ if (count($rows)) {
 
     //For every row returned from the database we add a new point to the dataset,
     //and create a new table row with the data as columns
-    foreach($rows as $row) {
+    foreach ($rows as $row) {
         echo '<tr class="light word-break">';
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
