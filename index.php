@@ -71,6 +71,11 @@
 
             <p><strong>CHANGES:</strong></p>
 
+            <p>Version 1.3:<br/>+ Switched all SQL operations to the RedBeanPHP library.
+                <br/>+ Reformatted and standardized all SQL queries.
+                <br/>+ Added VirusTotal IP lookup in Kippo-Geo.
+            </p>
+
             <p>Version 1.2:<br/>+ Substituted the defunct NoVirusThanks with Gary's Hood Online Virus Scanner.
                 <br/>+ Added Kippo-Scanner module to handle (future) AV and anti-malware submissions.
                 <br/>+ Added IP-address.com's tracer to Kippo-Geo IPs.
