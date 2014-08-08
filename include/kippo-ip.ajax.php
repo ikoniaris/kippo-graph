@@ -41,8 +41,8 @@ if (count($rows)) {
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['ip'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
-        echo '<td>' . $row['username'] . '</td>';
-        echo '<td>' . $row['password'] . '</td>';
+        echo '<td>' . xss_clean($row['username']) . '</td>';
+        echo '<td>' . xss_clean($row['password']) . '</td>';
         echo '<td>' . $row['success'] . '</td>';
         echo '</tr>';
     }
