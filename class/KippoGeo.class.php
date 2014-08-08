@@ -7,7 +7,6 @@ require_once(DIR_ROOT . '/include/misc/ip2host.php');
 
 class KippoGeo
 {
-    private $db_conn;
     private $geoplugin;
 
     function __construct()

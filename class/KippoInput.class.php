@@ -5,7 +5,6 @@ require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 
 class KippoInput
 {
-    private $db_conn;
 
     function __construct()
     {
