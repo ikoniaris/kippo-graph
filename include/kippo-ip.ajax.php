@@ -98,7 +98,7 @@ if (count($rows)) {
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
         echo '<td>' . $row['success'] . '</td>';
-        echo '<td>' . $row['input'] . '</td>';
+        echo '<td>' . xss_clean($row['input']) . '</td>';
         echo '</tr>';
     }
     //Close tbody and table element, it's ready.
