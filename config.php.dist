@@ -3,7 +3,7 @@
 #Website: bruteforce.gr/kippo-graph
 
 #DIR_ROOT -- defines where your Kippo-Graph installation currently resides in.
-define('DIR_ROOT', getcwd());
+define('DIR_ROOT', dirname(__FILE__));
 
 #Chart language selection -- Default: en (English). Change the two-letter
 #lang.XX.php language code to your preferred choice.
@@ -11,7 +11,7 @@ define('DIR_ROOT', getcwd());
 #en: English | fr: French | de: German | it: Italian | es: Spanish
 #nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
 #cs: Czech | ar: Arabic (currently not working)
-require_once('include/languages/lang.en.php');
+require_once(DIR_ROOT . '/include/languages/lang.en.php');
 
 #You will have to change the following four definitions
 #from the default values to the correct ones, according
