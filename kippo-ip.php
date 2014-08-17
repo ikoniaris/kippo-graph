@@ -54,7 +54,7 @@
             #Website: bruteforce.gr/kippo-graph
 
             require_once('config.php');
-            require_once('class/KippoIP.class.php');
+            require_once(DIR_ROOT . '/class/KippoIP.class.php');
 
             $kippoIP = new KippoIp();
 

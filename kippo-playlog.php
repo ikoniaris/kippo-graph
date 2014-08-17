@@ -51,7 +51,7 @@
             #Website: bruteforce.gr/kippo-graph
 
             require_once('config.php');
-            require_once('class/KippoPlayLog.class.php');
+            require_once(DIR_ROOT . '/class/KippoPlayLog.class.php');
 
             $kippoPlayLog = new KippoPlayLog();
 

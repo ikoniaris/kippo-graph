@@ -52,7 +52,7 @@
             #Website: bruteforce.gr/kippo-graph
 
             require_once('config.php');
-            require_once('class/KippoGeo.class.php');
+            require_once(DIR_ROOT . '/class/KippoGeo.class.php');
 
             $kippoGeo = new KippoGeo();
 

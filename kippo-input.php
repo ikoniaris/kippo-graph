@@ -51,7 +51,7 @@
             #Website: bruteforce.gr/kippo-graph
 
             require_once('config.php');
-            require_once('class/KippoInput.class.php');
+            require_once(DIR_ROOT . '/class/KippoInput.class.php');
 
             $kippoInput = new KippoInput();
 
