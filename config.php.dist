@@ -3,14 +3,7 @@
 #Website: bruteforce.gr/kippo-graph
 
 #DIR_ROOT -- defines where your Kippo-Graph installation currently resides in.
-#This should be an absolute directory/path, e.g. /var/www/kippo-graph for Linux.
-#There are some sample below for different platforms, please uncomment and complete yours.
-#Windows:
-#define('DIR_ROOT', 'C:\BitNami\wampstack-X.X.XX\apache2\htdocs\kippo-graph');
-#Mac:
-#define('DIR_ROOT', '/Applications/mampstack-X.X.XX/apache2/htdocs/kippo-graph');
-#Linux:
-define('DIR_ROOT', '/var/www/kippo-graph');
+define('DIR_ROOT', getcwd());
 
 #Chart language selection -- Default: en (English). Change the two-letter
 #lang.XX.php language code to your preferred choice.
