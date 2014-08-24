@@ -75,6 +75,7 @@
                 <br/>+ Reformatted and standardized all SQL queries.
                 <br/>+ Added VirusTotal IP lookup in Kippo-Geo.
                 <br/>+ Fix XSS problem in Kippo-IP (AJAX requester).
+                <br/>+ Updated README.md file.
                 <br/>- Removed manual DIR_ROOT configuration.
             </p>
 
