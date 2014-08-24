@@ -40,5 +40,6 @@ Browse to http://your-server/kippo-graph to generate the statistics.
 
 Note 1: If you are on a VPS/server and don't want to use the default Apache document root,
 		you will still need to add a new Apache vhost and enable the site.
+
 Note 2: To fully use the geolocation features (Intensity Map) you will need to give CREATE
 		TEMPORARY TABLES rights to your Kippo database user (most likely it has already been done).
