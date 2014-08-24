@@ -3,13 +3,14 @@ Kippo-Graph
 
 Kippo-Graph is a full featured script to visualize statistics from a Kippo SSH honeypot.
 
-It uses "Libchart" PHP chart drawing library by Jean-Marc Trémeaux,
-"QGoogleVisualizationAPI" PHP Wrapper for Google's Visualization API by Thomas Schäfer
-and geoPlugin geolocation technology (geoplugin.com)
+It uses the Libchart PHP chart drawing library by Jean-Marc Trémeaux,
+QGoogleVisualizationAPI PHP Wrapper for Google's Visualization API by Thomas Schäfer,
+RedBeanPHP library by Gabor de Mooij and geoPlugin's geolocation technology (geoplugin.com).
 
 REQUIREMENTS:
 -------------
-You need to have _libapache2-mod-php5_, _php5-gd_ and _php5-mysql_ packages installed.
+1. PHP version 5.3.4 or higher.
+2. The following packages: _libapache2-mod-php5_, _php5-gd_,  _php5-mysql_.
 
 On Ubuntu/Debian:
 > apt-get update && apt-get install -y libapache2-mod-php5 php5-gd php5-mysql
