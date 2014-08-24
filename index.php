@@ -19,7 +19,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
     <div id="topbar">
-        <div class="fl_left">Version: 1.2 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
+        <div class="fl_left">Version: 1.3 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
         </div>
         <br class="clear"/>
     </div>
@@ -70,6 +70,13 @@
             <p>&nbsp;</p>
 
             <p><strong>CHANGES:</strong></p>
+
+            <p>Version 1.3:<br/>+ Switched all SQL operations to the RedBeanPHP library.
+                <br/>+ Reformatted and standardized all SQL queries.
+                <br/>+ Added VirusTotal IP lookup in Kippo-Geo.
+                <br/>+ Fix XSS problem in Kippo-IP (AJAX requester).
+                <br/>- Remove manual DIR_ROOT configuration.
+            </p>
 
             <p>Version 1.2:<br/>+ Substituted the defunct NoVirusThanks with Gary's Hood Online Virus Scanner.
                 <br/>+ Added Kippo-Scanner module to handle (future) AV and anti-malware submissions.

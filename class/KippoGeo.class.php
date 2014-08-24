@@ -1,4 +1,5 @@
 <?php
+require_once(DIR_ROOT . '/include/rb.php');
 require_once(DIR_ROOT . '/include/libchart/classes/libchart.php');
 require_once(DIR_ROOT . '/include/qgooglevisualapi/config.inc.php');
 require_once(DIR_ROOT . '/include/geoplugin/geoplugin.class.php');
@@ -6,7 +7,6 @@ require_once(DIR_ROOT . '/include/misc/ip2host.php');
 
 class KippoGeo
 {
-    private $db_conn;
     private $geoplugin;
 
     function __construct()
@@ -14,31 +14,25 @@ class KippoGeo
         $this->geoplugin = new geoPlugin();
 
         //Let's connect to the database
-        $this->db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT); //host, username, password, database, port
-
-        if (mysqli_connect_errno()) {
-            echo 'Error connecting to the database: ' . mysqli_connect_error();
-            exit();
-        }
+        R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
 
     function __destruct()
     {
-        $this->db_conn->close();
+        R::close();
     }
 
     public function printKippoGeoData()
     {
-        $db_query = 'SELECT ip, COUNT(ip) '
-            . "FROM sessions "
-            . "GROUP BY ip "
-            . "ORDER BY COUNT(ip) DESC "
-            . "LIMIT 10 ";
+        $db_query = "SELECT ip, COUNT(ip)
+          FROM sessions
+          GROUP BY ip
+          ORDER BY COUNT(ip) DESC
+          LIMIT 10 ";
 
-        $result = $this->db_conn->query($db_query);
-        //echo 'Found '.$result->num_rows.' records';
+        $rows = R::getAll($db_query);
 
-        if ($result->num_rows > 0) {
+        if (count($rows)) {
             //We create a new vertical bar chart, a new pie chart and initialize the dataset
             $verticalChart = new VerticalBarChart(600, 300);
             $pieChart = new PieChart(600, 300);
@@ -79,7 +73,7 @@ class KippoGeo
             //and the corresponding country code, otherwise the Intensity Map won't work, because we need to
             //GROUP BY country code and SUM the #Probers per country
             $temp_table = 'CREATE TEMPORARY TABLE temp_ip (ip VARCHAR(12), counter INT, country VARCHAR(2))';
-            $temp_table_execute = $this->db_conn->query($temp_table);
+            R::exec($temp_table);
 
             //We create a dummy counter to use for the markers' tooltip inside Google Map like: IP 3/10
             //We use the same counter for the IP <table> as well
@@ -99,7 +93,7 @@ class KippoGeo
             echo '<th>Latitude</th>';
             echo '<th>Longitude</th>';
             echo '<th>Hostname</th>';
-            echo '<th colspan="8">Lookup</th>';
+            echo '<th colspan="9">IP Lookup</th>';
             echo '</tr></thead><tbody>';
 
             //We need to add data on the correct Map columns. The columns are always 0 or 1 or 2 for every repetition
@@ -108,7 +102,7 @@ class KippoGeo
             $col = 0;
 
             //For every row returned from the database...
-            while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+            foreach ($rows as $row) {
                 //We call the geoplugin service to get the geolocation data for the ip
                 $this->geoplugin->locate($row['ip']);
 
@@ -140,7 +134,7 @@ class KippoGeo
                 $ip_count = $row['COUNT(ip)'];
                 $CC = $this->geoplugin->countryCode;
                 $country_query = "INSERT INTO temp_ip VALUES('$ip', '$ip_count', '$CC')";
-                $country_query_execute = $this->db_conn->query($country_query);
+                R::exec($country_query);
 
                 //For every row returned from the database we create a new table row with the data as columns
                 echo '<tr class="light">';
@@ -162,6 +156,7 @@ class KippoGeo
                 echo '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.ip-adress.com/ip_tracer/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ip_tracer.png"/></a></td>';
+                echo '<td class="icon"><a href="https://www.virustotal.com/en/ip-address/' . $row['ip'] . '/information/" target="_blank"><img class="icon" src="images/virustotal.ico"/></a></td>';
                 echo '</tr>';
 
                 //Lastly, we increase the index used by maps to indicate the next row,
@@ -174,7 +169,7 @@ class KippoGeo
             echo '</tbody></table>';
             echo '<hr /><br />';
 
-            //While still inside the if($result->num_rows > 0) clause (otherwise the dataSet will be empty),
+            //While still inside the if(count($rows)) clause (otherwise the dataSet will be empty),
             //we set the bar chart's dataset, render the graph and display it (we're inside html code!)
             $verticalChart->setDataSet($dataSet);
             $verticalChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
@@ -203,19 +198,18 @@ class KippoGeo
             echo '<br/><hr /><br />';
 
             //Lastly, we prepare the data for the Intesity Map
-            $db_query_map = 'SELECT country, SUM(counter) '
-                . "FROM temp_ip "
-                . "GROUP BY country "
-                . "ORDER BY SUM(counter) DESC ";
-            //."LIMIT 10 ";
+            $db_query_map = "SELECT country, SUM(counter)
+              FROM temp_ip
+              GROUP BY country
+              ORDER BY SUM(counter) DESC ";
+            //LIMIT 10 ";
 
-            $result = $this->db_conn->query($db_query_map);
-            //echo 'Found '.$result->num_rows.' records';
+            $rows = R::getAll($db_query_map);
 
-            if ($result->num_rows > 0) {
+            if (count($rows)) {
                 $col = 0; //Dummy row index
                 //For every row returned from the database add the values to Intensity Map's table and intensityPieChart
-                while ($row = $result->fetch_array(MYSQLI_BOTH)) {
+                foreach ($rows as $row) {
                     $countryProbes = $row['country'] . " - " . $row['SUM(counter)'];
                     $intensityDataSet->addPoint(new Point($countryProbes, $row['SUM(counter)']));
                     $intensityMap->setValues(

@@ -1,6 +1,7 @@
 <?php
 require_once('../config.php');
-require_once('../include/misc/xss_clean.php');
+require_once(DIR_ROOT . '/include/rb.php');
+require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 
 $ip = xss_clean($_POST['ip']);
 
@@ -9,25 +10,20 @@ if (!filter_var($ip, FILTER_VALIDATE_IP)) {
     exit();
 }
 
-$db_conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
-if (mysqli_connect_errno()) {
-    echo 'Error connecting to the database: ' . mysqli_connect_error();
-    exit();
-}
+$db_query = "SELECT timestamp, ip, session, username, password, success
+FROM sessions, auth
+WHERE sessions.id = auth.session AND sessions.ip='$ip'
+ORDER BY auth.timestamp ASC";
 
-$db_query = 'SELECT timestamp, ip, session, username, password, success '
-    . "FROM sessions, auth "
-    . "WHERE sessions.id = auth.session AND sessions.ip=\"" . $ip . " \" "
-    . "ORDER BY auth.timestamp";
+$rows = R::getAll($db_query);
 
-$result = $db_conn->query($db_query);
-
-if ($result->num_rows > 0) {
+if (count($rows)) {
     //We create a skeleton for the table
     echo '<table id="IP-attemps" class="tablesorter"><thead>';
     echo '<tr class="dark">';
-    echo '<th colspan="6">Total connection attempts from ' . $ip . ': ' . $result->num_rows . ' </th>';
+    echo '<th colspan="6">Total connection attempts from ' . $ip . ': ' . count($rows) . ' </th>';
     echo '</tr>';
     echo '<tr class="dark">';
     echo '<th>Timestamp</th>';
@@ -40,8 +36,7 @@ if ($result->num_rows > 0) {
 
     //For every row returned from the database we add a new point to the dataset,
     //and create a new table row with the data as columns
-    while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-
+    foreach ($rows as $row) {
         echo '<tr class="light word-break">';
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['ip'] . '</td>';
@@ -77,14 +72,17 @@ if ($result->num_rows > 0) {
     echo '<p>No attempt records were found</p>';
 }
 
-$db_query = "select * from (select distinct sessions.id from sessions where sessions.ip=\"" . $ip . "\") A JOIN (select * from input) B on A.id=B.session order by timestamp";
-$result = $db_conn->query($db_query);
+$db_query = "SELECT * FROM
+  (SELECT DISTINCT sessions.id FROM SESSIONS WHERE sessions.ip='$ip') A
+  JOIN (SELECT * FROM INPUT) B on A.id=B.session ORDER BY TIMESTAMP";
 
-if ($result->num_rows > 0) {
+$rows = R::getAll($db_query);
+
+if (count($rows)) {
     //We create a skeleton for the table
     echo '<table id="IP-commands" class="tablesorter"><thead>';
     echo '<tr class="dark">';
-    echo '<th colspan="4">Total input activity from ' . $ip . ': ' . $result->num_rows . ' </th>';
+    echo '<th colspan="4">Total input activity from ' . $ip . ': ' . count($rows) . ' </th>';
     echo '</tr>';
     echo '<tr class="dark">';
     echo '<th>Timestamp</th>';
@@ -95,8 +93,7 @@ if ($result->num_rows > 0) {
 
     //For every row returned from the database we add a new point to the dataset,
     //and create a new table row with the data as columns
-    while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-
+    foreach ($rows as $row) {
         echo '<tr class="light word-break">';
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
@@ -128,5 +125,6 @@ if ($result->num_rows > 0) {
     echo '<p>No activity records were found</p>';
 }
 
-$db_conn->close();
+R::close();
+
 ?>

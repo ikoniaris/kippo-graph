@@ -19,7 +19,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
     <div id="topbar">
-        <div class="fl_left">Version: 1.2 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
+        <div class="fl_left">Version: 1.3 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
         </div>
         <br class="clear"/>
     </div>
@@ -52,7 +52,7 @@
             #Website: bruteforce.gr/kippo-graph
 
             require_once('config.php');
-            require_once('class/KippoGeo.class.php');
+            require_once(DIR_ROOT . '/class/KippoGeo.class.php');
 
             $kippoGeo = new KippoGeo();
 
