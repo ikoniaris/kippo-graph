@@ -10,7 +10,7 @@ define('DIR_ROOT', dirname(__FILE__));
 #Available options:
 #en: English | fr: French | de: German | it: Italian | es: Spanish
 #nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
-#cs: Czech | ar: Arabic (currently not working)
+#cs: Czech | sk: Slovak | ar: Arabic (currently not working)
 require_once(DIR_ROOT . '/include/languages/lang.en.php');
 
 #You will have to change the following four definitions
