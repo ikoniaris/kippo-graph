@@ -11,10 +11,10 @@ RedBeanPHP library by Gabor de Mooij and geoPlugin's geolocation technology (geo
 
 REQUIREMENTS:
 1. PHP version 5.3.4 or higher.
-2. The following packages: “libapache2-mod-php5″, “php5-gd”, “php5-mysql”.
+2. The following packages: "libapache2-mod-php5", "php5-mysql", "php5-gd", "php5-curl".
 
 On Ubuntu/Debian:
-apt-get update && apt-get install -y libapache2-mod-php5 php5-gd php5-mysql
+apt-get update && apt-get install -y libapache2-mod-php5 php5-mysql php5-gd php5-curl
 /etc/init.d/apache2 restart
 
 QUICK INSTALLATION:
