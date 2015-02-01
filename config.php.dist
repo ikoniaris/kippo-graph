@@ -26,15 +26,18 @@ define('DB_NAME', 'database');
 define('DB_PORT', '3306');
 
 # Which geolocation method should be used -- Default: LOCAL (MaxMind)
-# Note: when using LOCAL you might want to periodically update the
-# kippo-graph/include/maxmind/GeoLite2-City.mmdb MaxMind database file
-# with a new one from: http://dev.maxmind.com/geoip/geoip2/geolite2/
+# Note: LOCAL (MaxMind) enables additional fields in various components.
+#  When using LOCAL you might want to periodically update the
+#  kippo-graph/include/maxmind/GeoLite2-City.mmdb MaxMind database file
+#  with a new one from: http://dev.maxmind.com/geoip/geoip2/geolite2/
 # Available options:
 #  LOCAL: fastest, uses a local MaxMind GeoLite2 database
 #  GEOPLUGIN: uses the geoplugin.com web service (online)
 define('GEO_METHOD', 'LOCAL');
 
-# Check if IP logged addresses are coming from Tor: https://www.torproject.org/
+# Check if logged IP addresses are coming from Tor using the Tor Bulk Exit List exporting tool.
+# The list of exit nodes is also saved locally, in case the online service goes down.
+# Note: this enables additional fields in various components.
 # Change NO to YES if you want to enable it.
 define('TOR_CHECK', 'NO');
 
