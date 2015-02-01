@@ -32,8 +32,9 @@ class KippoPlayLog
         if (count($rows)) {
             //We create a skeleton for the table
             $counter = 1;
-            echo '<p>The following table displays a list of all the logs recorded by Kippo.</p>';
-            echo '<table><thead>';
+            echo '<p>The following table displays a list of all the logs recorded by Kippo.
+                     You can click on column heads to sort data.</p>';
+            echo '<table id="Playlog-List" class="tablesorter"><thead>';
             echo '<tr class="dark">';
             echo '<th>ID</th>';
             echo '<th>Timstamp</th>';
