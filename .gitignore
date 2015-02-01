@@ -6,4 +6,4 @@ config.php
 # These two are not actually ignored here,
 # but with git update-index --assume-unchanged
 include/maxmind/GeoLite2-City.mmdb
-#include/tor/tor_exit_node_list.txt
+include/tor/tor_exit_node_list.txt
