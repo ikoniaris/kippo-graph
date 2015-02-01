@@ -1,7 +1,7 @@
 ﻿============================================================================
 Kippo-Graph is distributed under this license:
 
-Kippo-Graph is Copyright (C) 2011 - 2014 Ioannis Koniaris
+Kippo-Graph is Copyright (C) 2011 - 2015 Ioannis Koniaris
 Contact: ikoniaris@gmail.com
 Website: bruteforce.gr/kippo-graph
 
@@ -11,9 +11,10 @@ Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
 Kippo-Graph is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-Public License for more details.
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Kippo-Graph. If not, see <http://www.gnu.org/licenses/>.
@@ -23,8 +24,7 @@ Libchart is distributed under this license:
 Libchart is Copyright (C) 2005-2011 Jean-Marc Trémeaux
 
 Libchart is distributed under the terms of the GNU GPL v3.
-This includes everything in the source code distribution
-except where otherwise stated.
+This includes everything in the source code distribution except where otherwise stated.
 A copy of the GNU GPL v3 can be found in doc/GNU_GPL_V3.
 
 Third Party Content:
@@ -61,6 +61,25 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ============================================================================
+MaxMind GeoIP2-php is distributed under this license:
+
+This software is Copyright (c) 2014 by MaxMind, Inc.
+
+This is free software, licensed under the Apache License, Version 2.0.
+============================================================================
+GeoLite2 databases are distributed under this license:
+
+The GeoLite2 databases are distributed under the
+Creative Commons Attribution-ShareAlike 3.0 Unported License.
+
+The attribution requirement may be met by including the following in all
+advertising and documentation mentioning features of or use of this database:
+
+This product includes GeoLite2 data created by MaxMind, available from
+<a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+
+The above recognition link has been added to the Kippo-Geo component/page.
+============================================================================
 RedBeanPHP is distributed under this license:
 
 Copyright © 2009-2014 Gabor de Mooij and the RedBeanPHP community All rights reserved.
@@ -78,18 +97,19 @@ FOR A PARTICULAR PURPOSE.
 ============================================================================
 geoPlugin is not distributed under any particular license.
 
-geoPlugin is free software according to its official website (geoplugin.com)
+geoPlugin is free to use software according to its official website (geoplugin.com)
 and all they ask in return is to "add some recognition of geoPlugin in your pages, 
-say by adding the following unobtrusive HTML to the foot of your pages:
-<a href="http://www.geoplugin.com/" target="_new" title="geoPlugin for IP geolocation">
-Geolocation by geoPlugin</a>".
+say by adding the following unobtrusive HTML to the foot of your pages":
+<a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a>
+by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a>
 
-The above recognition link has been added to Kippo-Geo component/page.
+The above recognition link has been added to the Kippo-Geo component/page.
 ============================================================================
 Kippo-Graph uses the "Realistic" free website template by OS-Templates.
 
 "Realistic" is distributed under a OS-Templates license which allows usage 
 for both private and commercial projects, under certain conditions.
+
 More information: http://www.os-templates.com/template-terms
 
 The required attribution links have been placed in every page applicable.
@@ -97,8 +117,9 @@ The required attribution links have been placed in every page applicable.
 Kippo-Graph uses the "Abstract Background" honeycomb image by digitalart.
 
 The "Abstract Background" image by digitalart is distributed through 
-freedigitalphotos.net and under the "Free" flavor of FreeDigitalPhotos.net 
+freedigitalphotos.net and under the "Free" version of FreeDigitalPhotos.net's
 Standard License which allows various types of usage and manipulation/editing.
+
 More information: http://www.freedigitalphotos.net/images/terms-summary.php
 
 The required attribution link has been placed in index.php.
