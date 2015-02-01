@@ -6,7 +6,7 @@ require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 $ip = xss_clean($_POST['ip']);
 
 if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-    echo "Error parsing IP address";
+    echo "Error parsing IP address.";
     exit();
 }
 
