@@ -44,7 +44,7 @@ class KippoIP
             echo '<tr class="dark">';
             echo '<th>IP address</th>';
             if (GEO_METHOD == 'LOCAL')
-                echo '<th>GeoLocation</th>';
+                echo '<th>Geolocation</th>';
             echo '<th>Sessions count</th>';
             echo '<th>Success</th>';
             echo '<th>Last seen</th>';
