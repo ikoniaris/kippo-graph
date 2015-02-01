@@ -27,7 +27,7 @@ define('DB_PORT', '3306');
 
 # Which geolocation method should be used -- Default: LOCAL (MaxMind)
 # Note: LOCAL (MaxMind) enables additional fields in various components.
-#  When using LOCAL you might want to periodically update the
+#  When using LOCAL you might want to periodically update (monthly) the
 #  kippo-graph/include/maxmind/GeoLite2-City.mmdb MaxMind database file
 #  with a new one from: http://dev.maxmind.com/geoip/geoip2/geolite2/
 # Available options:
