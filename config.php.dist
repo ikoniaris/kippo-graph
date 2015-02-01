@@ -24,6 +24,12 @@ define('DB_PASS', 'password');
 define('DB_NAME', 'database');
 define('DB_PORT', '3306');
 
+#Choose which geolocation method should be used.
+#Available options:
+#LOCAL: fastest, uses a local MaxMind GeoLite2 database
+#GEOPLUGIN: uses geoplugin.com's web service (online)
+define('GEO_METHOD', 'LOCAL');
+
 #The following value determines whether Kippo-Graph would
 #automatically check if a newer version is available for download.
 #You can inspect the function at include/misc/versionCheck.php.
