@@ -71,9 +71,10 @@
 
             <p><strong>CHANGES:</strong></p>
 
-            <p>Version 1.4:<br/>+ Added favicon.ico.
-                <br/>+ Added support for local MaxMind geolocation instead of geoplugin.com.
+            <p>Version 1.4:<br/>+ Added support for local MaxMind geolocation instead of geoplugin.com.
                 <br/>+ Various small fixes.
+                <br/>+ Added favicon.ico.
+                <br/>- Removed README.txt.
             </p>
 
             <p>Version 1.3:<br/>+ Switched all SQL operations to the RedBeanPHP library.
