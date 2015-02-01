@@ -8,25 +8,27 @@ require_once(DIR_ROOT . '/include/misc/ip2host.php');
 
 class GeoDataObject
 {
-    public $city;
-    public $region;
-    public $countryName;
-    public $countryCode;
-    public $latitude;
-    public $longitude;
+    public $city = "N/A";
+    public $region = "N/A";
+    public $countryName = "N/A";
+    public $countryCode = "N/A";
+    public $latitude = "N/A";
+    public $longitude = "N/A";
 
     function __construct($KippoGeoObject, $ip)
     {
         if (GEO_METHOD == 'LOCAL') {
-
-            $geodata = $KippoGeoObject->maxmind->city($ip);
-
-            $this->city = (string)$geodata->city->name;
-            $this->region = (string)$geodata->mostSpecificSubdivision->name;
-            $this->countryName = (string)$geodata->country->name;
-            $this->countryCode = (string)$geodata->country->isoCode;
-            $this->latitude = (string)$geodata->location->latitude;
-            $this->longitude = (string)$geodata->location->longitude;
+            try {
+                $geodata = $KippoGeoObject->maxmind->city($ip);
+            } catch (\GeoIp2\Exception\GeoIp2Exception $e) {
+                return;
+            }
+            $this->city = $geodata->city->name;
+            $this->region = $geodata->mostSpecificSubdivision->name;
+            $this->countryName = $geodata->country->name;
+            $this->countryCode = $geodata->country->isoCode;
+            $this->latitude = $geodata->location->latitude;
+            $this->longitude = $geodata->location->longitude;
 
         } else if (GEO_METHOD == 'GEOPLUGIN') {
 
