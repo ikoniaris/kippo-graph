@@ -56,6 +56,8 @@
             require_once('../config.php');
             require_once(DIR_ROOT . '/include/rb.php');
             require_once(DIR_ROOT . '/include/misc/xss_clean.php');
+            require_once(DIR_ROOT . '/include/maxmind/geoip2.phar');
+            require_once(DIR_ROOT . '/include/geoplugin/geoplugin.class.php');
 
             R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
@@ -144,17 +146,12 @@
 
             ?>
             <?php
-
+            //Additional information about IP address
             if (!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
                 if (function_exists('exec')) {
-                    exec("dig -x " . $ip . " +additional @130.95.128.1 2>&1", $dig, $returnValue);
+                    exec("dig -x " . $ip . " +additional @8.8.8.8 2>&1", $dig, $returnValue);
                     exec("host " . $ip . " 2>&1", $host, $returnValue);
                 }
-
-                require_once(DIR_ROOT . '/include/geoplugin/geoplugin.class.php');
-
-                $geoplugin = new geoPlugin();
-                $geoplugin->locate($ip);
 
                 if (!empty($host) || !empty($dig)) {
 
@@ -177,42 +174,64 @@
                         echo "</pre>\n\n";
                     }
                 }
-            }
 
+                //Geolocate the IP
+                $latitude = NULL;
+                $longitude = NULL;
+                if (GEO_METHOD == 'LOCAL') {
+                    $maxmind = new \GeoIp2\Database\Reader(DIR_ROOT . '/include/maxmind/GeoLite2-City.mmdb');
+                    try {
+                        $geodata = $maxmind->city($ip);
+                        $latitude = $geodata->location->latitude;
+                        $longitude = $geodata->location->longitude;
+                    } catch (\GeoIp2\Exception\GeoIp2Exception $e) {
+                        echo "<br />Unable to geolocate IP using MaxMind.";
+                    }
+                } else if (GEO_METHOD == 'GEOPLUGIN') {
+                    $geoplugin = new geoPlugin();
+                    $geoplugin->locate($ip);
+                    $latitude = $geoplugin->latitude;
+                    $longitude = $geoplugin->longitude;
+                }
+
+                //If geolocation succeeded show Google Map
+                if ($latitude && $longitude) {
+                    ?>
+
+                    <br/>Google Map:<br/>
+
+                    <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
+
+                    <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+                    <script type="text/javascript">
+
+                        // Define the latitude and longitude positions
+                        var latitude = parseFloat("<?php echo $latitude; ?>");
+                        var longitude = parseFloat("<?php echo $longitude; ?>");
+                        var latlngPos = new google.maps.LatLng(latitude, longitude);
+
+                        // Set up options for the Google map
+                        var myOptions = {
+                            zoom: 8,
+                            center: latlngPos,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+
+                        // Define the map
+                        map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+                        // Add the marker
+                        var marker = new google.maps.Marker({
+                            position: latlngPos,
+                            map: map,
+                            title: "Attacker"
+                        });
+
+                    </script>
+                <?php
+                } //google map
+            } //additional IP info
             ?>
-
-            <br/>
-            Google Maps:<br/>
-
-            <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
-
-            <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
-            <script type="text/javascript">
-
-                // Define the latitude and longitude positions
-                var latitude = parseFloat("<?php echo $geoplugin->latitude; ?>");
-                var longitude = parseFloat("<?php echo $geoplugin->longitude; ?>");
-                var latlngPos = new google.maps.LatLng(latitude, longitude);
-
-                // Set up options for the Google map
-                var myOptions = {
-                    zoom: 8,
-                    center: latlngPos,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-
-                // Define the map
-                map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-                // Add the marker
-                var marker = new google.maps.Marker({
-                    position: latlngPos,
-                    map: map,
-                    title: "Attacker"
-                });
-
-            </script>
-
 
             <!-- ####################################################################################################### -->
             <div class="clear"></div>
