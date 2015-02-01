@@ -280,9 +280,9 @@ class KippoGeo
             echo '<img src="generated-graphs/connections_per_country_pie.png">';
 
             if (GEO_METHOD == 'LOCAL') {
-                echo '<hr /><small><a href="http://www.maxmind.com">http://www.maxmind.com</a><small><br />.';
+                echo '<hr /><small><a href="http://www.maxmind.com">http://www.maxmind.com</a></small><br />';
             } else if (GEO_METHOD == 'GEOPLUGIN') {
-                echo '<hr /><small><a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a><small><br />';
+                echo '<hr /><small><a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a></small><br />';
             } else {
                 //TODO
             }
