@@ -1,55 +1,56 @@
 ﻿<?php
-#Author: ikoniaris
-#Website: bruteforce.gr/kippo-graph
+# Author: ikoniaris
+# Website: bruteforce.gr/kippo-graph
 
-#DIR_ROOT -- defines where your Kippo-Graph installation currently resides in.
+# DIR_ROOT: defines where your Kippo-Graph installation currently resides in.
+# Please don't change this unless there is a special reason to do so.
 define('DIR_ROOT', dirname(__FILE__));
 
-#Chart language selection -- Default: en (English). Change the two-letter
-#lang.XX.php language code to your preferred choice.
-#Available options:
-#en: English | fr: French | de: German | it: Italian | es: Spanish
-#nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
-#cs: Czech | sk: Slovak | ar: Arabic (currently not working)
+# Language selection for charts -- Default: en (English)
+# Change the two-letter lang.XX.php language code to your preferred choice.
+# Available options:
+#  en: English | fr: French | de: German | it: Italian | es: Spanish
+#  nl: Dutch | el: Greek | et: Estonian | pl: Polish | sv: Swedish
+#  cs: Czech | sk: Slovak | ar: Arabic (currently not working)
 require_once(DIR_ROOT . '/include/languages/lang.en.php');
 
-#You will have to change the following four definitions
-#from the default values to the correct ones, according
-#to your MySQL server instance. When you installed Kippo
-#and configured MySQL logging, you should have created
-#a new MySQL server user just for this job.
+# MySQL server configuration: you will have to change the following
+# four definitions from the default values to the correct ones,
+# according to your MySQL server instance. When you installed Kippo
+# and configured MySQL logging, you should have created a new
+# MySQL user just for this job, otherwise use root (not recommended!)
 define('DB_HOST', 'localhost');
 define('DB_USER', 'username');
 define('DB_PASS', 'password');
 define('DB_NAME', 'database');
 define('DB_PORT', '3306');
 
-#Choose which geolocation method should be used.
-#Available options:
-#LOCAL: fastest, uses a local MaxMind GeoLite2 database
-#GEOPLUGIN: uses geoplugin.com's web service (online)
+# Which geolocation method should be used -- Default: LOCAL (MaxMind)
+# Note: when using LOCAL you might want to periodically update the
+# kippo-graph/include/maxmind/GeoLite2-City.mmdb MaxMind database file
+# with a new one from: http://dev.maxmind.com/geoip/geoip2/geolite2/
+# Available options:
+#  LOCAL: fastest, uses a local MaxMind GeoLite2 database
+#  GEOPLUGIN: uses the geoplugin.com web service (online)
 define('GEO_METHOD', 'LOCAL');
 
-#The following value determines whether Kippo-Graph would
-#automatically check if a newer version is available for download.
-#You can inspect the function at include/misc/versionCheck.php.
-#It works by comparing the latest version number that resides
-#in a text file uploaded on Kippo-Graph's website against the
-#'VERSION' definition inside versionCheck.php. If the local
-#number is lower than the online/remote one, you get the message.
-#While in theory you can trust the remote website, I realise that
-#you might think this procedure poses a risk to the privacy of
-#your honeypot's IP address, because it is being transmitted and
-#logged while retrieving the remote text file. For this reason,
-#the following value ensures that having the update checking
-#feature enabled is your choice and not forced.
-#Change NO to YES if you want to enable it.
+# The following value determines whether Kippo-Graph will
+# automatically check if a newer version is available for download.
+# You can inspect the function at kippo-graph/include/misc/versionCheck.php.
+# It works by comparing the latest version number that resides
+# in a text file uploaded on Kippo-Graph's website against the
+# 'VERSION' definition inside versionCheck.php. While in theory you can
+# trust the remote website, I realise that you might think that this check
+# poses a risk to the privacy of your honeypot's IP address.
+# For this reason, the following value ensures that having the
+# update checking feature enabled is your choice and not forced.
+# Change NO to YES if you want to enable it.
 define('UPDATE_CHECK', 'NO');
 
-#The following value determines the minimum size (in kb) of the Kippo log needed to be
-#shown in Kippo-Playlog. Any value below it will be ignored.
-#This is useful to remove any sessions that just join and quit immediately afterwards.
-#The value may need updating based on the length of the MOTD (which is displayed after a successful login).
+# The following value determines the minimum size (in kb) of the Kippo log needed to be
+# shown in Kippo-Playlog. Any value below it will be ignored.
+# This is useful to remove any sessions that just join and quit immediately afterwards.
+# The value may need tweaking based on the length of the MOTD (displayed after a successful login).
 define('PLAYBACKSIZE_IGNORE', '0.4');
 
 ?>
