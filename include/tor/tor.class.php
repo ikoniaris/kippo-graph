@@ -6,8 +6,8 @@ class Tor
 
     function __construct()
     {
-        if ($this->_TorBulkExitListWorking('https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=1.2.3.4')) {
-            $exit_node_array = file('https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=1.2.3.4');
+        if ($this->_TorBulkExitListWorking('https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=8.8.8.8')) {
+            $exit_node_array = file('https://check.torproject.org/cgi-bin/TorBulkExitList.py?ip=8.8.8.8');
             file_put_contents(DIR_ROOT . '/include/tor/tor_exit_node_list.txt', $exit_node_array);
         } else {
             $exit_node_array = file(DIR_ROOT . '/include/tor/tor_exit_node_list.txt');
