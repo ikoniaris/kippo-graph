@@ -1,11 +1,15 @@
 <?php
 require_once(DIR_ROOT . '/include/rb.php');
+require_once(DIR_ROOT . '/include/maxmind/geoip2.phar');
 
 class KippoIP
 {
+    private $maxmind;
 
     function __construct()
     {
+        $this->maxmind = new \GeoIp2\Database\Reader(DIR_ROOT . '/include/maxmind/GeoLite2-City.mmdb');
+
         //Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
@@ -32,13 +36,15 @@ class KippoIP
         if (count($rows)) {
             echo '<p>Click column heads to sort data, rows to display attack details.</p>';
 
+            echo '<table id="Total-IPs"><thead><tr class="dark"><th>
+                  Total identified IP addresses: ' . count($rows) . '</th></tr></thead></table>';
+
             //We create a skeleton for the table
             echo '<table id="Overall-IP-Activity" class="tablesorter"><thead>';
             echo '<tr class="dark">';
-            echo '<th colspan="4">Total identified IP addresses: ' . count($rows) . '</th>';
-            echo '</tr>';
-            echo '<tr class="dark">';
             echo '<th>IP address</th>';
+            if (GEO_METHOD == 'LOCAL')
+                echo '<th>GeoLocation</th>';
             echo '<th>Sessions count</th>';
             echo '<th>Success</th>';
             echo '<th>Last seen</th>';
@@ -52,6 +58,18 @@ class KippoIP
 
                 echo '<tr class="light word-break" onclick=\'getIPinfo("' . $row['ip'] . '")\'>';
                 echo '<td>' . $row['ip'] . '</td>';
+
+                if (GEO_METHOD == 'LOCAL') {
+                    try {
+                        $geodata = $this->maxmind->city($row['ip']);
+                        $geolocation = $geodata->city->name ? $geodata->city->name . ', ' . $geodata->country->name : $geodata->country->name;
+
+                    } catch (\GeoIp2\Exception\GeoIp2Exception $e) {
+                        $geolocation = 'N/A';
+                    }
+                    echo '<td>' . $geolocation . '</td>';
+                }
+
                 echo '<td>' . $row['sessions'] . '</td>';
                 echo '<td>' . $success . '</td>';
                 echo '<td>' . $timestamp . '</td>';
