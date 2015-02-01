@@ -3,15 +3,58 @@ require_once(DIR_ROOT . '/include/rb.php');
 require_once(DIR_ROOT . '/include/libchart/classes/libchart.php');
 require_once(DIR_ROOT . '/include/qgooglevisualapi/config.inc.php');
 require_once(DIR_ROOT . '/include/geoplugin/geoplugin.class.php');
+require_once(DIR_ROOT . '/include/maxmind/geoip2.phar');
 require_once(DIR_ROOT . '/include/misc/ip2host.php');
+
+class GeoDataObject
+{
+    public $city;
+    public $region;
+    public $countryName;
+    public $countryCode;
+    public $latitude;
+    public $longitude;
+
+    function __construct($KippoGeoObject, $ip)
+    {
+        if (GEO_METHOD == 'LOCAL') {
+
+            $geodata = $KippoGeoObject->maxmind->city($ip);
+
+            $this->city = (string)$geodata->city->name;
+            $this->region = (string)$geodata->mostSpecificSubdivision->name;
+            $this->countryName = (string)$geodata->country->name;
+            $this->countryCode = (string)$geodata->country->isoCode;
+            $this->latitude = (string)$geodata->location->latitude;
+            $this->longitude = (string)$geodata->location->longitude;
+
+        } else if (GEO_METHOD == 'GEOPLUGIN') {
+
+            $KippoGeoObject->geoplugin->locate($ip);
+
+            $this->city = $KippoGeoObject->geoplugin->city;
+            $this->region = $KippoGeoObject->geoplugin->region;
+            $this->countryName = $KippoGeoObject->geoplugin->countryName;
+            $this->countryCode = $KippoGeoObject->geoplugin->countryCode;
+            $this->latitude = $KippoGeoObject->geoplugin->latitude;
+            $this->longitude = $KippoGeoObject->geoplugin->longitude;
+
+        } else {
+            echo "Error validating selected GEO_METHOD.";
+            exit();
+        }
+    }
+}
 
 class KippoGeo
 {
-    private $geoplugin;
+    public $geoplugin;
+    public $maxmind;
 
     function __construct()
     {
         $this->geoplugin = new geoPlugin();
+        $this->maxmind = new \GeoIp2\Database\Reader(DIR_ROOT . '/include/maxmind/GeoLite2-City.mmdb');
 
         //Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
@@ -69,6 +112,7 @@ class KippoGeo
                     array('number', '#Probes', 'a'),
                 )
             );
+
             //We create a temporary table in the database where we will store the IPs along with their #probes
             //and the corresponding country code, otherwise the Intensity Map won't work, because we need to
             //GROUP BY country code and SUM the #Probers per country
@@ -103,37 +147,37 @@ class KippoGeo
 
             //For every row returned from the database...
             foreach ($rows as $row) {
-                //We call the geoplugin service to get the geolocation data for the ip
-                $this->geoplugin->locate($row['ip']);
+                //We create a new GeoDataObject which geolocates the IP address
+                $geodata = new GeoDataObject($this, $row['ip']);
 
                 //We prepare the label for our vertical bar chart and add the point
-                $geoip = $row['ip'] . " - " . $this->geoplugin->countryCode;
-                $dataSet->addPoint(new Point($geoip, $row['COUNT(ip)']));
+                $label = $row['ip'] . " - " . $geodata->countryCode;
+                $dataSet->addPoint(new Point($label, $row['COUNT(ip)']));
 
                 //We next prepare the marker's tooltip inside Google Map
-                $geostats = "<strong>TOP $counter/10:</strong> " . $row['ip'] . "<br />"
+                $tooltip = "<strong>TOP $counter/10:</strong> " . $row['ip'] . "<br />"
                     . "<strong>Probes:</strong> " . $row['COUNT(ip)'] . "<br />"
-                    . "<strong>City:</strong> " . $this->geoplugin->city . "<br />"
-                    . "<strong>Region:</strong> " . $this->geoplugin->region . "<br />"
-                    . "<strong>Country:</strong> " . $this->geoplugin->countryName . "<br />"
-                    //."<strong>Country Code:</strong> ".$geoplugin->countryCode."<br />"
-                    . "<strong>Latitude:</strong> " . $this->geoplugin->latitude . "<br />"
-                    . "<strong>Longitude:</strong> " . $this->geoplugin->longitude . "<br />";
+                    . "<strong>City:</strong> " . $geodata->city . "<br />"
+                    . "<strong>Region:</strong> " . $geodata->region . "<br />"
+                    . "<strong>Country:</strong> " . $geodata->countryName . "<br />"
+                    //."<strong>Country Code:</strong> ".$geodata->countryCode."<br />"
+                    . "<strong>Latitude:</strong> " . $geodata->latitude . "<br />"
+                    . "<strong>Longitude:</strong> " . $geodata->longitude . "<br />";
 
                 //And add the marker to the map
                 $gMapTop10->setValues(
                     array(
-                        array($col, 0, (float)$this->geoplugin->latitude),
-                        array($col, 1, (float)$this->geoplugin->longitude),
-                        array($col, 2, $geostats)
+                        array($col, 0, (float)$geodata->latitude),
+                        array($col, 1, (float)$geodata->longitude),
+                        array($col, 2, $tooltip)
                     )
                 );
 
                 //We prepare the data that will be inserted in our temporary table
                 $ip = $row['ip'];
                 $ip_count = $row['COUNT(ip)'];
-                $CC = $this->geoplugin->countryCode;
-                $country_query = "INSERT INTO temp_ip VALUES('$ip', '$ip_count', '$CC')";
+                $country_code = $geodata->countryCode;
+                $country_query = "INSERT INTO temp_ip VALUES('$ip', '$ip_count', '$country_code')";
                 R::exec($country_query);
 
                 //For every row returned from the database we create a new table row with the data as columns
@@ -141,12 +185,12 @@ class KippoGeo
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['ip'] . '</td>';
                 echo '<td>' . $row['COUNT(ip)'] . '</td>';
-                echo '<td>' . $this->geoplugin->city . '</td>';
-                echo '<td>' . $this->geoplugin->region . '</td>';
-                echo '<td>' . $this->geoplugin->countryName . '</td>';
-                echo '<td>' . $this->geoplugin->countryCode . '</td>';
-                echo '<td>' . $this->geoplugin->latitude . '</td>';
-                echo '<td>' . $this->geoplugin->longitude . '</td>';
+                echo '<td>' . $geodata->city . '</td>';
+                echo '<td>' . $geodata->region . '</td>';
+                echo '<td>' . $geodata->countryName . '</td>';
+                echo '<td>' . $geodata->countryCode . '</td>';
+                echo '<td>' . $geodata->latitude . '</td>';
+                echo '<td>' . $geodata->longitude . '</td>';
                 echo '<td>' . get_host($row['ip']) . '</td>';
                 echo '<td class="icon"><a href="http://www.dshield.org/ipinfo.html?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/dshield.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.ipvoid.com/scan/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ipvoid.ico"/></a></td>';
@@ -232,7 +276,14 @@ class KippoGeo
             $intensityPieChart->render("generated-graphs/connections_per_country_pie.png");
             echo '<p>The following pie chart visualizes the volume of attacks per country by summarising probes originating from the same nation, using the same IP or not.</p>';
             echo '<img src="generated-graphs/connections_per_country_pie.png">';
-            echo '<hr /><small><a href="http://www.geoplugin.com/" target="_new" title="geoPlugin for IP geolocation">Geolocation by geoPlugin</a><small><br />';
+
+            if (GEO_METHOD == 'LOCAL') {
+                echo '<hr /><small><a href="http://www.maxmind.com">http://www.maxmind.com</a><small><br />.';
+            } else if (GEO_METHOD == 'GEOPLUGIN') {
+                echo '<hr /><small><a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a><small><br />';
+            } else {
+                //TODO
+            }
 
         } //END IF
     }
