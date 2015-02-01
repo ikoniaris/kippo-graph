@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="imagetoolbar" content="no"/>
     <link rel="stylesheet" href="styles/layout.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/tablesorter.css" type="text/css"/>
     <script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.tablesorter.js"></script>
 </head>
 <body id="top">
 <div class="wrapper">
@@ -85,6 +87,14 @@
     jQuery(function () {
         jQuery('ul.nav').superfish();
     });
+</script>
+<script type="text/javascript">
+    $(document).ready(function()
+        {
+            $("#Playlog-List").tablesorter();
+        }
+    );
+
 </script>
 </body>
 </html>
