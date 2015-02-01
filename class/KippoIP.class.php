@@ -109,7 +109,7 @@ class KippoIP
 
         echo '<br /><hr />';
         if (GEO_METHOD == 'LOCAL') {
-            echo '<small><a href="http://www.maxmind.com">http://www.maxmind.com</a><small><br />.';
+            echo '<small><a href="http://www.maxmind.com">http://www.maxmind.com</a></small><br />';
         }
         else {
             //TODO
