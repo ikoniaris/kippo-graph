@@ -1,4 +1,5 @@
 .DS_Store
 .idea/
 generated-graphs/
+include/tor/tor_exit_node_list.txt
 config.php
