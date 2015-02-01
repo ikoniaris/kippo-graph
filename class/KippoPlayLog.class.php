@@ -22,6 +22,7 @@ class KippoPlayLog
             FROM ttylog
             JOIN auth ON ttylog.session = auth.session
             WHERE auth.success = 1
+            GROUP BY ttylog.session
             ORDER BY timestamp DESC
             ) s
             WHERE size > " . PLAYBACKSIZE_IGNORE;
