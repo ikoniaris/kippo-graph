@@ -1,5 +1,9 @@
 .DS_Store
 .idea/
 generated-graphs/
-include/tor/tor_exit_node_list.txt
 config.php
+
+# These two are not actually ignored here,
+# but with git update-index --assume-unchanged
+include/maxmind/GeoLite2-City.mmdb
+#include/tor/tor_exit_node_list.txt
