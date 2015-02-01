@@ -34,6 +34,10 @@ define('DB_PORT', '3306');
 #  GEOPLUGIN: uses the geoplugin.com web service (online)
 define('GEO_METHOD', 'LOCAL');
 
+# Check if IP logged addresses are coming from Tor: https://www.torproject.org/
+# Change NO to YES if you want to enable it.
+define('TOR_CHECK', 'NO');
+
 # The following value determines whether Kippo-Graph will
 # automatically check if a newer version is available for download.
 # You can inspect the function at kippo-graph/include/misc/versionCheck.php.
