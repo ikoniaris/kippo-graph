@@ -71,6 +71,11 @@
 
             <p><strong>CHANGES:</strong></p>
 
+            <p>Version 1.4.2:<br/>+ Fixed Kippo-Playlog's results and added sorting to the table.
+                <br/>+ Added geo method selection in play.php.
+                <br/>+ Various small fixes.
+            </p>
+
             <p>Version 1.4.1:<br/>+ Added check for Tor exit nodes.</p>
 
             <p>Version 1.4:<br/>+ Added support for local MaxMind geolocation instead of geoplugin.com.
