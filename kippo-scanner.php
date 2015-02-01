@@ -16,6 +16,7 @@ function scanFileUrl($file_url)
         'method' => urldecode('url'),
     );
 
+    $fields_string = "";
     foreach ($fields as $key => $value) {
         $fields_string .= $key . '=' . $value . '&';
     }
