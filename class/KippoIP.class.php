@@ -97,8 +97,13 @@ class KippoIP
         echo '  <a id="allActivityLink" href="include/export.php?type=allActivity">CSV of all recent IP activity</a>';
         echo '</div>';
 
-        echo '<hr /><br />';
-
+        echo '<br /><hr />';
+        if (GEO_METHOD == 'LOCAL') {
+            echo '<small><a href="http://www.maxmind.com">http://www.maxmind.com</a><small><br />.';
+        }
+        else {
+            //TODO
+        }
     }
 }
 
