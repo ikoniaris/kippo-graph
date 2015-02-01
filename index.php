@@ -19,7 +19,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
     <div id="topbar">
-        <div class="fl_left">Version: 1.4 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
+        <div class="fl_left">Version: 1.4.1 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
         </div>
         <br class="clear"/>
     </div>
@@ -70,6 +70,8 @@
             <p>&nbsp;</p>
 
             <p><strong>CHANGES:</strong></p>
+
+            <p>Version 1.4.1:<br/>+ Added check for Tor exit nodes.</p>
 
             <p>Version 1.4:<br/>+ Added support for local MaxMind geolocation instead of geoplugin.com.
                 <br/>+ Various small fixes.
