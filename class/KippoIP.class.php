@@ -1,14 +1,17 @@
 <?php
 require_once(DIR_ROOT . '/include/rb.php');
 require_once(DIR_ROOT . '/include/maxmind/geoip2.phar');
+require_once(DIR_ROOT . '/include/tor/tor.class.php');
 
 class KippoIP
 {
     private $maxmind;
+    private $tor;
 
     function __construct()
     {
         $this->maxmind = new \GeoIp2\Database\Reader(DIR_ROOT . '/include/maxmind/GeoLite2-City.mmdb');
+        $this->tor = new Tor();
 
         //Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
@@ -45,6 +48,8 @@ class KippoIP
             echo '<th>IP address</th>';
             if (GEO_METHOD == 'LOCAL')
                 echo '<th>Geolocation</th>';
+            if (TOR_CHECK == 'YES')
+                echo '<th>Tor exit node</th>';
             echo '<th>Sessions count</th>';
             echo '<th>Success</th>';
             echo '<th>Last seen</th>';
@@ -68,6 +73,11 @@ class KippoIP
                         $geolocation = 'N/A';
                     }
                     echo '<td>' . $geolocation . '</td>';
+                }
+
+                if (TOR_CHECK == 'YES') {
+                    $exitnode = $this->tor->isTorExitNode($row['ip']) ? 'Yes' : 'No';
+                    echo '<td>' . $exitnode . '</td>';
                 }
 
                 echo '<td>' . $row['sessions'] . '</td>';
