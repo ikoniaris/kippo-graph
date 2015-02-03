@@ -32,7 +32,7 @@
     <div id="topnav">
         <ul class="nav">
             <li><a href="index.php">Homepage</a></li>
-            <li><a href="kippo-graph.php">Kippo-Graph</a></li>
+            <li><a href="kippo-graph.html">Kippo-Graph</a></li>
             <li><a href="kippo-input.php">Kippo-Input</a></li>
             <li><a href="kippo-playlog.php">Kippo-Playlog</a></li>
             <li class="active"><a href="kippo-ip.php">Kippo-Ip</a></li>
