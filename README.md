@@ -36,8 +36,16 @@ QUICK INSTALLATION:
 > cp config.php.dist config.php
 >
 > nano config.php #enter the appropriate values
+> 
+> mv kippo-graph.sh /etc/cron.hourly/
+>
+> nano /etc/cron.hourly/kippo-graph.sh #enter the appropriate values
 
-Browse to http://your-server/kippo-graph to generate the statistics.
+The graphs at http://your-server/kippo-graph/kippo-graph.html should now update every hour.
+Try running the following command to make sure the graphs are updating properly:
+> bash /etc/cron.hourly/kippo-graph.sh
+
+Browse to http://your-server/kippo-graph to view the generated statistics.
 
 Note 1: If you are on a VPS/server and don't want to use the default Apache document root,
 		you will still need to add a new Apache vhost and enable the site.
