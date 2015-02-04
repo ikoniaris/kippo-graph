@@ -25,7 +25,7 @@ class KippoPlayLog
             GROUP BY ttylog.session
             ORDER BY timestamp DESC
             ) s
-            WHERE size > " . PLAYBACKSIZE_IGNORE;
+            WHERE size > " . PLAYBACK_SIZE_IGNORE;
 
         $rows = R::getAll($db_query);
 
