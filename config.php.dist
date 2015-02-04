@@ -19,7 +19,7 @@ require_once(DIR_ROOT . '/include/languages/lang.en.php');
 # according to your MySQL server instance. When you installed Kippo
 # and configured MySQL logging, you should have created a new
 # MySQL user just for this job, otherwise use root (not recommended!)
-define('DB_HOST', 'localhost');
+define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'username');
 define('DB_PASS', 'password');
 define('DB_NAME', 'database');
@@ -35,29 +35,40 @@ define('DB_PORT', '3306');
 #  GEOPLUGIN: uses the geoplugin.com web service (online)
 define('GEO_METHOD', 'LOCAL');
 
-# Check if logged IP addresses are coming from Tor using the Tor Bulk Exit List exporting tool.
-# The list of exit nodes is also saved locally, in case the online service goes down.
+# Realtime statistics for the main Kippo-Graph component -- Default: YES
+# This value determines whether Kippo-Graph will query the MySQL server
+# every time the component's page loads. Disabling this feature can be
+# useful if your database has become huge after a long time of operation.
+# Note: if you disable this, you will probably want to setup the hourly cron
+#   script to update the charts in the background (see README for details).
+# Change YES to NO if you want to disable it.
+define('REALTIME_STATS', 'YES');
+
+# Check for Tor exit nodes -- Default: NO
+# This enables checking of all logged IP addresses against the current Tor exit
+# nodes list using the Tor Bulk Exit List exporting tool. The list of exit nodes
+# is also saved locally, in case the online service goes down.
 # Note: this enables additional fields in various components.
 # Change NO to YES if you want to enable it.
 define('TOR_CHECK', 'NO');
 
-# The following value determines whether Kippo-Graph will
-# automatically check if a newer version is available for download.
-# You can inspect the function at kippo-graph/include/misc/versionCheck.php.
-# It works by comparing the latest version number that resides
-# in a text file uploaded on Kippo-Graph's website against the
-# 'VERSION' definition inside versionCheck.php. While in theory you can
-# trust the remote website, I realise that you might think that this check
-# poses a risk to the privacy of your honeypot's IP address.
-# For this reason, the following value ensures that having the
-# update checking feature enabled is your choice and not forced.
+# Check for newer Kippo-Graph versions -- Default: NO
+# The following value determines whether Kippo-Graph will automatically check
+# if a newer version is available for download. You can inspect the function at
+# kippo-graph/include/misc/versionCheck.php. It works by comparing the latest
+# version number that resides in a text file uploaded on Kippo-Graph's website
+# against the 'VERSION' definition inside versionCheck.php.
+# While in theory you can trust the remote website, I realise that you might
+# think that this check poses a risk to the privacy of your honeypot's IP address.
+# For this reason, the following value ensures that having the update checking
+# feature enabled is your choice and not forced.
 # Change NO to YES if you want to enable it.
 define('UPDATE_CHECK', 'NO');
 
-# The following value determines the minimum size (in kb) of the Kippo log needed to be
-# shown in Kippo-Playlog. Any value below it will be ignored.
+# The following value determines the minimum size (in kb) of the Kippo log
+# needed to be shown in Kippo-Playlog. Any value below it will be ignored.
 # This is useful to remove any sessions that just join and quit immediately afterwards.
-# The value may need tweaking based on the length of the MOTD (displayed after a successful login).
-define('PLAYBACKSIZE_IGNORE', '0.4');
+# The value may need tweaking based on the length of your MOTD (displayed after successful logins).
+define('PLAYBACK_SIZE_IGNORE', '0.4');
 
 ?>
