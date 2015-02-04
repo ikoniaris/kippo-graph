@@ -49,8 +49,7 @@
             <h2>Replay input by attackers captured by the honeypot system</h2>
             <hr/>
             <?php
-            #Author: ikoniaris, CCoffie
-            #Website: bruteforce.gr/kippo-graph
+            # Author: ikoniaris, CCoffie
 
             require_once('config.php');
             require_once(DIR_ROOT . '/class/KippoPlayLog.class.php');

@@ -50,8 +50,7 @@
             <h2>IP activity gathered from the honeypot system</h2>
             <hr/>
             <?php
-            #Author: ikoniaris, s0rtega
-            #Website: bruteforce.gr/kippo-graph
+            # Author: ikoniaris, s0rtega
 
             require_once('config.php');
             require_once(DIR_ROOT . '/class/KippoIP.class.php');

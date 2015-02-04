@@ -50,8 +50,7 @@
             <h2>Kippo TTY log</h2>
             <hr/>
             <?php
-            #Author: ikoniaris, CCoffie
-            #Website: bruteforce.gr/kippo-graph
+            # Author: ikoniaris, CCoffie
 
             require_once('../config.php');
             require_once(DIR_ROOT . '/include/rb.php');

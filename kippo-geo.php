@@ -48,8 +48,7 @@
             <hr/>
 
             <?php
-            #Author: ikoniaris
-            #Website: bruteforce.gr/kippo-graph
+            # Author: ikoniaris
 
             require_once('config.php');
             require_once(DIR_ROOT . '/class/KippoGeo.class.php');

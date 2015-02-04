@@ -1,7 +1,5 @@
 <?php
-#CSV Export for Kippo Graph
-#Author: Kevin Breen
-#Website: techanarchy.net
+# Author: Kevin Breen
 
 //TOTAL LOGIN ATTEMPTS
 $db_AllCount = "SELECT COUNT(*) AS logins FROM auth";

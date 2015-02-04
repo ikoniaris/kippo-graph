@@ -1,7 +1,6 @@
 <?php
-#CSV Export for Kippo Graph
-#Author: Kevin Breen
-#Website: techanarchy.net
+#CSV Export script for Kippo-Graph
+# Author: Kevin Breen
 
 //Set Headers to create download instead of a page
 $fileName = "Export_" . $_GET['type'] . ".csv";
