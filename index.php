@@ -53,10 +53,11 @@
 
             <p align=center>
                 <?php
-                #Author: ikoniaris
-                #Website: bruteforce.gr/kippo-graph
+                # Author: ikoniaris
+
                 require_once('config.php');
                 include_once('include/misc/versionCheck.php');
+
                 echo "Version: " . VERSION;
                 if (UPDATE_CHECK == 'YES') {
                     if (isUpToDate()) {
@@ -65,11 +66,18 @@
                         echo NEW_VERSION_AVAILABLE;
                     }
                 }
-                ?></p>
+                ?>
+            </p>
 
             <p>&nbsp;</p>
 
             <p><strong>CHANGES:</strong></p>
+
+            <p>Version 1.5:<br/>+ Added config option for realtime statistics.
+                <br/>+ Added cron example to update charts in the background.
+                <br/>+ Updated RedBeanPHP to version 4.1.4.
+                <br/>+ Various small fixes.
+            </p>
 
             <p>Version 1.4.2:<br/>+ Fixed Kippo-Playlog's results and added sorting to the table.
                 <br/>+ Added geo method selection in play.php.
