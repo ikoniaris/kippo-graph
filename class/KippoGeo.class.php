@@ -221,7 +221,7 @@ class KippoGeo
             $verticalChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
             //For this particular graph we need to set the corrent padding
             $verticalChart->getPlot()->setGraphPadding(new Padding(5, 50, 100, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $verticalChart->render("generated-graphs/connections_per_ip_geo.png");
+            $verticalChart->render(DIR_ROOT . "/generated-graphs/connections_per_ip_geo.png");
             echo '<p>The following vertical bar chart visualizes the top 10 IPs ordered by the number of connections to the system.'
                 . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo.png">';
@@ -229,7 +229,7 @@ class KippoGeo
             //We set the pie chart's dataset, render the graph and display it (we're inside html code!)
             $pieChart->setDataSet($dataSet);
             $pieChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
-            $pieChart->render("generated-graphs/connections_per_ip_geo_pie.png");
+            $pieChart->render(DIR_ROOT . "/generated-graphs/connections_per_ip_geo_pie.png");
             echo '<p>The following pie chart visualizes the top 10 IPs ordered by the number of connections to the system.'
                 . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo_pie.png">';
@@ -275,7 +275,7 @@ class KippoGeo
             //We set the "intensity" pie chart's dataset, render the graph and display it (we're inside html code!)
             $intensityPieChart->setDataSet($intensityDataSet);
             $intensityPieChart->setTitle(NUMBER_OF_CONNECTIONS_PER_COUNTRY);
-            $intensityPieChart->render("generated-graphs/connections_per_country_pie.png");
+            $intensityPieChart->render(DIR_ROOT . "/generated-graphs/connections_per_country_pie.png");
             echo '<p>The following pie chart visualizes the volume of attacks per country by summarising probes originating from the same nation, using the same IP or not.</p>';
             echo '<img src="generated-graphs/connections_per_country_pie.png">';
 

@@ -106,7 +106,7 @@ class KippoInput
             //We set the vertical bar chart's dataset and render the graph
             $chart_vertical->setDataSet($dataSet);
             $chart_vertical->setTitle(HUMAN_ACTIVITY_BUSIEST_DAYS);
-            $chart_vertical->render("generated-graphs/human_activity_busiest_days.png");
+            $chart_vertical->render(DIR_ROOT . "/generated-graphs/human_activity_busiest_days.png");
             echo '<h3>Human activity inside the honeypot</h3>';
             echo '<p>The following vertical bar chart visualizes the top 20 busiest days of real human activity, by counting the number of input to the system.</p>';
             echo '<img src="generated-graphs/human_activity_busiest_days.png">';
@@ -146,7 +146,7 @@ class KippoInput
             //We set the line chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(HUMAN_ACTIVITY_PER_DAY);
-            $chart->render("generated-graphs/human_activity_per_day.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/human_activity_per_day.png");
             echo '<p>The following line chart visualizes real human activity per day, by counting the number of input to the system for each day of operation.
 			<br/><strong>Warning:</strong> Dates with zero input are not displayed.</p>';
             echo '<img src="generated-graphs/human_activity_per_day.png">';
@@ -196,7 +196,7 @@ class KippoInput
             //We set the line chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(HUMAN_ACTIVITY_PER_WEEK);
-            $chart->render("generated-graphs/human_activity_per_week.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/human_activity_per_week.png");
             echo '<p>The following line chart visualizes real human activity per week, by counting the number of input to the system for each day of operation.</p>';
             echo '<img src="generated-graphs/human_activity_per_week.png">';
             echo '<br /><hr /><br />';
@@ -253,7 +253,7 @@ class KippoInput
             $chart->setTitle(TOP_10_INPUT_OVERALL);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 90, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/top10_overall_input.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_overall_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 commands (overall) entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_overall_input.png">';
             echo '<hr /><br />';
@@ -309,7 +309,7 @@ class KippoInput
             $chart->setTitle(TOP_10_SUCCESSFUL_INPUT);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 90, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/top10_successful_input.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_successful_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 successful commands entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_successful_input.png">';
             echo '<hr /><br />';
@@ -365,7 +365,7 @@ class KippoInput
             $chart->setTitle(TOP_10_FAILED_INPUT);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 40, 120, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/top10_failed_input.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_failed_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 failed commands entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_failed_input.png">';
             echo '<hr /><br />';
