@@ -4,7 +4,6 @@ require_once(DIR_ROOT . '/include/libchart/classes/libchart.php');
 
 class KippoGraph
 {
-
     function __construct()
     {
         //Let's connect to the database
@@ -14,6 +13,53 @@ class KippoGraph
     function __destruct()
     {
         R::close();
+    }
+
+    // "meta" function to generate all charts
+    // this way kippo-graph.php can also be cron'd
+    public function generateKippoGraphCharts()
+    {
+        $this->createTop10Passwords();
+        $this->createTop10Usernames();
+        $this->createTop10Combinations();
+        $this->createSuccessRation();
+        $this->createMostSuccessfulLoginsPerDay();
+        $this->createSuccessesPerDay();
+        $this->createSuccessesPerWeek();
+        $this->createNumberOfConnectionsPerIP();
+        $this->createSuccessfulLoginsFromSameIP();
+        $this->createMostProbesPerDay();
+        $this->createProbesPerDay();
+        $this->createProbesPerWeek();
+        $this->createTop10SSHClients();
+    }
+
+    public function generatedKippoGraphChartsExist()
+    {
+        $generated_graphs_path = DIR_ROOT . '/generated-graphs/';
+        $generated_graphs_names_array = [
+            'top10_passwords.png',
+            'top10_usernames.png',
+            'top10_combinations.png',
+            'top10_combinations_pie.png',
+            'success_ratio.png',
+            'most_successful_logins_per_day.png',
+            'successes_per_day.png',
+            'successes_per_week.png',
+            'connections_per_ip.png',
+            'connections_per_ip_pie.png',
+            'logins_from_same_ip.png',
+            'most_probes_per_day.png',
+            'probes_per_day.png',
+            'probes_per_week.png',
+            'top10_ssh_clients.png',
+        ];
+
+        foreach ($generated_graphs_names_array as $graph_name)
+            if (!file_exists($generated_graphs_path . $graph_name))
+                return false;
+
+        return true;
     }
 
     public function printOverallHoneypotActivity()
@@ -95,7 +141,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(TOP_10_PASSWORDS);
-            $chart->render("generated-graphs/top10_passwords.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_passwords.png");
         }
     }
 
@@ -123,7 +169,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(TOP_10_USERNAMES);
-            $chart->render("generated-graphs/top10_usernames.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_usernames.png");
         }
     }
 
@@ -154,12 +200,12 @@ class KippoGraph
             $chart->setTitle(TOP_10_COMBINATIONS);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 40, 75, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/top10_combinations.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_combinations.png");
 
             //We set the pie chart's dataset and render the graph
             $pie_chart->setDataSet($dataSet);
             $pie_chart->setTitle(TOP_10_COMBINATIONS);
-            $pie_chart->render("generated-graphs/top10_combinations_pie.png");
+            $pie_chart->render(DIR_ROOT . "/generated-graphs/top10_combinations_pie.png");
         }
     }
 
@@ -191,7 +237,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(OVERALL_SUCCESS_RATIO);
-            $chart->render("generated-graphs/success_ratio.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/success_ratio.png");
         }
     }
 
@@ -220,7 +266,7 @@ class KippoGraph
             $chart->setDataSet($dataSet);
             $chart->setTitle(MOST_SUCCESSFUL_LOGINS_PER_DAY);
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 50, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/most_successful_logins_per_day.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/most_successful_logins_per_day.png");
         }
     }
 
@@ -258,7 +304,7 @@ class KippoGraph
             $chart->setDataSet($dataSet);
             $chart->setTitle(SUCCESSES_PER_DAY);
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 50, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/successes_per_day.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/successes_per_day.png");
         }
     }
 
@@ -304,7 +350,7 @@ class KippoGraph
             //We set the line chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(SUCCESSES_PER_WEEK);
-            $chart->render("generated-graphs/successes_per_week.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/successes_per_week.png");
         }
     }
 
@@ -334,12 +380,12 @@ class KippoGraph
             $chart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 40, 75, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/connections_per_ip.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/connections_per_ip.png");
 
             //We set the pie chart's dataset and render the graph
             $pie_chart->setDataSet($dataSet);
             $pie_chart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP);
-            $pie_chart->render("generated-graphs/connections_per_ip_pie.png");
+            $pie_chart->render(DIR_ROOT . "/generated-graphs/connections_per_ip_pie.png");
         }
     }
 
@@ -369,7 +415,7 @@ class KippoGraph
             $chart->setTitle(SUCCESSFUL_LOGINS_FROM_SAME_IP);
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 45, 80, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/logins_from_same_ip.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/logins_from_same_ip.png");
         }
     }
 
@@ -398,7 +444,7 @@ class KippoGraph
             $chart->setDataSet($dataSet);
             $chart->setTitle(MOST_PROBES_PER_DAY);
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 50, 75 /*140*/)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/most_probes_per_day.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/most_probes_per_day.png");
         }
     }
 
@@ -434,7 +480,7 @@ class KippoGraph
             //We set the line chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(PROBES_PER_DAY);
-            $chart->render("generated-graphs/probes_per_day.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/probes_per_day.png");
         }
     }
 
@@ -479,7 +525,7 @@ class KippoGraph
             //We set the line chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(PROBES_PER_WEEK);
-            $chart->render("generated-graphs/probes_per_week.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/probes_per_week.png");
         }
     }
 
@@ -508,7 +554,7 @@ class KippoGraph
             //For this particular graph we need to set the corrent padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 50, 245)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             //$chart->getPlot()->setGraphPadding(new Padding(5, 80, 140, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
-            $chart->render("generated-graphs/top10_ssh_clients.png");
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_ssh_clients.png");
         }
     }
 }

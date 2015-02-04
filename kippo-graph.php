@@ -47,28 +47,20 @@
 <h2>Overall honeypot activity</h2>
 <hr/>
 <?php
-#Author: ikoniaris
-#Website: bruteforce.gr/kippo-graph
+# Author: ikoniaris
 
 require_once('config.php');
 require_once(DIR_ROOT . '/class/KippoGraph.class.php');
 
 $kippoGraph = new KippoGraph();
 
-//Let's create all the charts! (generated-graphs folder)
-$kippoGraph->createTop10Passwords();
-$kippoGraph->createTop10Usernames();
-$kippoGraph->createTop10Combinations();
-$kippoGraph->createSuccessRation();
-$kippoGraph->createMostSuccessfulLoginsPerDay();
-$kippoGraph->createSuccessesPerDay();
-$kippoGraph->createSuccessesPerWeek();
-$kippoGraph->createNumberOfConnectionsPerIP();
-$kippoGraph->createSuccessfulLoginsFromSameIP();
-$kippoGraph->createMostProbesPerDay();
-$kippoGraph->createProbesPerDay();
-$kippoGraph->createProbesPerWeek();
-$kippoGraph->createTop10SSHClients();
+//if realtime and not a cronjob OR not realtime but is a cronjob OR not realtime but there are no images yet,
+//then populate the generated-graphs folder
+if (REALTIME_STATS == 'YES' && PHP_SAPI != 'cli' || (REALTIME_STATS == 'NO' && PHP_SAPI == 'cli') ||
+    (REALTIME_STATS == 'NO' && !$kippoGraph->generatedKippoGraphChartsExist())
+) {
+    $kippoGraph->generateKippoGraphCharts();
+}
 
 //-----------------------------------------------------------------------------------------------------------------
 //OVERALL HONEYPOT ACTIVITY
