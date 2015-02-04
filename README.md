@@ -37,10 +37,15 @@ QUICK INSTALLATION:
 >
 > nano config.php #enter the appropriate values
 
-Browse to http://your-server/kippo-graph to generate the statistics.
+Browse to http://your-server/kippo-graph to view or generate the honeypot charts and statistics.
 
-Note 1: If you are on a VPS/server and don't want to use the default Apache document root,
+Note 1: If you choose to disable `REALTIME_STATS` in your config.php file it is advisable to
+        setup a cron job to update the charts in the background. The recommended way to do that
+        is to add the following line in your crontab (`crontab -e`):
+> @hourly cd /var/www/kippo-graph && php kippo-graph.php > /dev/null 2>&1
+
+Note 2: If you are on a VPS/server and don't want to use the default Apache document root,
 		you will still need to add a new Apache vhost and enable the site.
 
-Note 2: To fully use the geolocation features (Intensity Map) you will need to give CREATE
+Note 3: To fully use the geolocation features (Intensity Map) you will need to give CREATE
 		TEMPORARY TABLES rights to your Kippo database user (most likely it has already been done).
