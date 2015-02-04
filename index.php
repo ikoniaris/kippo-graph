@@ -73,7 +73,7 @@
 
             <p><strong>CHANGES:</strong></p>
 
-            <p>Version 1.5:<br/>+ Added config option for realtime statistics.
+            <p>Version 1.5:<br/>+ Added configuration option for realtime statistics.
                 <br/>+ Added cron example to update charts in the background.
                 <br/>+ Updated RedBeanPHP to version 4.1.4.
                 <br/>+ Various small fixes.
