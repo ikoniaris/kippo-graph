@@ -118,7 +118,7 @@ class KippoGeo
             //We create a temporary table in the database where we will store the IPs along with their #probes
             //and the corresponding country code, otherwise the Intensity Map won't work, because we need to
             //GROUP BY country code and SUM the #Probers per country
-            $temp_table = 'CREATE TEMPORARY TABLE temp_ip (ip VARCHAR(12), counter INT, country VARCHAR(2))';
+            $temp_table = 'CREATE TEMPORARY TABLE temp_ip (ip VARCHAR(15), counter INT, country VARCHAR(3))';
             R::exec($temp_table);
 
             //We create a dummy counter to use for the markers' tooltip inside Google Map like: IP 3/10
