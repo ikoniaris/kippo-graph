@@ -37,7 +37,7 @@ class KippoGraph
     public function generatedKippoGraphChartsExist()
     {
         $generated_graphs_path = DIR_ROOT . '/generated-graphs/';
-        $generated_graphs_names_array = [
+        $generated_graphs_names_array = array(
             'top10_passwords.png',
             'top10_usernames.png',
             'top10_combinations.png',
@@ -53,7 +53,7 @@ class KippoGraph
             'probes_per_day.png',
             'probes_per_week.png',
             'top10_ssh_clients.png',
-        ];
+        );
 
         foreach ($generated_graphs_names_array as $graph_name)
             if (!file_exists($generated_graphs_path . $graph_name))
