@@ -37,7 +37,7 @@ class KippoPlayLog
             echo '<table id="Playlog-List" class="tablesorter"><thead>';
             echo '<tr class="dark">';
             echo '<th>ID</th>';
-            echo '<th>Timstamp</th>';
+            echo '<th>Timestamp</th>';
             echo '<th>Size</th>';
             echo '<th>Play the log</th>';
             echo '</tr></thead><tbody>';
