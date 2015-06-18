@@ -45,8 +45,9 @@ Note 1: If you choose to disable `REALTIME_STATS` in your config.php file it is 
         kippo-graph path if it's different):
 > @hourly cd /var/www/html/kippo-graph && php kippo-graph.php > /dev/null 2>&1
 
-Note 2: If you are on a VPS/server and don't want to use the default Apache document root,
-		you will still need to add a new Apache vhost and enable the site.
+Note 2: If you want to use the Kippo-Scanner component you will have to allow Kippo-Graph's .htaccess file
+        to take effect. You can do this by editing your Apache configuration file at /etc/apache2/apache2.conf
+        and changing `AllowOverride None` to `AllowOverride All` for the /var/www/ Directory (only).
 
 Note 3: To fully use the geolocation features (Intensity Map) you will need to give CREATE
 		TEMPORARY TABLES rights to your Kippo database user (most likely it has already been done).
