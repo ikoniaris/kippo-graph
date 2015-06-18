@@ -198,7 +198,7 @@ class KippoGeo
                 echo '<td class="icon"><a href="http://www.ipvoid.com/scan/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ipvoid.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.robtex.com/ip/' . $row['ip'] . '.html" target="_blank"><img class="icon" src="images/robtex.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.fortiguard.com/ip_rep/index.php?data=' . $row['ip'] . '&lookup=Lookup" target="_blank"><img class="icon" src="images/fortiguard.ico"/></a></td>';
-                echo '<td class="icon"><a href="http://labs.alienvault.com/labs/index.php/projects/open-source-ip-reputation-portal/information-about-ip/?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/alienvault.ico"/></a></td>';
+                echo '<td class="icon"><a href="https://www.alienvault.com/open-threat-exchange/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/alienvault.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.reputationauthority.org/lookup.php?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/watchguard.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.mcafee.com/threat-intelligence/ip/default.aspx?ip=' . $row['ip'] . '" target="_blank"><img class="icon" src="images/mcafee.ico"/></a></td>';
                 echo '<td class="icon"><a href="http://www.ip-adress.com/ip_tracer/' . $row['ip'] . '" target="_blank"><img class="icon" src="images/ip_tracer.png"/></a></td>';
