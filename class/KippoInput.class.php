@@ -444,7 +444,7 @@ class KippoInput
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
                 echo '<td>' . xss_clean($row['input']) . '</td>';
-                $file_link = trim($row['file']);
+                $file_link = explode(" ", trim($row['file']))[0];
                 // If the link has no "http://" in front, then add it
                 if (substr(strtolower($file_link), 0, 4) !== 'http') {
                     $file_link = 'http://' . $file_link;
