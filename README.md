@@ -21,9 +21,9 @@ QUICK INSTALLATION:
 -------------------
 > wget http://bruteforce.gr/wp-content/uploads/kippo-graph-VERSION.tar.gz
 >
-> mv kippo-graph-VERSION.tar.gz /var/www
+> mv kippo-graph-VERSION.tar.gz /var/www/html
 >
-> cd /var/www
+> cd /var/www/html
 >
 > tar zxvf kippo-graph-VERSION.tar.gz
 >
@@ -43,7 +43,7 @@ Note 1: If you choose to disable `REALTIME_STATS` in your config.php file it is 
         setup a cron job to update the charts in the background. The recommended way to do that
         is to add the following line in your crontab with `crontab -e` (make sure to change the
         kippo-graph path if it's different):
-> @hourly cd /var/www/kippo-graph && php kippo-graph.php > /dev/null 2>&1
+> @hourly cd /var/www/html/kippo-graph && php kippo-graph.php > /dev/null 2>&1
 
 Note 2: If you are on a VPS/server and don't want to use the default Apache document root,
 		you will still need to add a new Apache vhost and enable the site.
