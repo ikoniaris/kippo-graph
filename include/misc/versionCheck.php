@@ -6,7 +6,7 @@
 define('REMOTE_VERSION', 'http://bruteforce.gr/kippo-graph-version.txt');
 
 // this is the version of the deployed script
-define('VERSION', '1.5');
+define('VERSION', '1.5.1');
 
 function isUpToDate()
 {
