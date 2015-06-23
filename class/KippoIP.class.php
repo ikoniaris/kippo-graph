@@ -11,7 +11,8 @@ class KippoIP
     function __construct()
     {
         $this->maxmind = new \GeoIp2\Database\Reader(DIR_ROOT . '/include/maxmind/GeoLite2-City.mmdb');
-        $this->tor = new Tor();
+        if (TOR_CHECK == 'YES')
+            $this->tor = new Tor();
 
         //Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
