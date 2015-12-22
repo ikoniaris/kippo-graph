@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://gmpg.org/xfn/11">
-    <title>Kippo-Graph | Fast Visualization for your Kippo SSH Honeypot Stats</title>
+    <title>Kippo-Graph | Fast Visualization for your Kippo Based SSH Honeypot</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="imagetoolbar" content="no"/>
     <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
@@ -16,7 +16,7 @@
         <h1><a href="../index.php">Kippo-Graph</a></h1>
         <br />
 
-        <p>Fast Visualization for your Kippo SSH Honeypot Stats</p>
+        <p>Fast Visualization for your Kippo Based SSH Honeypot</p>
     </div>
 </div>
 <!-- ####################################################################################################### -->
