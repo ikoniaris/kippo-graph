@@ -6,7 +6,7 @@ class KippoPlayLog
 
     function __construct()
     {
-        //Let's connect to the database
+        // Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
 
@@ -18,31 +18,25 @@ class KippoPlayLog
     public function printLogs()
     {
 
-        if (strtoupper(BACK_END_ENGINE) === 'COWRIE') {
-            $db_query = "SELECT * FROM (
-                SELECT ttylog.session, timestamp
-                FROM ttylog
-                JOIN auth ON ttylog.session = auth.session
-                WHERE auth.success = 1
-                GROUP BY ttylog.session
-                ORDER BY timestamp DESC
-                ) s";
-        } else {
-            $db_query = "SELECT * FROM (
-                SELECT ttylog.session, timestamp, ROUND(LENGTH(ttylog)/1024, 2) AS size
-                FROM ttylog
-                JOIN auth ON ttylog.session = auth.session
-                WHERE auth.success = 1
-                GROUP BY ttylog.session
-                ORDER BY timestamp DESC
-                ) s
-                WHERE size > " . PLAYBACK_SIZE_IGNORE;
-        }
+        if (strtoupper(BACK_END_ENGINE) === 'COWRIE')
+            $db_size = "size";
+        else
+            $db_size = "LENGTH(ttylog)";
+
+        $db_query = "SELECT * FROM (
+            SELECT ttylog.session, timestamp, ROUND($db_size/1024, 2) AS size
+            FROM ttylog
+            JOIN auth ON ttylog.session = auth.session
+            WHERE auth.success = 1
+            GROUP BY ttylog.session
+            ORDER BY timestamp DESC
+            ) s
+            WHERE size > " . PLAYBACK_SIZE_IGNORE;
 
         $rows = R::getAll($db_query);
 
         if (count($rows)) {
-            //We create a skeleton for the table
+            // We create a skeleton for the table
             $counter = 1;
             echo '<p>The following table displays a list of all the logs recorded by Kippo.
                      Click on column heads to sort data.</p>';
@@ -50,24 +44,22 @@ class KippoPlayLog
             echo '<tr class="dark">';
             echo '<th>ID</th>';
             echo '<th>Timestamp</th>';
-            if ($row['size'])
-                echo '<th>Size</th>';
+            echo '<th>Size</th>';
             echo '<th>Play the log</th>';
             echo '</tr></thead><tbody>';
 
-            //For every row returned from the database we create a new table row with the data as columns
+            // For every row returned from the database we create a new table row with the data as columns
             foreach ($rows as $row) {
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
-                if ($row['size'])
-                    echo '<td>' . $row['size'] . 'kb' . '</td>';
+                echo '<td>' . $row['size'] . 'kb' . '</td>';
                 echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
 
-            //Close tbody and table element, it's ready.
+            // Close tbody and table element, it's ready.
             echo '</tbody></table>';
             echo '<hr /><br />';
         }
