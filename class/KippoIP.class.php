@@ -101,14 +101,17 @@ class KippoIP
         echo '     <select class="pagesize">';
         echo '        <option selected="selected" value="10">10</option>';
         echo '        <option value="20">20</option>';
-        echo '        <option value="30">30</option>';
-        echo '        <option value="40">40</option>';
+        echo '        <option value="25">20</option>';
+        echo '        <option value="50">50</option>';
+        echo '        <option value="75">20</option>';
+        echo '        <option value="100">100</option>';
+        echo '        <option value="500">100</option>';
         echo '     </select>';
         echo '  </form>';
         echo '  <a id="allActivityLink" href="include/export.php?type=allActivity">CSV of all recent IP activity</a>';
         echo '</div>';
 
-        echo '<br /><hr />';
+        echo '<br /><hr>';
         if (GEO_METHOD == 'LOCAL') {
             echo '<small><a href="http://www.maxmind.com">http://www.maxmind.com</a></small><br />';
         }

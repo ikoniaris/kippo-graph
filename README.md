@@ -1,7 +1,7 @@
 Kippo-Graph
 ===========
 
-Kippo-Graph is a full featured script to visualize statistics from a Kippo SSH honeypot.
+Kippo-Graph is a full featured script to visualize statistics for a Kippo based SSH honeypot.
 
 It uses the Libchart PHP chart drawing library by Jean-Marc Trémeaux,
 QGoogleVisualizationAPI PHP Wrapper for Google's Visualization API by Thomas Schäfer,
@@ -50,4 +50,4 @@ Note 2: If you want to use the Kippo-Scanner component you will have to allow Ki
         and changing `AllowOverride None` to `AllowOverride All` for the /var/www/ Directory (only).
 
 Note 3: To fully use the geolocation features (Intensity Map) you will need to give CREATE
-		TEMPORARY TABLES rights to your Kippo database user (most likely it has already been done).
+		TEMPORARY TABLES rights to your MySQL database user (most likely it has already been done).

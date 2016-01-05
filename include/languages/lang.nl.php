@@ -1,14 +1,16 @@
 ﻿<?php
 
+
 //INDEX.PHP STRINGS
 //MORE TODO
 define('LATEST_VERSION', ' - U gebruikt de <strong>laatste</strong> versie!');
-define('NEW_VERSION_AVAILABLE', ' - Er is een <strong>nieuwere</strong> versie beschikbaar voor <a href="http://bruteforce.gr/kippo-graph" target="_blank">download</a>!');
+define('NEW_VERSION_AVAILABLE', ' - Er is een <strong>nieuwere</strong> versie beschikbaar voor <a href="https://bruteforce.gr/kippo-graph" target="_blank">download</a>!');
 
 //KIPPO-GRAPH-GENERATOR.PHP STRINGS
 define('TOP_10_PASSWORDS', 'Top 10 wachtwoorden');
 define('TOP_10_USERNAMES', 'Top 10 gebruikersnamen');
 define('TOP_10_COMBINATIONS', 'Top 10 gebruikersnaam-wachtwoord combinaties');
+define('TOP_10_SUCCESSFUL_COMBINATIONS', 'Top 10 successful username-password combinations');
 define('AUTH_FAIL', 'Onsuccesvol');
 define('AUTH_SUCCESS', 'Succesvol');
 define('OVERALL_SUCCESS_RATIO', 'Gemiddelde succesratio');

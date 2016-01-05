@@ -1,58 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://gmpg.org/xfn/11">
-    <title>Kippo-Graph | Fast Visualization for your Kippo Based SSH Honeypot</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="imagetoolbar" content="no"/>
-    <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
-    <link rel="stylesheet" href="../styles/playlog.css" type="text/css">
-    <script type="text/javascript" src="../scripts/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript" src="../scripts/BinFileReader.js"></script>
-    <script type="text/javascript" src="../scripts/jquery.getUrlParam.js"></script>
-</head>
-<body id="top">
-<div class="wrapper">
-    <div id="header">
-        <h1><a href="../index.php">Kippo-Graph</a></h1>
-        <br />
+<?php
 
-        <p>Fast Visualization for your Kippo Based SSH Honeypot</p>
-    </div>
-</div>
-<!-- ####################################################################################################### -->
-<div class="wrapper">
-    <div id="topbar">
-        <div class="fl_left">Version: 1.5.1 | Website: <a href="http://bruteforce.gr/kippo-graph">bruteforce.gr/kippo-graph</a>
-        </div>
-        <br class="clear"/>
-    </div>
-</div>
-<!-- ####################################################################################################### -->
-<div class="wrapper">
-    <div id="topnav">
-        <ul class="nav">
-            <li><a href="../index.php">Homepage</a></li>
-            <li><a href="../kippo-graph.php">Kippo-Graph</a></li>
-            <li><a href="../kippo-input.php">Kippo-Input</a></li>
-            <li class="active"><a href="../kippo-playlog.php">Kippo-PlayLog</a></li>
-            <li><a href="../kippo-ip.php">Kippo-Ip</a></li>
-            <li><a href="../kippo-geo.php">Kippo-Geo</a></li>
-            <li class="last"><a href="../gallery.php">Graph Gallery</a></li>
-        </ul>
-        <div class="clear"></div>
-    </div>
-</div>
-<!-- ####################################################################################################### -->
+# Used for <title></title>
+$page_title = "TTY Log Playback | Fast Visualization for your Kippo Based SSH Honeypot";
+
+# Used for nav menu
+$page_file = "kippo-play.php";
+
+# Custom head
+$page_head = '
+        <script type="text/javascript" src="scripts/BinFileReader.js"></script>
+        <script type="text/javascript" src="scripts/jquery.getUrlParam.js"></script>';
+
+require('include/header.php');
+?>
+
 <div class="wrapper">
     <div class="container">
         <div class="whitebox">
             <!-- ####################################################################################################### -->
-            <h2>Kippo TTY log</h2>
-            <hr />
+            <h2>TTY log</h2>
+            <hr>
             <?php
             # Author: ikoniaris, CCoffie
 
-            require_once('../config.php');
+            require_once('config.php');
             require_once(DIR_ROOT . '/include/rb.php');
             require_once(DIR_ROOT . '/include/misc/xss_clean.php');
             require_once(DIR_ROOT . '/include/maxmind/geoip2.phar');
@@ -83,7 +54,6 @@
             }
 
             $db_query = "SELECT ip, starttime FROM sessions WHERE id='$session'";
-
             $rows = R::getAll($db_query);
 
             foreach ($rows as $row) {
@@ -99,7 +69,7 @@
             <script type="text/javascript">
                 var log = "<?php echo $log; ?>";
             </script>
-            <script type="text/javascript" src="../scripts/jspl.js"></script>
+            <script type="text/javascript" src="scripts/jspl.js"></script>
 
             <noscript>Please enable Javascript for log playback.<br /><br /></noscript>
             <div id="description">Error loading specified log.</div>
@@ -108,6 +78,85 @@
             <div id="playlog"></div>
             <br /><br />
 
+            <?php
+            echo "<hr>";
+            echo "<h3>Information about the attacker and session:</h3>";
+
+            // Sessions
+            $db_query = "SELECT ip, starttime, endtime FROM sessions WHERE id='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $ip = $row['ip'];
+                $starttime = $row['starttime'];
+                $endtime = $row['endtime'];
+            }
+            $length = round(abs(strtotime($endtime) - strtotime($starttime)) / 60);
+
+            // TTY log
+            $db_query = "SELECT count(ttylog) as count FROM ttylog WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countip = $row['count'];
+            }
+
+            // Auth
+            $db_query = "SELECT count(session) as count FROM auth WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countauths = $row['count'];
+            }
+
+            $db_query = "SELECT username, password FROM auth WHERE session='$session' and success = '1'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $username = $row['username'];
+                $password = $row['password'];
+            }
+
+            // Input
+            $db_query = "SELECT count(session) as count FROM input WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countinput = $row['count'];
+            }
+
+            $db_query = "SELECT count(session) as count FROM input WHERE session='$session' and success = '0'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countinputfailed = $row['count'];
+            }
+
+            // Fingerprints
+            $db_query = "SELECT count(session) as count FROM keyfingerprints WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countfinger = $row['count'];
+            }
+
+            // Display out
+            echo "Session ID: <b>" . $session . "</b><br />";
+            strtotime("2011-10-10 10:00:00");
+
+            if (!empty($starttime)){
+                $length = round(abs(strtotime($endtime) - strtotime($starttime)) / 60, 1);
+                echo "Timestamp: <b>" . str_replace(".000000", "", $starttime) . "</b> (<b>" . $length . "</b> minutes)<br />";
+            }
+            if (!empty($ip))
+                echo "Attacker's IP: <b>" . $ip . "</b><br />";
+            if (!empty($countip))
+                echo "Number of TTY logs from the IP Attacker's IP: <b>" . $countip . "</b><br />";
+            if (!empty($countauths))
+                echo "Total login attempts: <b>" . $countauths . "</b><br />";
+            if (!empty($username) && !empty($password))
+                echo "SSH credentials: <b>" . $username . "</b> / <b>" . $password . "</b><br />";
+            if (!empty($countfinger))
+                echo "Attacker's SSH fingerprints: <b>" . $countfinger . "</b><br />";
+            if (!empty($countinput))
+                echo "Total number of input commands: <b>" . $countinput . "</b> (<b>" . $countinputfailed . "</b> failed commands)<br />";
+            ?>
+            <br />
+
+            <hr>
             <h3>Downloaded files:</h3>
             <?php
 
@@ -143,47 +192,32 @@
                     if (substr(strtolower($file_link), 0, 4) !== 'http') {
                         $file_link = 'http://' . $file_link;
                     }
-                    echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="../images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-                    echo '<td><a href="../kippo-scanner.php?file_url=' . $file_link . '" target="_blank">Scan File</a></td>';
+                    echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
+                    echo '<td><a href="kippo-scanner.php?file_url=' . $file_link . '" target="_blank">Scan File</a></td>';
                     echo '</tr>';
                     $counter++;
                 }
 
                 //Close tbody and table element, it's ready.
                 echo '</tbody></table>';
-                echo '<hr /><br />';
+                echo '<hr><br />';
             } else {
                 echo "No files have been downloaded in this session.<br /><br />";
             }
 
             R::close();
 
-            } else {    // if (!empty($ip)) {
-                echo "<b>Error locating session</b> (" . $session . ")<br /><br />";
-                if (!empty($errors))
-                    echo $errors . "<br /><br />";
-                echo "<hr /><br />";
-            }
-
-            //Additional information about IP address
+            // Additional information about IP address
             if (!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
                 if (function_exists('exec')) {
-                    exec("dig -x " . $ip . " +additional @8.8.8.8 2>&1", $dig, $returnValue);
                     exec("host " . $ip . " 2>&1", $host, $returnValue);
+                    exec("dig -x " . $ip . " +additional @8.8.8.8 2>&1", $dig, $returnValue);
                 }
 
                 if (!empty($host) || !empty($dig)) {
-
+                    echo "<hr>";
                     echo "<h3>Additional information about IP:</h3>";
 
-                    if (!empty($dig)) {
-                        echo "<b>dig</b> data:<br />\n";
-                        echo "<pre>";
-                        foreach ($dig as $parse) {
-                            echo $parse . "\n";
-                        }
-                        echo "</pre>\n\n";
-                    }
                     if (!empty($host)) {
                         echo "<b>host</b> data:<br />\n";
                         echo "<pre>";
@@ -192,6 +226,15 @@
                         }
                         echo "</pre>\n\n";
                     }
+                    if (!empty($dig)) {
+                        echo "<b>dig</b> data:<br />\n";
+                        echo "<pre>";
+                        foreach ($dig as $parse) {
+                            echo $parse . "\n";
+                        }
+                        echo "</pre>\n\n";
+                    }
+
                 }
 
                 //Geolocate the IP
@@ -217,7 +260,8 @@
                 if ($latitude && $longitude) {
                     ?>
 
-                    <br />Google Map:<br />
+                    <br />
+                    <b>Google Map</b>:<br />
 
                     <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
 
@@ -250,6 +294,13 @@
                 <?php
                 } //google map
             } //additional IP info
+
+            } else {    // if (!empty($ip)) {
+                echo "<b>Error locating session</b> (" . $session . ")<br /><br />";
+                if (!empty($errors))
+                    echo $errors . "<br /><br />";
+                echo "<hr /><br />";
+            }
             ?>
 
             <!-- ####################################################################################################### -->
@@ -257,26 +308,7 @@
         </div>
     </div>
 </div>
-<!-- ####################################################################################################### -->
-<div class="wrapper">
-    <div id="copyright">
-        <p class="fl_left">Copyright &copy; 2011 - 2015 - All Rights Reserved - <a
-                href="http://bruteforce.gr/kippo-graph">Kippo-Graph</a></p>
 
-        <p class="fl_right">Thanks to <a href="http://www.os-templates.com/" title="Free Website Templates">OS
-                Templates</a></p>
-        <br class="clear"/>
-    </div>
-</div>
-<script type="text/javascript" src="../scripts/superfish.js"></script>
-<script type="text/javascript">
-    jQuery(function () {
-        {
-            {
-                jQuery('ul.nav').superfish();
-            }
-        }
-    }
-</script>
-</body>
-</html>
+<?php
+require('include/footer.php');
+?>

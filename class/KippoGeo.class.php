@@ -213,7 +213,7 @@ class KippoGeo
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
 
             //While still inside the if(count($rows)) clause (otherwise the dataSet will be empty),
             //we set the bar chart's dataset, render the graph and display it (we're inside html code!)
@@ -223,7 +223,7 @@ class KippoGeo
             $verticalChart->getPlot()->setGraphPadding(new Padding(5, 50, 100, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $verticalChart->render(DIR_ROOT . "/generated-graphs/connections_per_ip_geo.png");
             echo '<p>The following vertical bar chart visualizes the top 10 IPs ordered by the number of connections to the system.'
-                . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
+                . '<br />Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo.png">';
 
             //We set the pie chart's dataset, render the graph and display it (we're inside html code!)
@@ -231,9 +231,9 @@ class KippoGeo
             $pieChart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP_CC);
             $pieChart->render(DIR_ROOT . "/generated-graphs/connections_per_ip_geo_pie.png");
             echo '<p>The following pie chart visualizes the top 10 IPs ordered by the number of connections to the system.'
-                . '<br/>Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
+                . '<br />Notice the two-letter country code to after each IP get a quick view of the locations where the attacks are coming from.</p>';
             echo '<img src="generated-graphs/connections_per_ip_geo_pie.png">';
-            echo '<hr /><br />';
+            echo '<hr><br />';
 
             //Charts are ready, so is Google Map, let's render it below
             echo '<p>The following zoomable world map marks the geographic locations of the top 10 IPs according to their latitude and longitude values. '
@@ -241,7 +241,7 @@ class KippoGeo
             //echo '<div align=center>';
             echo $gMapTop10->render();
             //echo '</div>';
-            echo '<br/><hr /><br />';
+            echo '<br /><hr><br />';
 
             //Lastly, we prepare the data for the Intesity Map
             $db_query_map = "SELECT country, SUM(counter)
@@ -270,7 +270,7 @@ class KippoGeo
             //Intensity Map is ready, render it
             echo '<p>The following Intensity Map shows the volume of attacks per country by summarising probes originating from the same nation, using the same IP or not.</p>';
             echo $intensityMap->render();
-            echo '<br/>';
+            echo '<br />';
 
             //We set the "intensity" pie chart's dataset, render the graph and display it (we're inside html code!)
             $intensityPieChart->setDataSet($intensityDataSet);
@@ -280,9 +280,9 @@ class KippoGeo
             echo '<img src="generated-graphs/connections_per_country_pie.png">';
 
             if (GEO_METHOD == 'LOCAL') {
-                echo '<hr /><small><a href="http://www.maxmind.com">http://www.maxmind.com</a></small><br />';
+                echo '<hr><small><a href="http://www.maxmind.com">http://www.maxmind.com</a></small><br />';
             } else if (GEO_METHOD == 'GEOPLUGIN') {
-                echo '<hr /><small><a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a></small><br />';
+                echo '<hr><small><a href="http://www.geoplugin.com/geolocation/" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" target="_new">geoPlugin</a></small><br />';
             } else {
                 //TODO
             }

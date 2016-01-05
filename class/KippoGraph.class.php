@@ -23,6 +23,7 @@ class KippoGraph
         $this->createTop10Usernames();
         $this->createTop10Combinations();
         $this->createSuccessRation();
+        $this->createSuccessTop10Combinations();
         $this->createMostSuccessfulLoginsPerDay();
         $this->createSuccessesPerDay();
         $this->createSuccessesPerWeek();
@@ -43,6 +44,8 @@ class KippoGraph
             'top10_combinations.png',
             'top10_combinations_pie.png',
             'success_ratio.png',
+            'top10_successful_combinations.png',
+            'top10_successful_combinations_pie.png',
             'most_successful_logins_per_day.png',
             'successes_per_day.png',
             'successes_per_week.png',
@@ -124,7 +127,7 @@ class KippoGraph
           WHERE password <> ''
           GROUP BY password
           ORDER BY COUNT(password) DESC
-          LIMIT 10 ";
+          LIMIT 10";
 
         $rows = R::getAll($db_query);
 
@@ -152,7 +155,7 @@ class KippoGraph
           WHERE username <> ''
           GROUP BY username
           ORDER BY COUNT(username) DESC
-          LIMIT 10 ";
+          LIMIT 10";
 
         $rows = R::getAll($db_query);
 
@@ -180,7 +183,7 @@ class KippoGraph
           WHERE username <> '' AND password <> ''
           GROUP BY username, password
           ORDER BY COUNT(username) DESC
-          LIMIT 10 ";
+          LIMIT 10";
 
         $rows = R::getAll($db_query);
 
@@ -198,7 +201,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(TOP_10_COMBINATIONS);
-            //For this particular graph we need to set the corrent padding
+            //For this particular graph we need to set the correct padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 40, 75, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $chart->render(DIR_ROOT . "/generated-graphs/top10_combinations.png");
 
@@ -241,6 +244,43 @@ class KippoGraph
         }
     }
 
+    public function createSuccessTop10Combinations()
+    {
+        $db_query = "SELECT username, password, COUNT(username)
+          FROM auth
+          WHERE username <> '' AND password <> ''
+          AND success = 1
+          GROUP BY username, password
+          ORDER BY COUNT(username) DESC
+          LIMIT 10";
+
+        $rows = R::getAll($db_query);
+
+        if (count($rows)) {
+            //We create a new vertical bar chart,a new pie chart and initialize the dataset
+            $chart = new VerticalBarChart(600, 300);
+            $pie_chart = new PieChart(600, 300);
+            $dataSet = new XYDataSet();
+
+            //For every row returned from the database we add a new point to the dataset
+            foreach ($rows as $row) {
+                $dataSet->addPoint(new Point($row['username'] . '/' . $row['password'], $row['COUNT(username)']));
+            }
+
+            //We set the bar chart's dataset and render the graph
+            $chart->setDataSet($dataSet);
+            $chart->setTitle(TOP_10_SUCCESSFUL_COMBINATIONS);
+            //For this particular graph we need to set the correct padding
+            $chart->getPlot()->setGraphPadding(new Padding(5, 40, 75, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
+            $chart->render(DIR_ROOT . "/generated-graphs/top10_successful_combinations.png");
+
+            //We set the pie chart's dataset and render the graph
+            $pie_chart->setDataSet($dataSet);
+            $pie_chart->setTitle(TOP_10_SUCCESSFUL_COMBINATIONS);
+            $pie_chart->render(DIR_ROOT . "/generated-graphs/top10_successful_combinations_pie.png");
+        }
+    }
+
     public function createMostSuccessfulLoginsPerDay()
     {
         $db_query = "SELECT COUNT(session), timestamp
@@ -248,7 +288,7 @@ class KippoGraph
           WHERE success = 1
           GROUP BY DAYOFYEAR(timestamp)
           ORDER BY COUNT(session) DESC
-          LIMIT 20 ";
+          LIMIT 20";
 
         $rows = R::getAll($db_query);
 
@@ -276,7 +316,7 @@ class KippoGraph
           FROM auth
           WHERE success = 1
           GROUP BY DAYOFYEAR(timestamp)
-          ORDER BY timestamp ASC ";
+          ORDER BY timestamp ASC";
 
         $rows = R::getAll($db_query);
 
@@ -360,7 +400,7 @@ class KippoGraph
           FROM sessions
           GROUP BY ip
           ORDER BY COUNT(ip) DESC
-          LIMIT 10 ";
+          LIMIT 10";
 
         $rows = R::getAll($db_query);
 
@@ -378,7 +418,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(NUMBER_OF_CONNECTIONS_PER_UNIQUE_IP);
-            //For this particular graph we need to set the corrent padding
+            //For this particular graph we need to set the correct padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 40, 75, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $chart->render(DIR_ROOT . "/generated-graphs/connections_per_ip.png");
 
@@ -396,7 +436,7 @@ class KippoGraph
           WHERE auth.success = 1
           GROUP BY sessions.ip
           ORDER BY COUNT(sessions.ip) DESC
-          LIMIT 20 ";
+          LIMIT 20";
 
         $rows = R::getAll($db_query);
 
@@ -413,7 +453,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(SUCCESSFUL_LOGINS_FROM_SAME_IP);
-            //For this particular graph we need to set the corrent padding
+            //For this particular graph we need to set the correct padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 45, 80, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $chart->render(DIR_ROOT . "/generated-graphs/logins_from_same_ip.png");
         }
@@ -425,7 +465,7 @@ class KippoGraph
           FROM auth
           GROUP BY DAYOFYEAR(timestamp)
           ORDER BY COUNT(session) DESC
-          LIMIT 20 ";
+          LIMIT 20";
 
         $rows = R::getAll($db_query);
 
@@ -551,7 +591,7 @@ class KippoGraph
             //We set the bar chart's dataset and render the graph
             $chart->setDataSet($dataSet);
             $chart->setTitle(TOP_10_SSH_CLIENTS);
-            //For this particular graph we need to set the corrent padding
+            //For this particular graph we need to set the correct padding
             $chart->getPlot()->setGraphPadding(new Padding(5, 30, 50, 245)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             //$chart->getPlot()->setGraphPadding(new Padding(5, 80, 140, 50)); //top, right, bottom, left | defaults: 5, 30, 50, 50
             $chart->render(DIR_ROOT . "/generated-graphs/top10_ssh_clients.png");

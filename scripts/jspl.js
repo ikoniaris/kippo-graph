@@ -237,7 +237,7 @@ jQuery(document).ready(function ($) {
     blinkCursor();
     if (fileName !== null) {
         $("#playlog").css('display', 'block');
-        $("#description").html("Playing <b>" + fileName + "</b>");
+        $("#description").html("Playing session: <b>" + fileName + "</b>");
         ttylog = new TTYLog(fileName);
         autoTick();
     } else {

@@ -80,7 +80,7 @@ class KippoInput
             echo '</tbody></table>';
         }
 
-        echo '<hr /><br />';
+        echo '<hr><br />';
     }
 
     public function printHumanActivityBusiestDays()
@@ -148,7 +148,7 @@ class KippoInput
             $chart->setTitle(HUMAN_ACTIVITY_PER_DAY);
             $chart->render(DIR_ROOT . "/generated-graphs/human_activity_per_day.png");
             echo '<p>The following line chart visualizes real human activity per day, by counting the number of input to the system for each day of operation.
-			<br/><strong>Warning:</strong> Dates with zero input are not displayed.</p>';
+			<br /><strong>Warning:</strong> Dates with zero input are not displayed.</p>';
             echo '<img src="generated-graphs/human_activity_per_day.png">';
             echo '<br />';
         }
@@ -199,7 +199,7 @@ class KippoInput
             $chart->render(DIR_ROOT . "/generated-graphs/human_activity_per_week.png");
             echo '<p>The following line chart visualizes real human activity per week, by counting the number of input to the system for each day of operation.</p>';
             echo '<img src="generated-graphs/human_activity_per_week.png">';
-            echo '<br /><hr /><br />';
+            echo '<br /><hr><br />';
         }
     }
 
@@ -256,7 +256,7 @@ class KippoInput
             $chart->render(DIR_ROOT . "/generated-graphs/top10_overall_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 commands (overall) entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_overall_input.png">';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -312,7 +312,7 @@ class KippoInput
             $chart->render(DIR_ROOT . "/generated-graphs/top10_successful_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 successful commands entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_successful_input.png">';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -368,7 +368,7 @@ class KippoInput
             $chart->render(DIR_ROOT . "/generated-graphs/top10_failed_input.png");
             echo '<p>This vertical bar chart visualizes the top 10 failed commands entered by attackers in the honeypot system.</p>';
             echo '<img src="generated-graphs/top10_failed_input.png">';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -402,14 +402,14 @@ class KippoInput
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo '<td>' . xss_clean($row['input']) . '</td>';
-                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -452,7 +452,7 @@ class KippoInput
                     $file_link = 'http://' . $file_link;
                 }
                 echo '<td><a href="http://anonym.to/?' . $file_link . '" target="_blank"><img class="icon" src="images/warning.png"/>http://anonym.to/?' . $file_link . '</a></td>';
-                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '<td><a href="kippo-scanner.php?file_url=' . $file_link . '" target="_blank">Scan File</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -460,7 +460,7 @@ class KippoInput
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -494,14 +494,14 @@ class KippoInput
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo '<td>' . xss_clean($row['input']) . '</td>';
-                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -539,14 +539,14 @@ class KippoInput
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo '<td>' . xss_clean($row['input']) . '</td>';
-                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
@@ -582,14 +582,14 @@ class KippoInput
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
                 echo '<td>' . xss_clean($row['input']) . '</td>';
-                echo '<td><a href="include/play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
+                echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
             }
 
             //Close tbody and table element, it's ready.
             echo '</tbody></table>';
-            echo '<hr /><br />';
+            echo '<hr><br />';
         }
     }
 
