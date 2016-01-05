@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head profile="http://gmpg.org/xfn/11">
-    <title>Kippo-Graph | Fast Visualization for your Kippo SSH Honeypot Stats</title>
+    <title>Kippo-Graph | Fast Visualization for your Kippo Based SSH Honeypot</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="imagetoolbar" content="no"/>
     <link rel="stylesheet" href="../styles/layout.css" type="text/css"/>
@@ -14,9 +14,9 @@
 <div class="wrapper">
     <div id="header">
         <h1><a href="../index.php">Kippo-Graph</a></h1>
-        <br/>
+        <br />
 
-        <p>Fast Visualization for your Kippo SSH Honeypot Stats</p>
+        <p>Fast Visualization for your Kippo Based SSH Honeypot</p>
     </div>
 </div>
 <!-- ####################################################################################################### -->
@@ -48,7 +48,7 @@
         <div class="whitebox">
             <!-- ####################################################################################################### -->
             <h2>Kippo TTY log</h2>
-            <hr/>
+            <hr />
             <?php
             # Author: ikoniaris, CCoffie
 
@@ -63,11 +63,23 @@
             $session = preg_replace('/[^-a-zA-Z0-9_]/', '', xss_clean($_GET['f']));
 
             $db_query = "SELECT ttylog, session FROM ttylog WHERE session='$session'";
-
             $rows = R::getAll($db_query);
 
             foreach ($rows as $row) {
-                $log = base64_encode($row['ttylog']);
+                if (strtoupper(BACK_END_ENGINE) === 'COWRIE') {
+                    if (function_exists('shell_exec')) {
+                        $log_path = BACK_END_PATH . "/" . $row['ttylog'];
+
+                        if (file_exists($log_path) && is_readable($log_path))
+                            $log = shell_exec("base64 -w 0 " . $log_path . " 2>&1");
+                        else
+                            $errors .= "Unable to access: " . $log_path . "<br />";
+                    } else {
+                        $errors .= "Missing PHP function, shell_exec<br />";
+                    }
+                } else {
+                    $log = base64_encode($row['ttylog']);
+                }
             }
 
             $db_query = "SELECT ip, starttime FROM sessions WHERE id='$session'";
@@ -79,7 +91,8 @@
                 $starttime = $row['starttime'];
             }
 
-            echo "IP: <b>" . $ip . "</b> on " . str_replace(".000000", "", $starttime) . "<br /><br />";
+            if (!empty($ip) && empty($errors)) {
+                echo "IP: <b>" . $ip . "</b> on " . str_replace(".000000", "", $starttime) . "<br /><br />";
             ?>
 
             <!-- Pass PHP variables to javascript - Please ignore the below section -->
@@ -88,12 +101,12 @@
             </script>
             <script type="text/javascript" src="../scripts/jspl.js"></script>
 
-            <noscript>Please enable Javascript for log playback.<br/><br/></noscript>
+            <noscript>Please enable Javascript for log playback.<br /><br /></noscript>
             <div id="description">Error loading specified log.</div>
-            <br/>
+            <br />
 
             <div id="playlog"></div>
-            <br/><br/>
+            <br /><br />
 
             <h3>Downloaded files:</h3>
             <?php
@@ -145,8 +158,13 @@
 
             R::close();
 
-            ?>
-            <?php
+            } else {    // if (!empty($ip)) {
+                echo "<b>Error locating session</b> (" . $session . ")<br /><br />";
+                if (!empty($errors))
+                    echo $errors . "<br /><br />";
+                echo "<hr /><br />";
+            }
+
             //Additional information about IP address
             if (!empty($ip) && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
                 if (function_exists('exec')) {
@@ -199,7 +217,7 @@
                 if ($latitude && $longitude) {
                     ?>
 
-                    <br/>Google Map:<br/>
+                    <br />Google Map:<br />
 
                     <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
 

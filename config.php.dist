@@ -71,4 +71,10 @@ define('UPDATE_CHECK', 'NO');
 # The value may need tweaking based on the length of your MOTD (displayed after successful logins).
 define('PLAYBACK_SIZE_IGNORE', '0.4');
 
+# The following value determines which honeypot is being used -- Default: KIPPO
+# Values: COWRIE or KIPPO
+define('BACK_END_ENGINE', 'KIPPO');
+
+# The following value determines which honeypot is being used -- Default: /opt/kippo
+define('BACK_END_PATH', '/opt/kippo');
 ?>
