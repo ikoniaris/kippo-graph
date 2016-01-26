@@ -77,4 +77,10 @@ define('BACK_END_ENGINE', 'KIPPO');
 
 # The following value determines which honeypot is being used -- Default: /opt/kippo
 define('BACK_END_PATH', '/opt/kippo');
+
+# Playback method. This is how the TTY logs are shown.
+# JS uses a JavaScript method that re-enacts the console window
+# Python is a in-built script to make a static output
+# Values: JS or PYTHON
+define('PLAYBACK_SYSTEM', 'JS');
 ?>

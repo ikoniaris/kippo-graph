@@ -33,54 +33,6 @@ require('include/header.php');
 
             $session = preg_replace('/[^-a-zA-Z0-9_]/', '', xss_clean($_GET['f']));
 
-            $db_query = "SELECT ttylog, session FROM ttylog WHERE session='$session'";
-            $rows = R::getAll($db_query);
-
-            foreach ($rows as $row) {
-                if (strtoupper(BACK_END_ENGINE) === 'COWRIE') {
-                    if (function_exists('shell_exec')) {
-                        $log_path = BACK_END_PATH . "/" . $row['ttylog'];
-
-                        if (file_exists($log_path) && is_readable($log_path))
-                            $log = shell_exec("base64 -w 0 " . $log_path . " 2>&1");
-                        else
-                            $errors .= "Unable to access: " . $log_path . "<br />";
-                    } else {
-                        $errors .= "Missing PHP function, shell_exec<br />";
-                    }
-                } else {
-                    $log = base64_encode($row['ttylog']);
-                }
-            }
-
-            $db_query = "SELECT ip, starttime FROM sessions WHERE id='$session'";
-            $rows = R::getAll($db_query);
-
-            foreach ($rows as $row) {
-                $ip = $row['ip'];
-                $starttime = $row['starttime'];
-            }
-
-            if (!empty($ip) && empty($errors)) {
-                echo "IP: <b>" . $ip . "</b> on " . str_replace(".000000", "", $starttime) . "<br /><br />";
-            ?>
-
-            <!-- Pass PHP variables to javascript - Please ignore the below section -->
-            <script type="text/javascript">
-                var log = "<?php echo $log; ?>";
-            </script>
-            <script type="text/javascript" src="scripts/jspl.js"></script>
-
-            <noscript>Please enable Javascript for log playback.<br /><br /></noscript>
-            <div id="description">Error loading specified log.</div>
-            <br />
-
-            <div id="playlog"></div>
-            <br /><br />
-
-            <?php
-            echo "<hr>";
-            echo "<h3>Information about the attacker and session:</h3>";
 
             // Sessions
             $db_query = "SELECT ip, starttime, endtime FROM sessions WHERE id='$session'";
@@ -92,20 +44,28 @@ require('include/header.php');
             }
             $length = round(abs(strtotime($endtime) - strtotime($starttime)) / 60);
 
-            // TTY log
+            // Sessions
             $db_query = "SELECT count(ttylog) as count FROM ttylog WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            foreach ($rows as $row) {
+                $countsession = $row['count'];
+            }
+
+            // Attacker's IP
+            $db_query = "SELECT count(DISTINCT id) as count FROM sessions WHERE ip='$ip'";
             $rows = R::getAll($db_query);
             foreach ($rows as $row) {
                 $countip = $row['count'];
             }
 
-            // Auth
+            // Any logins
             $db_query = "SELECT count(session) as count FROM auth WHERE session='$session'";
             $rows = R::getAll($db_query);
             foreach ($rows as $row) {
                 $countauths = $row['count'];
             }
 
+            // All valid logins
             $db_query = "SELECT username, password FROM auth WHERE session='$session' and success = '1'";
             $rows = R::getAll($db_query);
             foreach ($rows as $row) {
@@ -120,6 +80,7 @@ require('include/header.php');
                 $countinput = $row['count'];
             }
 
+            // Failed input commands
             $db_query = "SELECT count(session) as count FROM input WHERE session='$session' and success = '0'";
             $rows = R::getAll($db_query);
             foreach ($rows as $row) {
@@ -133,26 +94,85 @@ require('include/header.php');
                 $countfinger = $row['count'];
             }
 
+            // TTY log file(s)
+            $db_query = "SELECT ttylog, session FROM ttylog WHERE session='$session'";
+            $rows = R::getAll($db_query);
+            $log = "";
+            foreach ($rows as $row) {
+                if (strtoupper(BACK_END_ENGINE) === 'COWRIE') {
+                    if (function_exists('shell_exec')) {
+                        $log_path = BACK_END_PATH . "/" . $row['ttylog'];
+
+                        if (file_exists($log_path) && is_readable($log_path)) {
+                            if (strtoupper(PLAYBACK_SYSTEM) != "PYTHON")
+                                $log .= shell_exec("base64 -w 0 " . $log_path . " 2>&1");
+                            else {
+                                $log .= "*** Log: $log_path ***\n";
+                                $log .= shell_exec("python /opt/cowrie/utils/playlog.py -m 0 " . $log_path);
+                                $log .= "\n\n*** End Of Log ***\n\n";
+                            }
+                        } else
+                            $errors .= "Unable to access: " . $log_path . "<br />\n";
+                    } else
+                        $errors .= "Missing PHP function, shell_exec<br />\n";
+                } else {
+                    if (strtoupper(PLAYBACK_SYSTEM) != "PYTHON")
+                        $log .= base64_encode($row['ttylog']);
+                    else
+                        $log .= $row['ttylog'];
+                }
+            }
+
+            if (!empty($ip) && empty($errors)) {
+                echo "IP: <b>" . $ip . "</b> on " . str_replace(".000000", "", $starttime) . "<br /><br />";
+
+                if (strtoupper(PLAYBACK_SYSTEM) != "PYTHON") { ?>
+                <!-- Pass PHP variables to javascript - Please ignore the below section -->
+                <script type="text/javascript">
+                    var log = "<?php echo $log; ?>";
+                </script>
+                <script type="text/javascript" src="scripts/jspl.js"></script>
+
+                <?php
+                if (($countsession > 1) && (strtoupper(PLAYBACK_SYSTEM) != "PYTHON"))
+                    echo "<h1>Issue using JavaScript playback and having multiple log ($countsession files).</h1><br />\n"
+                ?>
+
+                <noscript>Please enable Javascript for log playback.<br /><br /></noscript>
+                <div id="description">Error loading specified log.</div>
+                <br />
+            <?php } else { ?>
+                <pre id="description"><?php echo htmlentities($log); ?></pre>
+            <?php } ?>
+
+            <div id="playlog"></div>
+            <br /><br />
+
+            <?php
+            echo "<hr>";
+            echo "<h3>Information about the attacker and session:</h3>";
+
             // Display out
-            echo "Session ID: <b>" . $session . "</b><br />";
-            strtotime("2011-10-10 10:00:00");
+            echo "Session ID: <b>" . $session . "</b><br />\n";
 
             if (!empty($starttime)){
                 $length = round(abs(strtotime($endtime) - strtotime($starttime)) / 60, 1);
-                echo "Timestamp: <b>" . str_replace(".000000", "", $starttime) . "</b> (<b>" . $length . "</b> minutes)<br />";
+                echo "Timestamp: <b>" . str_replace(".000000", "", $starttime) . "</b> (<b>" . $length . "</b> minutes)<br />\n";
             }
             if (!empty($ip))
-                echo "Attacker's IP: <b>" . $ip . "</b><br />";
+                echo "Attacker's IP: <b>" . $ip . "</b><br />\n";
+            if (!empty($countsession))
+                echo "Number of sessions for the attacker's IP: <b>" . $countsession . "</b><br />\n";
             if (!empty($countip))
-                echo "Number of TTY logs from the IP Attacker's IP: <b>" . $countip . "</b><br />";
+                echo "Number of times the attacker's IP have been seen: <b>" . $countip . "</b><br />\n";
             if (!empty($countauths))
-                echo "Total login attempts: <b>" . $countauths . "</b><br />";
+                echo "Total login attempts: <b>" . $countauths . "</b><br />\n";
             if (!empty($username) && !empty($password))
-                echo "SSH credentials: <b>" . $username . "</b> / <b>" . $password . "</b><br />";
+                echo "SSH credentials: <b>" . $username . "</b> / <b>" . $password . "</b><br />\n";
             if (!empty($countfinger))
-                echo "Attacker's SSH fingerprints: <b>" . $countfinger . "</b><br />";
+                echo "Attacker's SSH fingerprints: <b>" . $countfinger . "</b><br />\n";
             if (!empty($countinput))
-                echo "Total number of input commands: <b>" . $countinput . "</b> (<b>" . $countinputfailed . "</b> failed commands)<br />";
+                echo "Total number of input commands: <b>" . $countinput . "</b> (<b>" . $countinputfailed . "</b> failed commands)<br />\n";
             ?>
             <br />
 
@@ -161,14 +181,14 @@ require('include/header.php');
             <?php
 
             $db_query = "SELECT input, TRIM(LEADING 'wget' FROM input) as file, timestamp, session
-				  FROM input
-				  WHERE input LIKE '%wget%' AND input NOT LIKE 'wget' AND session = '$session'
-				  ORDER BY timestamp DESC";
+                  FROM input
+                  WHERE input LIKE '%wget%' AND input NOT LIKE 'wget' AND session = '$session'
+                  ORDER BY timestamp DESC";
 
             $rows = R::getAll($db_query);
 
             if (count($rows)) {
-                //We create a skeleton for the table
+                // We create a skeleton for the table
                 $counter = 1;
                 echo '<table><thead>';
                 echo '<tr class="dark">';
@@ -179,7 +199,7 @@ require('include/header.php');
                 echo '<th>Kippo-Scanner</th>';
                 echo '</tr></thead><tbody>';
 
-                //For every row returned from the database we create a new table row with the data as columns
+                // For every row returned from the database we create a new table row with the data as columns
                 foreach ($rows as $row) {
                     echo '<tr class="light word-break">';
                     echo '<td>' . $counter . '</td>';
@@ -198,7 +218,7 @@ require('include/header.php');
                     $counter++;
                 }
 
-                //Close tbody and table element, it's ready.
+                // Close tbody and table element, it's ready.
                 echo '</tbody></table>';
                 echo '<hr><br />';
             } else {
@@ -237,7 +257,7 @@ require('include/header.php');
 
                 }
 
-                //Geolocate the IP
+                // Geolocate the IP
                 $latitude = NULL;
                 $longitude = NULL;
                 if (GEO_METHOD == 'LOCAL') {
@@ -256,7 +276,7 @@ require('include/header.php');
                     $longitude = $geoplugin->longitude;
                 }
 
-                //If geolocation succeeded show Google Map
+                // If geolocation succeeded show Google Map
                 if ($latitude && $longitude) {
                     ?>
 
