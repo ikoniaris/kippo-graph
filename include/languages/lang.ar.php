@@ -1,14 +1,16 @@
 ﻿<?php
 
+
 //INDEX.PHP STRINGS
 //MORE TODO
 define('LATEST_VERSION', ' - أنت تستعمل <strong>أحدث</strong> نسخة!');
-define('NEW_VERSION_AVAILABLE', ' - هناك نسخة <strong>أحدث</strong> متاحة <a href="http://bruteforce.gr/kippo-graph" target="_blank">للتحميل</a>!');
+define('NEW_VERSION_AVAILABLE', ' - هناك نسخة <strong>أحدث</strong> متاحة <a href="https://bruteforce.gr/kippo-graph" target="_blank">للتحميل</a>!');
 
 //KIPPO-GRAPH-GENERATOR.PHP STRINGS
 define('TOP_10_PASSWORDS', 'أكثر 10 كلمات مرور تم تجربتها');
 define('TOP_10_USERNAMES', 'أكثر 10 أسماء مستخدمين تم تجربتها');
 define('TOP_10_COMBINATIONS', 'أكثر 10 تركيبات إسم مستخدم:باسوورد تم تجربتها');
+define('TOP_10_SUCCESSFUL_COMBINATIONS', 'Top 10 successful username-password combinations');
 define('AUTH_FAIL', 'فشل');
 define('AUTH_SUCCESS', 'ناجح');
 define('OVERALL_SUCCESS_RATIO', 'إجمالي نسبة النجاح');

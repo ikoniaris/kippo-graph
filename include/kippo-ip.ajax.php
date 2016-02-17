@@ -67,7 +67,7 @@ if (count($rows)) {
     echo '  </form>';
     echo '</div>';
 
-    echo '<hr /><br />';
+    echo '<hr><br />';
 } else {
     echo '<p>No attempt records were found</p>';
 }
@@ -120,7 +120,7 @@ if (count($rows)) {
     echo '  </form>';
     echo '</div>';
 
-    echo '<hr /><br />';
+    echo '<hr><br />';
 } else {
     echo '<p>No activity records were found</p>';
 }

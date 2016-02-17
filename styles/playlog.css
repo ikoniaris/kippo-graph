@@ -20,7 +20,7 @@ a:active {
 #playlog {
     border: 3px solid #541;
     font: 15px/1.2 Courier, monospace;
-    width: 48em; /* 80 x 0.6 (the width/height ratio of Courier) */
+    width: 100%; /* 80 x 0.6 (the width/height ratio of Courier) */
     height: 30em; /* 25 x 1.2 (line-height is 1.2) */
     overflow: hidden;
     /*background-color: #021; */

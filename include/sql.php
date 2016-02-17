@@ -21,27 +21,35 @@ $db_Pass = "SELECT password, COUNT(password)
   FROM auth
   WHERE password <> ''
   GROUP BY password
-  ORDER BY COUNT(password) DESC ";
+  ORDER BY COUNT(password) DESC";
 
 // ALL USERNAMES AND COUNT
 $db_User = "SELECT username, COUNT(username)
   FROM auth
   WHERE username <> ''
   GROUP BY username
-  ORDER BY COUNT(username) DESC ";
+  ORDER BY COUNT(username) DESC";
 
 //ALL USER PASS COMBINATIONS
 $db_Combo = "SELECT username, password, COUNT(username)
   FROM auth
   WHERE username <> '' AND password <> ''
   GROUP BY username, password
-  ORDER BY COUNT(username) DESC ";
+  ORDER BY COUNT(username) DESC";
 
 //SUCCESS RATIO
 $db_Success = "SELECT success, COUNT(success)
   FROM auth
   GROUP BY success
   ORDER BY success";
+
+//ALL USER PASS COMBINATIONS
+$db_ComboSuccess = "SELECT username, password, COUNT(username)
+  FROM auth
+  WHERE username <> '' AND password <> ''
+  AND success = 1
+  GROUP BY username, password
+  ORDER BY COUNT(username) DESC";
 
 //MOST SUCCESFUL LOGONS PER DAY
 $db_SuccessLogon = "SELECT COUNT(session), timestamp
@@ -74,7 +82,7 @@ $db_SuccessIP = "SELECT sessions.ip, COUNT(sessions.ip)
   FROM sessions INNER JOIN auth ON sessions.id = auth.session
   WHERE auth.success = 1
   GROUP BY sessions.ip
-  ORDER BY COUNT(sessions.ip) DESC ";
+  ORDER BY COUNT(sessions.ip) DESC";
 
 // PROBES PER DAY
 $db_ProbesDay = "SELECT COUNT(session), timestamp

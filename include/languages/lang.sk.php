@@ -1,14 +1,16 @@
 <?php
 
+
 //INDEX.PHP STRINGS
 //MORE TODO
 define('LATEST_VERSION', ' - Používate <strong>najnovšiu</strong> verziu!');
-define('NEW_VERSION_AVAILABLE', ' - Je dostupná <strong>nová</strong> verzia na <a href="http://bruteforce.gr/kippo-graph" target="_blank">stiahnutie</a>!');
+define('NEW_VERSION_AVAILABLE', ' - Je dostupná <strong>nová</strong> verzia na <a href="https://bruteforce.gr/kippo-graph" target="_blank">stiahnutie</a>!');
 
 //KIPPO-GRAPH-GENERATOR.PHP STRINGS
 define('TOP_10_PASSWORDS', 'Top 10 hesiel');
 define('TOP_10_USERNAMES', 'Top 10 užívateľov');
 define('TOP_10_COMBINATIONS', 'Top 10 kombinácií užívateľ-heslo');
+define('TOP_10_SUCCESSFUL_COMBINATIONS', 'Top 10 successful username-password combinations');
 define('AUTH_FAIL', 'Neúspešné');
 define('AUTH_SUCCESS', 'Úspešné');
 define('OVERALL_SUCCESS_RATIO', 'Pomer úspešnosti');

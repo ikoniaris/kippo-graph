@@ -16,7 +16,7 @@ require_once(DIR_ROOT . '/include/languages/lang.en.php');
 
 # MySQL server configuration: you will have to change the following
 # four definitions from the default values to the correct ones,
-# according to your MySQL server instance. When you installed Kippo
+# according to your MySQL server instance. When you installed Kippo/Cowrie
 # and configured MySQL logging, you should have created a new
 # MySQL user just for this job, otherwise use root (not recommended!)
 define('DB_HOST', '127.0.0.1');
@@ -65,11 +65,11 @@ define('TOR_CHECK', 'NO');
 # Change NO to YES if you want to enable it.
 define('UPDATE_CHECK', 'NO');
 
-# The following value determines the minimum size (in kb) of the Kippo log
+# The following value determines the minimum size (in kb) of the TTY log
 # needed to be shown in Kippo-Playlog. Any value below it will be ignored.
 # This is useful to remove any sessions that just join and quit immediately afterwards.
 # The value may need tweaking based on the length of your MOTD (displayed after successful logins).
-define('PLAYBACK_SIZE_IGNORE', '0.4');
+define('PLAYBACK_SIZE_IGNORE', '0.3');
 
 # The following value determines which honeypot is being used -- Default: KIPPO
 # Values: COWRIE or KIPPO
@@ -77,4 +77,10 @@ define('BACK_END_ENGINE', 'KIPPO');
 
 # The following value determines which honeypot is being used -- Default: /opt/kippo
 define('BACK_END_PATH', '/opt/kippo');
+
+# Playback method. This is how the TTY logs are shown.
+# JS uses a JavaScript method that re-enacts the console window
+# Python is a in-built script to make a static output
+# Values: JS or PYTHON
+define('PLAYBACK_SYSTEM', 'JS');
 ?>
