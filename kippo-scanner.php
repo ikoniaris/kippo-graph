@@ -35,7 +35,8 @@ function scanFileUrl($file_url)
 }
 
 if (isset($_GET['file_url'])) {
-    $file_url = xss_clean($_GET['file_url']);
+    $xss_clean = new xssClean();
+    $file_url = $xss_clean->clean_input($_GET['file_url']);
     scanFileUrl($file_url);
 } else {
     echo "Kippo-Graph virus scanning submission error. You need to supply a valid file URL.";

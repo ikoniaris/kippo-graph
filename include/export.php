@@ -19,7 +19,8 @@ require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
 // create the varaiable name from the URL Query string which should match SQL.php, than pass it as db_query
-$db_query = ${"db_" . xss_clean($_GET['type'])};
+$xss_clean = new xssClean();
+$db_query = ${"db_" . $xss_clean->clean_input($_GET['type'])};
 
 $rows = R::getAll($db_query);
 

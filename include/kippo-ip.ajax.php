@@ -3,7 +3,8 @@ require_once('../config.php');
 require_once(DIR_ROOT . '/include/rb.php');
 require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 
-$ip = xss_clean($_POST['ip']);
+$xss_clean = new xssClean();
+$ip = $xss_clean->clean_input($_POST['ip']);
 
 if (!filter_var($ip, FILTER_VALIDATE_IP)) {
     echo "Error parsing IP address.";
@@ -41,8 +42,8 @@ if (count($rows)) {
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['ip'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
-        echo '<td>' . xss_clean($row['username']) . '</td>';
-        echo '<td>' . xss_clean($row['password']) . '</td>';
+        echo '<td>' . $xss_clean->clean_input($row['username']) . '</td>';
+        echo '<td>' . $xss_clean->clean_input($row['password']) . '</td>';
         echo '<td>' . $row['success'] . '</td>';
         echo '</tr>';
     }
@@ -98,7 +99,7 @@ if (count($rows)) {
         echo '<td>' . $row['timestamp'] . '</td>';
         echo '<td>' . $row['session'] . '</td>';
         echo '<td>' . $row['success'] . '</td>';
-        echo '<td>' . xss_clean($row['input']) . '</td>';
+        echo '<td>' . $xss_clean->clean_input($row['input']) . '</td>';
         echo '</tr>';
     }
     //Close tbody and table element, it's ready.

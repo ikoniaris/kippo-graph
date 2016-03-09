@@ -6,8 +6,12 @@ require_once(DIR_ROOT . '/include/misc/xss_clean.php');
 class KippoInput
 {
 
+    private $xss_clean;
+
     function __construct()
     {
+        $this->xss_clean = new xssClean();
+
         //Let's connect to the database
         R::setup('mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     }
@@ -238,7 +242,7 @@ class KippoInput
 
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
@@ -295,7 +299,7 @@ class KippoInput
 
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
@@ -351,7 +355,7 @@ class KippoInput
 
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td>' . $row['COUNT(input)'] . '</td>';
                 echo '</tr>';
                 $counter++;
@@ -401,7 +405,7 @@ class KippoInput
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -443,9 +447,9 @@ class KippoInput
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . $row['timestamp'] . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 //PHP < 5.4 doesn't like array dereferencing
-                $file_link_array = explode(" ", trim(xss_clean($row['file'])));
+                $file_link_array = explode(" ", trim($this->xss_clean->clean_input($row['file'])));
                 $file_link = $file_link_array[0];
                 // If the link has no "http://" in front, then add it
                 if (substr(strtolower($file_link), 0, 4) !== 'http') {
@@ -493,7 +497,7 @@ class KippoInput
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -538,7 +542,7 @@ class KippoInput
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
@@ -581,7 +585,7 @@ class KippoInput
                 echo '<tr class="light word-break">';
                 echo '<td>' . $counter . '</td>';
                 echo '<td>' . date('l, d-M-Y, H:i A', strtotime($row['timestamp'])) . '</td>';
-                echo '<td>' . xss_clean($row['input']) . '</td>';
+                echo '<td>' . $this->xss_clean->clean_input($row['input']) . '</td>';
                 echo '<td><a href="kippo-play.php?f=' . $row['session'] . '" target="_blank"><img class="icon" src="images/play.ico"/>Play</a></td>';
                 echo '</tr>';
                 $counter++;
