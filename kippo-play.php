@@ -8,6 +8,7 @@ $page_file = "kippo-play.php";
 
 # Custom head
 $page_head = '
+        <link rel="stylesheet" href="./styles/playlog.css" type="text/css">
         <script type="text/javascript" src="scripts/BinFileReader.js"></script>
         <script type="text/javascript" src="scripts/jquery.getUrlParam.js"></script>';
 
