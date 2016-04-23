@@ -26,17 +26,21 @@ class xssClean {
      */
     public function clean_input( $input, $safe_level = 0 ) {
 
+        $output = $input;
         do {
+            // Treat $input as buffer on each loop, faster than new var
+            $input = $output;
+
             // Remove unwanted tags
-            $old_input = $input;
             $output = $this->strip_tags( $input );
             $output = $this->strip_encoded_entities( $output );
 
+            // Use 2nd input param if not empty or '0'
             if ( $safe_level !== 0 ) {
                 $output = $this->strip_base64( $output );
             }
 
-        } while ( $output !== $old_input );
+        } while ( $output !== $input );
 
         return $output;
 
