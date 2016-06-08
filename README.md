@@ -7,14 +7,14 @@ It uses the Libchart PHP chart drawing library by Jean-Marc Trémeaux,
 QGoogleVisualizationAPI PHP Wrapper for Google's Visualization API by Thomas Schäfer,
 RedBeanPHP library by Gabor de Mooij, MaxMind and geoPlugin geolocation technology.
 
-FIXES:
-1. Group By statements caused compatibility issues with php7.0 as mysql has made changes to "Group By" syntax
-ERROR: Syntax error or access violation: 1055 Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column
-References: https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html
-IMPACT: PHP version 5.3.4 or higher were not compatiable.
-modified:   class/KippoGraph.class.php "nonaggregated columns mysql patch"
-modified:   class/KippoPlayLog.class.php "nonaggregated columns mysql patch"
-Now operational with php7.0 and latest mysql
+FIXES:</br>
+1. Group By statements caused compatibility issues with php7.0 as mysql has made changes to "Group By" syntax </br>
+ERROR: Syntax error or access violation: 1055 Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column</br>
+References: https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html</br>
+IMPACT: PHP version 5.3.4 or higher were not compatiable.</br>
+modified:   class/KippoGraph.class.php "nonaggregated columns mysql patch"</br>
+modified:   class/KippoPlayLog.class.php "nonaggregated columns mysql patch"</br>
+Now operational with php7.0 and latest mysql</br>
 
 REQUIREMENTS:
 -------------
