@@ -286,7 +286,7 @@ class KippoGraph
         $db_query = "SELECT COUNT(session), timestamp
           FROM auth
           WHERE success = 1
-          GROUP BY DAYOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY COUNT(session) DESC
           LIMIT 20";
 
@@ -315,7 +315,7 @@ class KippoGraph
         $db_query = "SELECT COUNT(session), timestamp
           FROM auth
           WHERE success = 1
-          GROUP BY DAYOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY timestamp ASC";
 
         $rows = R::getAll($db_query);
@@ -357,7 +357,7 @@ class KippoGraph
             END, (WEEKOFYEAR(timestamp) * 7)-4) AS DateOfWeek_Value
           FROM auth
           WHERE success = 1
-          GROUP BY WEEKOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY timestamp ASC";
 
         $rows = R::getAll($db_query);
@@ -463,7 +463,7 @@ class KippoGraph
     {
         $db_query = "SELECT COUNT(session), timestamp
           FROM auth
-          GROUP BY DAYOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY COUNT(session) DESC
           LIMIT 20";
 
@@ -492,7 +492,7 @@ class KippoGraph
     {
         $db_query = "SELECT COUNT(session), timestamp
           FROM auth
-          GROUP BY DAYOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY timestamp ASC";
 
         $rows = R::getAll($db_query);
@@ -532,7 +532,7 @@ class KippoGraph
             ELSE YEAR(timestamp)
             END, (WEEKOFYEAR(timestamp) * 7)-4) AS DateOfWeek_Value
           FROM auth
-          GROUP BY WEEKOFYEAR(timestamp)
+          GROUP BY auth.timestamp
           ORDER BY timestamp ASC";
 
         $rows = R::getAll($db_query);

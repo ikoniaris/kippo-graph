@@ -30,7 +30,7 @@ class KippoPlayLog
                      JOIN input ON ttylog.session = input.session
                      WHERE auth.success = 1
                        AND size > " . PLAYBACK_SIZE_IGNORE . "
-                     GROUP BY ttylog.session
+                     GROUP BY ttylog.session, auth.timestamp, ttylog.size
                      ORDER BY auth.timestamp ASC";
 
         $rows = R::getAll($db_query);
