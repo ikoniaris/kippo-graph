@@ -75,8 +75,9 @@ define('PLAYBACK_SIZE_IGNORE', '0.3');
 # Values: COWRIE or KIPPO
 define('BACK_END_ENGINE', 'KIPPO');
 
-# The following value determines which honeypot is being used -- Default: /opt/kippo
-define('BACK_END_PATH', '/opt/kippo');
+# The following value determines where cowrie is installed -- Default: /opt/cowrie
+# You don't need to change it if you're using Kippo
+define('BACK_END_PATH', '/opt/cowrie');
 
 # Playback method. This is how the TTY logs are shown.
 # JS uses a JavaScript method that re-enacts the console window
