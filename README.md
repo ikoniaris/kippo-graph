@@ -7,13 +7,22 @@ It uses the Libchart PHP chart drawing library by Jean-Marc Trémeaux,
 QGoogleVisualizationAPI PHP Wrapper for Google's Visualization API by Thomas Schäfer,
 RedBeanPHP library by Gabor de Mooij, MaxMind and geoPlugin geolocation technology.
 
+FIXES:</br>
+1. Group By statements caused compatibility issues with php7.0 as mysql has made changes to "Group By" syntax </br>
+ERROR: Syntax error or access violation: 1055 Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column</br>
+References: https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html</br>
+IMPACT: PHP version 5.3.4 or higher were not compatiable.</br>
+modified:   class/KippoGraph.class.php "nonaggregated columns mysql patch"</br>
+modified:   class/KippoPlayLog.class.php "nonaggregated columns mysql patch"</br>
+Now operational with php7.0 and latest mysql</br>
+
 REQUIREMENTS:
 -------------
 1. PHP version 5.3.4 or higher.
-2. The following packages: _libapache2-mod-php5_, _php5-mysql_, _php5-gd_, _php5-curl_.
+2. The following packages: _libapache2-mod-php7.0_, _php7.0-mysql_, _php7.0-gd_, _php7.0-curl_.
 
 On Ubuntu/Debian:
-> apt-get update && apt-get install -y libapache2-mod-php5 php5-mysql php5-gd php5-curl
+> apt-get update && apt-get install -y libapache2-mod-php7.0 php7.0-mysql php7.0-gd php7.0-curl
 >
 > /etc/init.d/apache2 restart
 
