@@ -24,14 +24,14 @@ class KippoPlayLog
         else
             $db_size = "LENGTH(ttylog)";
 
-        $db_query = "SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
+        $db_query = "SELECT * FROM (SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
                      FROM ttylog
                      JOIN auth ON ttylog.session = auth.session
                      JOIN input ON ttylog.session = input.session
                      WHERE auth.success = 1
-                       AND size > " . PLAYBACK_SIZE_IGNORE . "
                      GROUP BY ttylog.session
-                     ORDER BY auth.timestamp ASC";
+                     ORDER BY auth.timestamp ASC) s
+                     WHERE size > " . PLAYBACK_SIZE_IGNORE;
 
         $rows = R::getAll($db_query);
 
