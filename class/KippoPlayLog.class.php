@@ -77,11 +77,11 @@ class KippoPlayLog
         echo '     <select class="pagesize">';
         echo '        <option selected="selected" value="10">10</option>';
         echo '        <option value="20">20</option>';
-        echo '        <option value="25">20</option>';
+        echo '        <option value="25">25</option>';
         echo '        <option value="50">50</option>';
-        echo '        <option value="75">20</option>';
+        echo '        <option value="75">75</option>';
         echo '        <option value="100">100</option>';
-        echo '        <option value="500">100</option>';
+        echo '        <option value="500">500</option>';
         echo '     </select>';
         echo '  </form>';
         echo '</div>';
