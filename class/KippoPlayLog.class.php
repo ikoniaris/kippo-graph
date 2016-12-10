@@ -24,14 +24,14 @@ class KippoPlayLog
         else
             $db_size = "LENGTH(ttylog)";
 
-        $db_query = "SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
+        $db_query = "SELECT * FROM (SELECT ttylog.session, auth.timestamp, ROUND($db_size/1024, 2) AS size, COUNT(input) as input
                      FROM ttylog
                      JOIN auth ON ttylog.session = auth.session
                      JOIN input ON ttylog.session = input.session
                      WHERE auth.success = 1
-                       AND size > " . PLAYBACK_SIZE_IGNORE . "
                      GROUP BY ttylog.session
-                     ORDER BY auth.timestamp ASC";
+                     ORDER BY auth.timestamp ASC) s
+                     WHERE size > " . PLAYBACK_SIZE_IGNORE;
 
         $rows = R::getAll($db_query);
 
@@ -77,11 +77,11 @@ class KippoPlayLog
         echo '     <select class="pagesize">';
         echo '        <option selected="selected" value="10">10</option>';
         echo '        <option value="20">20</option>';
-        echo '        <option value="25">20</option>';
+        echo '        <option value="25">25</option>';
         echo '        <option value="50">50</option>';
-        echo '        <option value="75">20</option>';
+        echo '        <option value="75">75</option>';
         echo '        <option value="100">100</option>';
-        echo '        <option value="500">100</option>';
+        echo '        <option value="500">500</option>';
         echo '     </select>';
         echo '  </form>';
         echo '</div>';
