@@ -425,14 +425,12 @@ class KippoInput
           ORDER BY timestamp DESC";
 
         $rows = R::getAll($db_query);
-
-        if (count($rows)) {
-            //We create a skeleton for the table
-            $counter = 1;
-            echo '<h3>wget commands</h3>';
-            echo '<p>The following table displays the latest "wget" commands entered by attackers in the honeypot system.</p>';
+	
+	    echo '<h3>wget Commands</h3>';
+	    echo '<p>The following table displays the latest "wget" commands entered by attackers in the honeypot system.</p>';
             echo '<p><a href="include/export.php?type=wget">CSV of all "wget" commands</a><p>';
-            echo '<table><thead>';
+            echo '<table id="Total-Logs"><thead><tr class="dark"><th> Total inputs: ' . count($rows) . '</th></tr></thead></table>';
+	    echo '<table id="wget-Commands" class="tablesorter"><thead>';
             echo '<tr class="dark">';
             echo '<th>ID</th>';
             echo '<th>Timestamp</th>';
@@ -441,7 +439,9 @@ class KippoInput
             echo '<th>Play Log</th>';
             echo '<th>Kippo-Scanner</th>';
             echo '</tr></thead><tbody>';
-
+			
+        if (count($rows)) {
+            $counter = 1;
             //For every row returned from the database we create a new table row with the data as columns
             foreach($rows as $row) {
                 echo '<tr class="light word-break">';
@@ -461,11 +461,27 @@ class KippoInput
                 echo '</tr>';
                 $counter++;
             }
-
-            //Close tbody and table element, it's ready.
-            echo '</tbody></table>';
-            echo '<hr><br />';
         }
+	 //Close tbody and table element, it's ready.
+        echo '</tbody></table>';
+	echo '<div id="pager1" class="pager">';
+	echo '  <form>';
+	echo '     <img src="images/first.png" class="first"/>';
+	echo '     <img src="images/prev.png" class="prev"/>';
+	echo '     <span class="pagedisplay"></span>';
+	echo '     <img src="images/next.png" class="next"/>';
+	echo '     <img src="images/last.png" class="last"/>';
+	echo '     <select class="pagesize">';
+	echo '        <option selected="selected" value="10">10</option>';
+	echo '        <option value="25">25</option>';
+	echo '        <option value="50">50</option>';
+	echo '        <option value="75">75</option>';
+	echo '        <option value="100">100</option>';
+	echo '        <option value="500">500</option>';
+	echo '     </select>';
+	echo '  </form>';
+	echo '</div>';
+	echo '<hr><br />';
     }
 
     public function printExecutedScripts()
