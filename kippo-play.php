@@ -287,7 +287,7 @@ require('include/header.php');
 
                     <div id="map" style="width:100%;height:400px;margin-top:10px;"></div>
 
-                    <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+                    <script type="text/javascript" src="//maps.google.com/maps/api/js?key=AIzaSyDEMaaLU6t3XuijBcO484BBhUoluqpnFa4"></script>
                     <script type="text/javascript">
 
                         // Define the latitude and longitude positions
