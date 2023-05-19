@@ -23,6 +23,18 @@ class KippoIP
         R::close();
     }
 
+    public function getAllIPs()
+    {
+        // select only uniq IP addresses
+	    $db_query = 'select DISTINCT ip from sessions';
+        $rows = R::getAll($db_query);
+        foreach ($rows as $row)
+        {
+            //Printing proper way for pfSense
+            echo $row['ip'] . "\r\n";
+        }
+    }
+
     public function printOverallIpActivity()
     {
         $db_query = "SELECT A.*, B.success FROM (
